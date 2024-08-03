@@ -668,6 +668,7 @@
             DM_Btn.Anchor = AnchorStyles.None;
             DM_Btn.FlatAppearance.BorderSize = 0;
             DM_Btn.FlatStyle = FlatStyle.Popup;
+            DM_Btn.Cursor = Cursors.Hand;
             DM_Btn.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             DM_Btn.Location = new Point(305, 12);
             DM_Btn.Name = "DM_Btn";
