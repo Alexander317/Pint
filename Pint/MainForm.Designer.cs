@@ -156,7 +156,7 @@
             SaveFile_Btn.Font = new Font("Calibri", 12F);
             SaveFile_Btn.Location = new Point(0, 0);
             SaveFile_Btn.Name = "SaveFile_Btn";
-            SaveFile_Btn.Size = new Size(145, 74);
+            SaveFile_Btn.Size = new Size(143, 74);
             SaveFile_Btn.TabIndex = 36;
             SaveFile_Btn.Text = "Сохранить изображение";
             SaveFile_Btn.UseVisualStyleBackColor = false;
@@ -1068,6 +1068,7 @@
             // 
             // splitContainer2
             // 
+            splitContainer2.BorderStyle = BorderStyle.FixedSingle;
             splitContainer2.Dock = DockStyle.Fill;
             splitContainer2.Location = new Point(0, 0);
             splitContainer2.Name = "splitContainer2";
@@ -1079,7 +1080,7 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(DM_Btn);
-            splitContainer2.Size = new Size(296, 72);
+            splitContainer2.Size = new Size(298, 74);
             splitContainer2.SplitterDistance = 145;
             splitContainer2.SplitterWidth = 1;
             splitContainer2.TabIndex = 0;
@@ -1094,7 +1095,7 @@
             SelectFile_Btn.Font = new Font("Calibri", 12F);
             SelectFile_Btn.Location = new Point(0, 0);
             SelectFile_Btn.Name = "SelectFile_Btn";
-            SelectFile_Btn.Size = new Size(145, 72);
+            SelectFile_Btn.Size = new Size(143, 72);
             SelectFile_Btn.TabIndex = 42;
             SelectFile_Btn.Text = "Выбрать изображение";
             SelectFile_Btn.UseVisualStyleBackColor = false;
@@ -1117,6 +1118,7 @@
             // 
             // splitContainer3
             // 
+            splitContainer3.BorderStyle = BorderStyle.FixedSingle;
             splitContainer3.Dock = DockStyle.Fill;
             splitContainer3.Location = new Point(0, 0);
             splitContainer3.Name = "splitContainer3";
@@ -1128,7 +1130,7 @@
             // splitContainer3.Panel2
             // 
             splitContainer3.Panel2.Controls.Add(ClearBoard_Btn);
-            splitContainer3.Size = new Size(296, 74);
+            splitContainer3.Size = new Size(298, 76);
             splitContainer3.SplitterDistance = 145;
             splitContainer3.SplitterWidth = 1;
             splitContainer3.TabIndex = 0;
