@@ -1,10 +1,28 @@
-﻿using System.Drawing.Imaging;
+﻿using System.Configuration;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace Pint.Core.Misc
 {
     internal class Filler : MainMisc
     {
         public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
+        {
+
+            try
+            {
+                if (ConfigurationManager.AppSettings["AgressiveFilling"] == "use")
+                    AgressiveFilling(bitmap, pen, posX, posY);
+                else
+                    SimpleFilling(bitmap, pen, posX, posY);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void SimpleFilling(Bitmap bitmap, Pen pen, int posX, int posY)
         {
             Color oldColor = bitmap.GetPixel(posX, posY);
 
@@ -66,7 +84,7 @@ namespace Pint.Core.Misc
         }
 
         //Более агрессивный метод, норм юзать если граница и заливка одного цвета, в остальных случаях просто хавает границу
-        /*public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
+        private void AgressiveFilling(Bitmap bitmap, Pen pen, int posX, int posY)
         {
             Color oldColor = bitmap.GetPixel(posX, posY);
 
@@ -145,6 +163,6 @@ namespace Pint.Core.Misc
             }
 
             bitmap.UnlockBits(bitmapData);
-        }*/
+        }
     }
 }

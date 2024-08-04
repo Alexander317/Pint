@@ -57,7 +57,7 @@
             Goldenrod_Btn = new Button();
             Crimson_Btn = new Button();
             DarkGreen_Btn = new Button();
-            OrangeRed_Btn = new Button();
+            Tomato_Btn = new Button();
             DarkOrange_Btn = new Button();
             SteelBlue_Btn = new Button();
             LightGray_Btn = new Button();
@@ -90,6 +90,7 @@
             Black_Btn = new Button();
             Cyan_Btn = new Button();
             panel1 = new Panel();
+            Settings_Btn = new Button();
             splitContainer1 = new SplitContainer();
             splitContainer2 = new SplitContainer();
             SelectFile_Btn = new Button();
@@ -472,7 +473,7 @@
             panel2.Controls.Add(Goldenrod_Btn);
             panel2.Controls.Add(Crimson_Btn);
             panel2.Controls.Add(DarkGreen_Btn);
-            panel2.Controls.Add(OrangeRed_Btn);
+            panel2.Controls.Add(Tomato_Btn);
             panel2.Controls.Add(DarkOrange_Btn);
             panel2.Controls.Add(SteelBlue_Btn);
             panel2.Controls.Add(LightGray_Btn);
@@ -594,19 +595,19 @@
             DarkGreen_Btn.UseVisualStyleBackColor = false;
             DarkGreen_Btn.Click += SelectColor;
             // 
-            // OrangeRed_Btn
+            // Tomato_Btn
             // 
-            OrangeRed_Btn.Anchor = AnchorStyles.None;
-            OrangeRed_Btn.BackColor = Color.OrangeRed;
-            OrangeRed_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
-            OrangeRed_Btn.FlatAppearance.BorderSize = 0;
-            OrangeRed_Btn.FlatStyle = FlatStyle.Popup;
-            OrangeRed_Btn.Location = new Point(45, 56);
-            OrangeRed_Btn.Name = "OrangeRed_Btn";
-            OrangeRed_Btn.Size = new Size(26, 26);
-            OrangeRed_Btn.TabIndex = 61;
-            OrangeRed_Btn.UseVisualStyleBackColor = false;
-            OrangeRed_Btn.Click += SelectColor;
+            Tomato_Btn.Anchor = AnchorStyles.None;
+            Tomato_Btn.BackColor = Color.Tomato;
+            Tomato_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            Tomato_Btn.FlatAppearance.BorderSize = 0;
+            Tomato_Btn.FlatStyle = FlatStyle.Popup;
+            Tomato_Btn.Location = new Point(77, 26);
+            Tomato_Btn.Name = "Tomato_Btn";
+            Tomato_Btn.Size = new Size(26, 26);
+            Tomato_Btn.TabIndex = 61;
+            Tomato_Btn.UseVisualStyleBackColor = false;
+            Tomato_Btn.Click += SelectColor;
             // 
             // DarkOrange_Btn
             // 
@@ -983,7 +984,7 @@
             Red_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Red_Btn.FlatAppearance.BorderSize = 0;
             Red_Btn.FlatStyle = FlatStyle.Popup;
-            Red_Btn.Location = new Point(77, 26);
+            Red_Btn.Location = new Point(45, 56);
             Red_Btn.Name = "Red_Btn";
             Red_Btn.Size = new Size(26, 26);
             Red_Btn.TabIndex = 1;
@@ -1035,6 +1036,7 @@
             // panel1
             // 
             panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(Settings_Btn);
             panel1.Controls.Add(splitContainer1);
             panel1.Controls.Add(panel6);
             panel1.Controls.Add(panel4);
@@ -1046,6 +1048,22 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1626, 150);
             panel1.TabIndex = 42;
+            // 
+            // Settings_Btn
+            // 
+            Settings_Btn.Anchor = AnchorStyles.None;
+            Settings_Btn.BackgroundImage = Properties.Resources.settings;
+            Settings_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Settings_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            Settings_Btn.FlatAppearance.BorderSize = 0;
+            Settings_Btn.FlatStyle = FlatStyle.Flat;
+            Settings_Btn.ForeColor = Color.Black;
+            Settings_Btn.Location = new Point(1582, 12);
+            Settings_Btn.Name = "Settings_Btn";
+            Settings_Btn.Size = new Size(32, 32);
+            Settings_Btn.TabIndex = 61;
+            Settings_Btn.UseVisualStyleBackColor = false;
+            Settings_Btn.Click += Settings_Btn_Click;
             // 
             // splitContainer1
             // 
@@ -1112,9 +1130,7 @@
             DM_Btn.Name = "DM_Btn";
             DM_Btn.Size = new Size(150, 72);
             DM_Btn.TabIndex = 57;
-            DM_Btn.Text = "Тёмная тема: Выкл";
             DM_Btn.UseVisualStyleBackColor = false;
-            DM_Btn.Click += DM_Btn_Click;
             // 
             // splitContainer3
             // 
@@ -1173,6 +1189,7 @@
             // 
             MainImage.Anchor = AnchorStyles.None;
             MainImage.BackColor = Color.White;
+            MainImage.BorderStyle = BorderStyle.FixedSingle;
             MainImage.Location = new Point(68, 199);
             MainImage.Name = "MainImage";
             MainImage.Size = new Size(1480, 680);
@@ -1249,7 +1266,7 @@
             Icon = Properties.Resources.Icon;
             KeyPreview = true;
             Name = "MainForm";
-            Text = "Pint v4.0.0";
+            Text = "Pint v4.1.0";
             KeyDown += MainForm_KeyDown;
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
@@ -1350,11 +1367,12 @@
         private Button Goldenrod_Btn;
         private Button Crimson_Btn;
         private Button DarkGreen_Btn;
-        private Button OrangeRed_Btn;
+        private Button Tomato_Btn;
         private Button DarkOrange_Btn;
         private Button SteelBlue_Btn;
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
         private SplitContainer splitContainer3;
+        private Button Settings_Btn;
     }
 }

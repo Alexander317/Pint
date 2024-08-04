@@ -9,10 +9,12 @@ using System.Drawing;
 
 namespace Pint
 {
+    public delegate void OnThemeChanged();
     public partial class MainForm : Form
     {
         #region FIELDS
 
+        public event OnThemeChanged changed;
         private PaintCore paintCore = new();
         private Pen pen = new(Color.Black, 1);
         private Bitmap MainBitmap;
@@ -36,7 +38,8 @@ namespace Pint
 
             UpdateCurrentColors(pen.Color);
             ButtonHandler.Select(Pencil_Btn);
-            InitUI("UIMode");
+            ChangeUITheme();
+            changed += ChangeUITheme;
             trackBar1_Scroll(null, null);
             PenHandler.MakePenRound(pen);
         }
@@ -82,7 +85,8 @@ namespace Pint
                 {
                     pen.Color = MainBitmap.GetPixel(paintCore.PosX, paintCore.PosY);
                     UpdateCurrentColors(pen.Color);
-                } else
+                }
+                else
                 {
                     /*paintCore.AddToPreviousBitmaps(MainBitmap);*/
                     paintCore.Filter(MainBitmap, pen);
@@ -296,22 +300,20 @@ namespace Pint
         #endregion
 
         #region THEME_CONTROL
-        private void InitUI(string key)
+
+        private void ChangeUITheme()
         {
             try
             {
-                var uiMode = ConfigurationManager.AppSettings[key];
-                if (uiMode == "light")
+                if (ConfigurationManager.AppSettings["UIMode"] == "light")
                 {
-                    DM_Btn.Text = "Тёмная тема: Выкл";
                     SetLightTheme();
-                    ConfigurationManager.AppSettings[key] = "dark";
+                    ConfigurationManager.AppSettings["UIMode"] = "dark";
                 }
                 else
                 {
-                    DM_Btn.Text = "Тёмная тема: Вкл";
                     SetDarkTheme();
-                    ConfigurationManager.AppSettings[key] = "light";
+                    ConfigurationManager.AppSettings["UIMode"] = "light";
                 }
             }
             catch (Exception e)
@@ -347,6 +349,7 @@ namespace Pint
             Eraser_Btn.BackgroundImage = Properties.Resources.eraser;
             ColorPicker_Btn.BackgroundImage = Properties.Resources.color_picker;
             Scribble.BackgroundImage = Properties.Resources.scribble;
+            Settings_Btn.BackgroundImage = Properties.Resources.settings;
 
             /*Invalidate();*/
             SetWindowTheme(false);
@@ -379,6 +382,8 @@ namespace Pint
             Eraser_Btn.BackgroundImage = Properties.Resources.eraser_inverted;
             ColorPicker_Btn.BackgroundImage = Properties.Resources.color_picker_inverted;
             Scribble.BackgroundImage = Properties.Resources.scribble_inverted;
+            Settings_Btn.BackgroundImage = Properties.Resources.settings_inverted;
+
 
             /*Invalidate();*/
             SetWindowTheme(true);
@@ -418,11 +423,12 @@ namespace Pint
             panel5.BackColor = panel1.BackColor;
             panel5.ForeColor = panel1.ForeColor;
         }
-
-        private void DM_Btn_Click(object sender, EventArgs e)
-        {
-            InitUI("UIMode");
-        }
         #endregion
+
+        private void Settings_Btn_Click(object sender, EventArgs e)
+        {
+            SettingsScreen settingsScreen = new SettingsScreen(changed);
+            settingsScreen.Show();
+        }
     }
 }
