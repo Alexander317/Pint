@@ -4,7 +4,7 @@ namespace Pint.Core.Misc
 {
     internal class Filler : MainMisc
     {
-        /*public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
+        public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
         {
             Color oldColor = bitmap.GetPixel(posX, posY);
 
@@ -63,10 +63,10 @@ namespace Pint.Core.Misc
             }
 
             bitmap.UnlockBits(bitmapData);
-        }*/
+        }
 
         //Более агрессивный метод, норм юзать если граница и заливка одного цвета, в остальных случаях просто хавает границу
-        public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
+        /*public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
         {
             Color oldColor = bitmap.GetPixel(posX, posY);
 
@@ -145,6 +145,6 @@ namespace Pint.Core.Misc
             }
 
             bitmap.UnlockBits(bitmapData);
-        }
+        }*/
     }
 }
