@@ -124,17 +124,29 @@
   <data name="circle_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\circle_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="color_picker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\color_picker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="color_picker_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\color_picker_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="eraser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\eraser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="eraser_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\eraser_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="filler" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Filler" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\Filler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="filler_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\filler_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hexagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\hexagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hexagon_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\hexagon_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,10 +175,40 @@
   <data name="regular_triangle_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\regular_triangle_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="rhombus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\rhombus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rhombus_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\rhombus_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="right_triangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\right-triangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="right_triangle_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\right_triangle_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scribble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\scribble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scribble_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\scribble_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star_eight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\star_eight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star_eight_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\star_eight_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star_five" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\star_five.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star_five_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\star_five_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star_six" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\star_six.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star_six_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\star_six_inverted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

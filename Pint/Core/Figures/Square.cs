@@ -13,6 +13,7 @@
             int height = Math.Abs(p2.Y - p1.Y);
 
             using Graphics graphics = Graphics.FromImage(bitmap);
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             graphics.DrawRectangle(pen, x, y, width, height);
         }
     }

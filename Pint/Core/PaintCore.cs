@@ -8,16 +8,22 @@ namespace Pint.Core
 {
     public class PaintCore
     {
+
+        #region FIELDS
+
         public int PosX { get; set; } = 0;
         public int PosY { get; set; } = 0;
         public MainEnum MainToolDefiner { get; set; }
         public MainFigure CurrentFigure { get; set; }
         public MainPencil CurrentPensil { get; set; }
         public MainMisc CurrentMisc { get; set; }
-        List<Bitmap> previousBitmaps = [];
-        List<Bitmap> futureBitmaps = [];
+        private List<Bitmap> previousBitmaps = new();
+        private List<Bitmap> futureBitmaps = new();
         public ArrayPoint arrayPoint = new(2);
 
+        #endregion
+
+        #region DRAWING
 
         public void Filter(Bitmap bitmap, Pen pen)
         {
@@ -37,12 +43,16 @@ namespace Pint.Core
             CurrentFigure.UseFigure(bitmap, pen, arrayPoint);
             return bitmap;
         }
-        public void ClearBitmap(Bitmap bitmap)
+        public void ClearBM(Bitmap bitmap)
         {
-            Graphics graphics = Graphics.FromImage(bitmap);
-            graphics.Clear(Color.White);
-            graphics.Dispose();
+            using Graphics g = Graphics.FromImage(bitmap);
+            g.Clear(Color.White);
         }
+
+        #endregion
+
+        #region PREVIOUS/FUTURE_BITMAPS
+
         public Bitmap ReturnToPreviousBitmap(Bitmap bitmap)
         {
             if (previousBitmaps.Count > 0)
@@ -63,55 +73,11 @@ namespace Pint.Core
             }
             return bitmap;
         }
-        /*public Bitmap ReturnToPreviousBitmap(ref Bitmap currentBitmap)
-        {
-            if (previousBitmaps.Count > 0)
-            {
-                // Store the current bitmap in futureBitmaps
-                futureBitmaps.Add(currentBitmap);
 
-                // Retrieve the last bitmap from previousBitmaps
-                Bitmap previousBitmap = previousBitmaps[previousBitmaps.Count - 1];
-                previousBitmaps.RemoveAt(previousBitmaps.Count - 1);
-
-                // Dispose of the current bitmap
-                currentBitmap.Dispose();
-
-                // Assign the previous bitmap as the current bitmap
-                currentBitmap = previousBitmap;
-            }
-
-            return currentBitmap;
-        }
-
-        public Bitmap ReturnToFutureBitmap(ref Bitmap currentBitmap)
-        {
-            if (futureBitmaps.Count > 0)
-            {
-                // Store the current bitmap in previousBitmaps
-                previousBitmaps.Add(currentBitmap);
-
-                // Retrieve the last bitmap from futureBitmaps
-                Bitmap futureBitmap = futureBitmaps[futureBitmaps.Count - 1];
-                futureBitmaps.RemoveAt(futureBitmaps.Count - 1);
-
-                // Dispose of the current bitmap
-                currentBitmap.Dispose();
-
-                // Assign the future bitmap as the current bitmap
-                currentBitmap = futureBitmap;
-            }
-
-            return currentBitmap;
-        }*/
         public void AddToPreviousBitmaps(Bitmap bitmap)
         {
-            previousBitmaps.Add(new Bitmap(bitmap));
+            previousBitmaps.Add(bitmap);
         }
-        public void ClearBM(Bitmap bitmap)
-        {
-            using Graphics g = Graphics.FromImage(bitmap);
-            g.Clear(Color.White);
-        }
+        #endregion
     }
 }

@@ -6,7 +6,8 @@
         {
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                Pen EraserPen = new Pen(Color.White, pen.Width * 3);
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                Pen EraserPen = new(Color.White, pen.Width);
                 PenHandler.MakePenRound(EraserPen);
                 Point startPoint = paintCore.arrayPoint.Points[0];
                 Point endPoint = new(paintCore.PosX, paintCore.PosY);

@@ -6,6 +6,7 @@
         {
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 Point startPoint = paintCore.arrayPoint.Points[0];
                 Point endPoint = new(paintCore.PosX, paintCore.PosY);
                 graphics.DrawLine(pen, startPoint, endPoint);

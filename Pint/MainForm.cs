@@ -4,36 +4,31 @@ using Pint.Core.Pencils;
 using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
+using Pint.Core.Misc;
+using System.Drawing;
 
 namespace Pint
 {
     public partial class MainForm : Form
     {
+        #region FIELDS
 
-        //TODO:
-        //1)�������� ������, �� ����� ��������
-        //2)��������� �������� � ������������ ������������� ����� ��� ������ ��������� ����� (������ ������� �������� �� ������ ����� ������� ���)
-        //3)�������� ���� ���, ���-�� �������� ���� ������
-        //4)����������� � ������� ������ ��� ��������� ������������ ���
-        //5)��������� ������ � ���� ����� ���� (https://stackoverflow.com/questions/57124243/winforms-dark-title-bar-on-windows-10)
+        private PaintCore paintCore = new();
+        private Pen pen = new(Color.Black, 1);
+        private Bitmap MainBitmap;
+        private Bitmap CopyBitmap;
+        private bool mouseDown = false;
 
-
-        PaintCore paintCore = new();
-        Pen pen = new(Color.Black, 1);
-        Bitmap MainBitmap;
-        Bitmap CopyBitmap;
-        bool mouseDown = false;
+        #endregion
 
         public MainForm()
         {
             InitializeComponent();
             InitializeButtons();
-            PenHandler.MakePenRound(pen);
-            PenHandler.SetPenParameters(pen, (trackBar1.Value + 1) * 2, pen.Color);
 
-            MainBitmap = new(MainImage.Width, MainImage.Height, PixelFormat.Format32bppArgb);
+            MainBitmap = new(MainImage.Width, MainImage.Height);
+            paintCore.ClearBM(MainBitmap);
             MainImage.Image = MainBitmap;
-            paintCore.ClearBitmap(MainBitmap);
 
             SetButtonTags();
             paintCore.MainToolDefiner = MainEnum.Pensils;
@@ -42,32 +37,15 @@ namespace Pint
             UpdateCurrentColors(pen.Color);
             ButtonHandler.Select(Pencil_Btn);
             InitUI("UIMode");
+            trackBar1_Scroll(null, null);
+            PenHandler.MakePenRound(pen);
         }
-        private void SetButtonTags()
-        {
-            Circle_Btn.Tag = FiguresEnum.Circle;
-            Line_Btn.Tag = FiguresEnum.Line;
-            Rectangle_Btn.Tag = FiguresEnum.Square;
-            RightTriangle_Btn.Tag = FiguresEnum.RightTriangle;
-            RegularTriangle_Btn.Tag = FiguresEnum.RegularTriangle;
-            Pencil_Btn.Tag = PensilsEnum.Pencil;
-            Eraser_Btn.Tag = PensilsEnum.Eraser;
-            Filler_Btn.Tag = MiscEnum.Filler;
-        }
-        public void InitializeButtons()
-        {
-            ButtonHandler.Allbuttons.Add(Circle_Btn);
-            ButtonHandler.Allbuttons.Add(Rectangle_Btn);
-            ButtonHandler.Allbuttons.Add(RegularTriangle_Btn);
-            ButtonHandler.Allbuttons.Add(RightTriangle_Btn);
-            ButtonHandler.Allbuttons.Add(Line_Btn);
-            ButtonHandler.Allbuttons.Add(Pencil_Btn);
-            ButtonHandler.Allbuttons.Add(Eraser_Btn);
-            ButtonHandler.Allbuttons.Add(Filler_Btn);
-        }
+
+        #region MAIN_IMAGE_HANDLERS
+
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
-            paintCore.AddToPreviousBitmaps(MainBitmap);
+            /*paintCore.AddToPreviousBitmaps(MainBitmap);*/
             paintCore.arrayPoint.SetPoint(e.X, e.Y);
             mouseDown = true;
             if (paintCore.MainToolDefiner == MainEnum.Figures)
@@ -75,12 +53,14 @@ namespace Pint
         }
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
-            CoordinatesLabel.Text = $"x: {e.X}; y: {e.Y}";
+            CoordinatesLabel.Text = $"{e.X}, {e.Y}пкс";
             paintCore.PosX = e.X;
             paintCore.PosY = e.Y;
             if (!mouseDown)
                 return;
-            if (paintCore.MainToolDefiner != MainEnum.Figures)
+
+
+            if (paintCore.MainToolDefiner == MainEnum.Pensils)
             {
                 paintCore.Filter(MainBitmap, pen);
                 MainImage.Image = MainBitmap;
@@ -98,8 +78,16 @@ namespace Pint
         {
             if (paintCore.MainToolDefiner is MainEnum.Misc)
             {
-                paintCore.Filter(MainBitmap, pen);
-                MainImage.Image = MainBitmap;
+                if (paintCore.CurrentMisc is ColorPicker)
+                {
+                    pen.Color = MainBitmap.GetPixel(paintCore.PosX, paintCore.PosY);
+                    UpdateCurrentColors(pen.Color);
+                } else
+                {
+                    /*paintCore.AddToPreviousBitmaps(MainBitmap);*/
+                    paintCore.Filter(MainBitmap, pen);
+                    MainImage.Image = MainBitmap;
+                }
             }
         }
         private void DrawingTimer_Tick(object sender, EventArgs e)
@@ -109,6 +97,33 @@ namespace Pint
             MainImage.Image = CopyBitmap;
             GC.Collect();
         }
+
+        private void MainSelect(object sender, EventArgs e)
+        {
+            object tag = ((Button)sender).Tag;
+
+            if (tag is FiguresEnum)
+            {
+                paintCore.MainToolDefiner = MainEnum.Figures;
+                paintCore.CurrentFigure = EnumsHandler.getFigure((FiguresEnum)tag);
+            }
+            else if (tag is PensilsEnum)
+            {
+                paintCore.MainToolDefiner = MainEnum.Pensils;
+                paintCore.CurrentPensil = EnumsHandler.getPensil((PensilsEnum)tag);
+            }
+            else if (tag is MiscEnum)
+            {
+                paintCore.MainToolDefiner = MainEnum.Misc;
+                paintCore.CurrentMisc = EnumsHandler.getMisc((MiscEnum)tag);
+            }
+            ButtonHandler.UnselectAll();
+            ButtonHandler.Select((Button)sender);
+        }
+
+        #endregion
+
+        #region OTHER_HANDLERS
 
         private void ClearBoard_Btn_Click(object sender, EventArgs e)
         {
@@ -135,12 +150,11 @@ namespace Pint
             }
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            //��������� Ctrl + �����-�� ������
             if (e.Control)
             {
-                if (e.KeyCode == Keys.Z)
+                /*if (e.KeyCode == Keys.Z)
                 {
                     MainBitmap = paintCore.ReturnToPreviousBitmap(MainBitmap);
                     MainImage.Image = MainBitmap;
@@ -150,7 +164,8 @@ namespace Pint
                     MainBitmap = paintCore.ReturnToFutureBitmap(MainBitmap);
                     MainImage.Image = MainBitmap;
                 }
-                else if (e.KeyCode == Keys.S)
+                else */
+                if (e.KeyCode == Keys.S)
                     SaveFile_Btn_Click(sender, null);
                 else if (e.KeyCode == Keys.C)
                     ClearBoard_Btn_Click(sender, null);
@@ -159,30 +174,15 @@ namespace Pint
             }
         }
 
-        private void MainSelect(object sender, EventArgs e)
+        private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            object tag = ((Button)sender).Tag;
-
-            if (tag is FiguresEnum)
-            {
-                paintCore.MainToolDefiner = MainEnum.Figures;
-                paintCore.CurrentFigure = EnumsHandler.getFigure((FiguresEnum)tag);
-            }
-            else if (tag is PensilsEnum)
-            {
-                paintCore.MainToolDefiner = MainEnum.Pensils;
-                paintCore.CurrentPensil = EnumsHandler.getPensil((PensilsEnum)tag);
-            }
-            else if (tag is MiscEnum)
-            {
-                paintCore.MainToolDefiner = MainEnum.Misc;
-                paintCore.CurrentMisc = EnumsHandler.getMisc((MiscEnum)tag);
-            }
-            ButtonHandler.UnselectAll();
-            ButtonHandler.Select((Button)sender);
+            PenHandler.SetPenParameters(pen, trackBar1.Value + 1, pen.Color);
+            PenWidthLabel.Text = pen.Width.ToString();
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e) => PenHandler.SetPenParameters(pen, trackBar1.Value * 2, pen.Color);
+        #endregion
+
+        #region COLOR_CONTROL
 
         private void ColorInHTML_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -252,7 +252,50 @@ namespace Pint
             UpdateCurrentColors(color);
             pen.Color = color;
         }
+        #endregion
 
+        #region BUTTON_HANDLERS
+
+        private void SetButtonTags()
+        {
+            Circle_Btn.Tag = FiguresEnum.Circle;
+            Line_Btn.Tag = FiguresEnum.Line;
+            Rectangle_Btn.Tag = FiguresEnum.Square;
+            RightTriangle_Btn.Tag = FiguresEnum.RightTriangle;
+            RegularTriangle_Btn.Tag = FiguresEnum.RegularTriangle;
+            StarFive_Btn.Tag = FiguresEnum.StarFive;
+            StarSix_Btn.Tag = FiguresEnum.StarSix;
+            StarEight_Btn.Tag = FiguresEnum.StarEight;
+            Rhombus_Btn.Tag = FiguresEnum.Rhombus;
+            Hexagon_Btn.Tag = FiguresEnum.Hexagon;
+            Pencil_Btn.Tag = PensilsEnum.Pencil;
+            Eraser_Btn.Tag = PensilsEnum.Eraser;
+            Filler_Btn.Tag = MiscEnum.Filler;
+            ColorPicker_Btn.Tag = MiscEnum.ColorPicker;
+            /*TextLabel_Btn.Tag = MiscEnum.TextLabel;*/
+        }
+        public void InitializeButtons()
+        {
+            ButtonHandler.Allbuttons.Add(Circle_Btn);
+            ButtonHandler.Allbuttons.Add(Rectangle_Btn);
+            ButtonHandler.Allbuttons.Add(RegularTriangle_Btn);
+            ButtonHandler.Allbuttons.Add(RightTriangle_Btn);
+            ButtonHandler.Allbuttons.Add(Line_Btn);
+            ButtonHandler.Allbuttons.Add(StarFive_Btn);
+            ButtonHandler.Allbuttons.Add(StarSix_Btn);
+            ButtonHandler.Allbuttons.Add(StarEight_Btn);
+            ButtonHandler.Allbuttons.Add(Rhombus_Btn);
+            ButtonHandler.Allbuttons.Add(Hexagon_Btn);
+            ButtonHandler.Allbuttons.Add(Pencil_Btn);
+            ButtonHandler.Allbuttons.Add(Eraser_Btn);
+            ButtonHandler.Allbuttons.Add(Filler_Btn);
+            ButtonHandler.Allbuttons.Add(ColorPicker_Btn);
+            /*ButtonHandler.Allbuttons.Add(TextLabel_Btn);*/
+        }
+
+        #endregion
+
+        #region THEME_CONTROL
         private void InitUI(string key)
         {
             try
@@ -277,23 +320,14 @@ namespace Pint
             }
             GC.Collect();
         }
-
         private void SetLightTheme()
         {
             ForeColor = Color.Black;
-            BackColor = Color.FromArgb(215, 215, 215);
-            panel1.BackColor = Color.WhiteSmoke;
+            BackColor = Color.FromArgb(195, 195, 195);
+            panel1.BackColor = Color.FromArgb(245, 245, 245);
             panel1.ForeColor = Color.Black;
 
-            CurrentColorInHTML.BackColor = panel1.BackColor;
-            CurrentColor_R.BackColor = panel1.BackColor;
-            CurrentColor_G.BackColor = panel1.BackColor;
-            CurrentColor_B.BackColor = panel1.BackColor;
-
-            CurrentColorInHTML.ForeColor = panel1.ForeColor;
-            CurrentColor_R.ForeColor = panel1.ForeColor;
-            CurrentColor_G.ForeColor = panel1.ForeColor;
-            CurrentColor_B.ForeColor = panel1.ForeColor;
+            SetColorDependencies();
 
             ButtonHandler.SelectColor = Color.FromArgb(195, 195, 195);
             ButtonHandler.UnselectColor = Color.WhiteSmoke;
@@ -303,14 +337,21 @@ namespace Pint
             RegularTriangle_Btn.BackgroundImage = Properties.Resources.regular_triangle;
             RightTriangle_Btn.BackgroundImage = Properties.Resources.right_triangle;
             Line_Btn.BackgroundImage = Properties.Resources.line;
-            Filler_Btn.BackgroundImage = Properties.Resources.filler;
+            StarFive_Btn.BackgroundImage = Properties.Resources.star_five;
+            StarSix_Btn.BackgroundImage = Properties.Resources.star_six;
+            StarEight_Btn.BackgroundImage = Properties.Resources.star_eight;
+            Rhombus_Btn.BackgroundImage = Properties.Resources.rhombus;
+            Hexagon_Btn.BackgroundImage = Properties.Resources.hexagon;
+            Filler_Btn.BackgroundImage = Properties.Resources.Filler;
             Pencil_Btn.BackgroundImage = Properties.Resources.pencil;
             Eraser_Btn.BackgroundImage = Properties.Resources.eraser;
+            ColorPicker_Btn.BackgroundImage = Properties.Resources.color_picker;
+            Scribble.BackgroundImage = Properties.Resources.scribble;
 
+            /*Invalidate();*/
             SetWindowTheme(false);
             ButtonHandler.UpdateBtnColors();
         }
-
         private void SetDarkTheme()
         {
             ForeColor = Color.WhiteSmoke;
@@ -318,15 +359,7 @@ namespace Pint
             panel1.BackColor = Color.FromArgb(32, 39, 49);
             panel1.ForeColor = Color.WhiteSmoke;
 
-            CurrentColorInHTML.BackColor = panel1.BackColor;
-            CurrentColor_R.BackColor = panel1.BackColor;
-            CurrentColor_G.BackColor = panel1.BackColor;
-            CurrentColor_B.BackColor = panel1.BackColor;
-
-            CurrentColorInHTML.ForeColor = panel1.ForeColor;
-            CurrentColor_R.ForeColor = panel1.ForeColor;
-            CurrentColor_G.ForeColor = panel1.ForeColor;
-            CurrentColor_B.ForeColor = panel1.ForeColor;
+            SetColorDependencies();
 
             ButtonHandler.SelectColor = Color.FromArgb(87, 94, 104);
             ButtonHandler.UnselectColor = panel1.BackColor;
@@ -336,10 +369,18 @@ namespace Pint
             RegularTriangle_Btn.BackgroundImage = Properties.Resources.regular_triangle_inverted;
             RightTriangle_Btn.BackgroundImage = Properties.Resources.right_triangle_inverted;
             Line_Btn.BackgroundImage = Properties.Resources.line_inverted;
+            StarFive_Btn.BackgroundImage = Properties.Resources.star_five_inverted;
+            StarSix_Btn.BackgroundImage = Properties.Resources.star_six_inverted;
+            StarEight_Btn.BackgroundImage = Properties.Resources.star_eight_inverted;
+            Rhombus_Btn.BackgroundImage = Properties.Resources.rhombus_inverted;
+            Hexagon_Btn.BackgroundImage = Properties.Resources.hexagon_inverted;
             Filler_Btn.BackgroundImage = Properties.Resources.filler_inverted;
             Pencil_Btn.BackgroundImage = Properties.Resources.pencil_inverted;
             Eraser_Btn.BackgroundImage = Properties.Resources.eraser_inverted;
+            ColorPicker_Btn.BackgroundImage = Properties.Resources.color_picker_inverted;
+            Scribble.BackgroundImage = Properties.Resources.scribble_inverted;
 
+            /*Invalidate();*/
             SetWindowTheme(true);
             ButtonHandler.UpdateBtnColors();
         }
@@ -360,9 +401,28 @@ namespace Pint
             DwmSetWindowAttribute(Handle, 20, useDarkMode, sizeof(int));
         }
 
+        private void SetColorDependencies()
+        {
+            CurrentColorInHTML.BackColor = panel1.BackColor;
+            CurrentColor_R.BackColor = panel1.BackColor;
+            CurrentColor_G.BackColor = panel1.BackColor;
+            CurrentColor_B.BackColor = panel1.BackColor;
+
+            CurrentColorInHTML.ForeColor = panel1.ForeColor;
+            CurrentColor_R.ForeColor = panel1.ForeColor;
+            CurrentColor_G.ForeColor = panel1.ForeColor;
+            CurrentColor_B.ForeColor = panel1.ForeColor;
+            ColorSlider_R.BackColor = panel1.BackColor;
+            ColorSlider_G.BackColor = panel1.BackColor;
+            ColorSlider_B.BackColor = panel1.BackColor;
+            panel5.BackColor = panel1.BackColor;
+            panel5.ForeColor = panel1.ForeColor;
+        }
+
         private void DM_Btn_Click(object sender, EventArgs e)
         {
             InitUI("UIMode");
         }
+        #endregion
     }
 }

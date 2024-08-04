@@ -15,6 +15,11 @@ namespace Pint.Core
                 case FiguresEnum.Line: return new Line();
                 case FiguresEnum.RightTriangle: return new RightTriangle();
                 case FiguresEnum.RegularTriangle: return new RegularTriangle();
+                case FiguresEnum.StarFive: return new StarFive();
+                case FiguresEnum.StarSix: return new StarSix();
+                case FiguresEnum.StarEight: return new StarEight();
+                case FiguresEnum.Rhombus: return new Rhombus();
+                case FiguresEnum.Hexagon: return new Hexagon();
             }
             return null;
         }
@@ -31,7 +36,9 @@ namespace Pint.Core
             switch (miscEnum)
             {
                 case MiscEnum.Filler: return new Filler();
-            }
+                case MiscEnum.TextLabel: return new TextLabel();
+                case MiscEnum.ColorPicker: return new ColorPicker();
+             }
             return null;
         }
     }
