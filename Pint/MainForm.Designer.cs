@@ -90,9 +90,11 @@
             Black_Btn = new Button();
             Cyan_Btn = new Button();
             panel1 = new Panel();
-            panel3 = new Panel();
+            splitContainer1 = new SplitContainer();
+            splitContainer2 = new SplitContainer();
             SelectFile_Btn = new Button();
             DM_Btn = new Button();
+            splitContainer3 = new SplitContainer();
             panel6 = new Panel();
             label2 = new Label();
             MainImage = new PictureBox();
@@ -110,7 +112,18 @@
             ((System.ComponentModel.ISupportInitialize)ColorSlider_G).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ColorSlider_B).BeginInit();
             panel1.SuspendLayout();
-            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
+            splitContainer3.Panel1.SuspendLayout();
+            splitContainer3.Panel2.SuspendLayout();
+            splitContainer3.SuspendLayout();
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Scribble).BeginInit();
@@ -119,31 +132,31 @@
             // 
             // ClearBoard_Btn
             // 
-            ClearBoard_Btn.Anchor = AnchorStyles.None;
             ClearBoard_Btn.BackColor = Color.Transparent;
+            ClearBoard_Btn.Dock = DockStyle.Fill;
             ClearBoard_Btn.FlatAppearance.BorderColor = Color.Black;
             ClearBoard_Btn.FlatAppearance.BorderSize = 0;
             ClearBoard_Btn.FlatStyle = FlatStyle.Popup;
             ClearBoard_Btn.Font = new Font("Calibri", 12F);
-            ClearBoard_Btn.Location = new Point(131, 71);
+            ClearBoard_Btn.Location = new Point(0, 0);
             ClearBoard_Btn.Name = "ClearBoard_Btn";
-            ClearBoard_Btn.Size = new Size(141, 78);
+            ClearBoard_Btn.Size = new Size(150, 74);
             ClearBoard_Btn.TabIndex = 37;
-            ClearBoard_Btn.Text = "Очистить";
+            ClearBoard_Btn.Text = "Очистить изображение";
             ClearBoard_Btn.UseVisualStyleBackColor = false;
             ClearBoard_Btn.Click += ClearBoard_Btn_Click;
             // 
             // SaveFile_Btn
             // 
-            SaveFile_Btn.Anchor = AnchorStyles.None;
             SaveFile_Btn.BackColor = Color.Transparent;
+            SaveFile_Btn.Dock = DockStyle.Fill;
             SaveFile_Btn.FlatAppearance.BorderColor = Color.Black;
             SaveFile_Btn.FlatAppearance.BorderSize = 0;
             SaveFile_Btn.FlatStyle = FlatStyle.Popup;
             SaveFile_Btn.Font = new Font("Calibri", 12F);
-            SaveFile_Btn.Location = new Point(-1, 71);
+            SaveFile_Btn.Location = new Point(0, 0);
             SaveFile_Btn.Name = "SaveFile_Btn";
-            SaveFile_Btn.Size = new Size(135, 78);
+            SaveFile_Btn.Size = new Size(145, 74);
             SaveFile_Btn.TabIndex = 36;
             SaveFile_Btn.Text = "Сохранить изображение";
             SaveFile_Btn.UseVisualStyleBackColor = false;
@@ -700,9 +713,9 @@
             CurrentColor_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             CurrentColor_Btn.FlatAppearance.BorderSize = 0;
             CurrentColor_Btn.FlatStyle = FlatStyle.Popup;
-            CurrentColor_Btn.Location = new Point(332, 7);
+            CurrentColor_Btn.Location = new Point(323, 7);
             CurrentColor_Btn.Name = "CurrentColor_Btn";
-            CurrentColor_Btn.Size = new Size(80, 23);
+            CurrentColor_Btn.Size = new Size(89, 23);
             CurrentColor_Btn.TabIndex = 45;
             CurrentColor_Btn.UseVisualStyleBackColor = false;
             // 
@@ -711,10 +724,10 @@
             ColorSlider_R.Anchor = AnchorStyles.None;
             ColorSlider_R.AutoSize = false;
             ColorSlider_R.BackColor = Color.WhiteSmoke;
-            ColorSlider_R.Location = new Point(350, 40);
+            ColorSlider_R.Location = new Point(343, 40);
             ColorSlider_R.Maximum = 255;
             ColorSlider_R.Name = "ColorSlider_R";
-            ColorSlider_R.Size = new Size(138, 27);
+            ColorSlider_R.Size = new Size(145, 27);
             ColorSlider_R.TabIndex = 47;
             ColorSlider_R.TickStyle = TickStyle.None;
             ColorSlider_R.Scroll += ColorFromChangingSlider;
@@ -766,10 +779,10 @@
             ColorSlider_G.Anchor = AnchorStyles.None;
             ColorSlider_G.AutoSize = false;
             ColorSlider_G.BackColor = Color.WhiteSmoke;
-            ColorSlider_G.Location = new Point(350, 71);
+            ColorSlider_G.Location = new Point(343, 71);
             ColorSlider_G.Maximum = 255;
             ColorSlider_G.Name = "ColorSlider_G";
-            ColorSlider_G.Size = new Size(138, 27);
+            ColorSlider_G.Size = new Size(145, 27);
             ColorSlider_G.TabIndex = 48;
             ColorSlider_G.TickStyle = TickStyle.None;
             ColorSlider_G.Scroll += ColorFromChangingSlider;
@@ -821,10 +834,10 @@
             ColorSlider_B.Anchor = AnchorStyles.None;
             ColorSlider_B.AutoSize = false;
             ColorSlider_B.BackColor = Color.WhiteSmoke;
-            ColorSlider_B.Location = new Point(350, 102);
+            ColorSlider_B.Location = new Point(343, 102);
             ColorSlider_B.Maximum = 255;
             ColorSlider_B.Name = "ColorSlider_B";
-            ColorSlider_B.Size = new Size(138, 27);
+            ColorSlider_B.Size = new Size(145, 27);
             ColorSlider_B.TabIndex = 49;
             ColorSlider_B.TickStyle = TickStyle.None;
             ColorSlider_B.Scroll += ColorFromChangingSlider;
@@ -876,7 +889,7 @@
             label6.Anchor = AnchorStyles.None;
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Calibri", 12F);
-            label6.Location = new Point(332, 35);
+            label6.Location = new Point(323, 35);
             label6.Name = "label6";
             label6.Size = new Size(21, 28);
             label6.TabIndex = 51;
@@ -902,7 +915,7 @@
             label8.Anchor = AnchorStyles.None;
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Calibri", 12F);
-            label8.Location = new Point(332, 98);
+            label8.Location = new Point(323, 98);
             label8.Name = "label8";
             label8.Size = new Size(21, 27);
             label8.TabIndex = 53;
@@ -928,7 +941,7 @@
             label7.Anchor = AnchorStyles.None;
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Calibri", 12F);
-            label7.Location = new Point(332, 67);
+            label7.Location = new Point(323, 67);
             label7.Name = "label7";
             label7.Size = new Size(21, 27);
             label7.TabIndex = 52;
@@ -1022,7 +1035,7 @@
             // panel1
             // 
             panel1.BackColor = Color.WhiteSmoke;
-            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(splitContainer1);
             panel1.Controls.Add(panel6);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(panel2);
@@ -1034,31 +1047,54 @@
             panel1.Size = new Size(1626, 150);
             panel1.TabIndex = 42;
             // 
-            // panel3
+            // splitContainer1
             // 
-            panel3.Anchor = AnchorStyles.Left;
-            panel3.BackColor = Color.Transparent;
-            panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(ClearBoard_Btn);
-            panel3.Controls.Add(SelectFile_Btn);
-            panel3.Controls.Add(SaveFile_Btn);
-            panel3.Controls.Add(DM_Btn);
-            panel3.Location = new Point(909, 0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(273, 150);
-            panel3.TabIndex = 59;
+            splitContainer1.BorderStyle = BorderStyle.FixedSingle;
+            splitContainer1.Location = new Point(909, 0);
+            splitContainer1.Name = "splitContainer1";
+            splitContainer1.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(splitContainer2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(splitContainer3);
+            splitContainer1.Size = new Size(298, 151);
+            splitContainer1.SplitterDistance = 74;
+            splitContainer1.SplitterWidth = 1;
+            splitContainer1.TabIndex = 60;
+            // 
+            // splitContainer2
+            // 
+            splitContainer2.Dock = DockStyle.Fill;
+            splitContainer2.Location = new Point(0, 0);
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(SelectFile_Btn);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(DM_Btn);
+            splitContainer2.Size = new Size(296, 72);
+            splitContainer2.SplitterDistance = 145;
+            splitContainer2.SplitterWidth = 1;
+            splitContainer2.TabIndex = 0;
             // 
             // SelectFile_Btn
             // 
-            SelectFile_Btn.Anchor = AnchorStyles.None;
             SelectFile_Btn.BackColor = Color.Transparent;
+            SelectFile_Btn.Dock = DockStyle.Fill;
             SelectFile_Btn.FlatAppearance.BorderColor = Color.Black;
             SelectFile_Btn.FlatAppearance.BorderSize = 0;
             SelectFile_Btn.FlatStyle = FlatStyle.Popup;
             SelectFile_Btn.Font = new Font("Calibri", 12F);
-            SelectFile_Btn.Location = new Point(131, -1);
+            SelectFile_Btn.Location = new Point(0, 0);
             SelectFile_Btn.Name = "SelectFile_Btn";
-            SelectFile_Btn.Size = new Size(141, 74);
+            SelectFile_Btn.Size = new Size(145, 72);
             SelectFile_Btn.TabIndex = 42;
             SelectFile_Btn.Text = "Выбрать изображение";
             SelectFile_Btn.UseVisualStyleBackColor = false;
@@ -1066,18 +1102,36 @@
             // 
             // DM_Btn
             // 
-            DM_Btn.Anchor = AnchorStyles.None;
             DM_Btn.BackColor = Color.Transparent;
+            DM_Btn.Dock = DockStyle.Fill;
             DM_Btn.FlatAppearance.BorderSize = 0;
             DM_Btn.FlatStyle = FlatStyle.Popup;
             DM_Btn.Font = new Font("Calibri", 12F);
-            DM_Btn.Location = new Point(-1, -1);
+            DM_Btn.Location = new Point(0, 0);
             DM_Btn.Name = "DM_Btn";
-            DM_Btn.Size = new Size(135, 74);
+            DM_Btn.Size = new Size(150, 72);
             DM_Btn.TabIndex = 57;
             DM_Btn.Text = "Тёмная тема: Выкл";
             DM_Btn.UseVisualStyleBackColor = false;
             DM_Btn.Click += DM_Btn_Click;
+            // 
+            // splitContainer3
+            // 
+            splitContainer3.Dock = DockStyle.Fill;
+            splitContainer3.Location = new Point(0, 0);
+            splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            splitContainer3.Panel1.Controls.Add(SaveFile_Btn);
+            // 
+            // splitContainer3.Panel2
+            // 
+            splitContainer3.Panel2.Controls.Add(ClearBoard_Btn);
+            splitContainer3.Size = new Size(296, 74);
+            splitContainer3.SplitterDistance = 145;
+            splitContainer3.SplitterWidth = 1;
+            splitContainer3.TabIndex = 0;
             // 
             // panel6
             // 
@@ -1203,7 +1257,18 @@
             ((System.ComponentModel.ISupportInitialize)ColorSlider_G).EndInit();
             ((System.ComponentModel.ISupportInitialize)ColorSlider_B).EndInit();
             panel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            splitContainer3.Panel1.ResumeLayout(false);
+            splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
+            splitContainer3.ResumeLayout(false);
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)MainImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)Scribble).EndInit();
@@ -1286,6 +1351,8 @@
         private Button OrangeRed_Btn;
         private Button DarkOrange_Btn;
         private Button SteelBlue_Btn;
-        private Panel panel3;
+        private SplitContainer splitContainer1;
+        private SplitContainer splitContainer2;
+        private SplitContainer splitContainer3;
     }
 }
