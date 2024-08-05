@@ -1051,7 +1051,7 @@
             // 
             // Settings_Btn
             // 
-            Settings_Btn.Anchor = AnchorStyles.None;
+            Settings_Btn.Anchor = AnchorStyles.Right;
             Settings_Btn.BackgroundImage = Properties.Resources.settings;
             Settings_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             Settings_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
@@ -1202,7 +1202,7 @@
             // 
             // DrawingTimer
             // 
-            DrawingTimer.Interval = 15;
+            DrawingTimer.Interval = 10;
             DrawingTimer.Tick += DrawingTimer_Tick;
             // 
             // openFileDialog1
@@ -1233,6 +1233,7 @@
             // 
             // panel5
             // 
+            panel5.BackColor = Color.WhiteSmoke;
             panel5.Controls.Add(PenWidthLabel);
             panel5.Controls.Add(Scribble);
             panel5.Controls.Add(trackBar1);
