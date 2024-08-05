@@ -132,6 +132,8 @@ namespace Pint
         private void ClearBoard_Btn_Click(object sender, EventArgs e)
         {
             paintCore.AddToPreviousBitmaps(MainBitmap);
+            //Temporary fix
+            MainBitmap = new Bitmap(MainImage.Width, MainImage.Height);
             paintCore.ClearBM(MainBitmap);
             MainImage.Image = MainBitmap;
         }
