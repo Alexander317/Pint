@@ -36,8 +36,13 @@
             label2 = new Label();
             useAgressiveFilling = new RadioButton();
             dontUseAgressiveFilling = new RadioButton();
+            groupBox3 = new GroupBox();
+            label3 = new Label();
+            useAntiAliasing = new RadioButton();
+            dontUseAntiAliasing = new RadioButton();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -97,7 +102,7 @@
             groupBox2.Font = new Font("Calibri", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             groupBox2.Location = new Point(12, 202);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(522, 195);
+            groupBox2.Size = new Size(522, 173);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Более агрессивная заливка";
@@ -107,7 +112,7 @@
             label2.Font = new Font("Calibri", 11F);
             label2.Location = new Point(8, 29);
             label2.Name = "label2";
-            label2.Size = new Size(508, 79);
+            label2.Size = new Size(508, 67);
             label2.TabIndex = 3;
             label2.Text = "Определяет, будет ли использоваться более агрессивный метод заливки фигуры (Лучше всего использовать когда цвета заливки и контура фигуры совпадают. Может привести к графическим ошибкам)";
             // 
@@ -115,7 +120,7 @@
             // 
             useAgressiveFilling.AutoSize = true;
             useAgressiveFilling.Font = new Font("Calibri", 13F);
-            useAgressiveFilling.Location = new Point(31, 123);
+            useAgressiveFilling.Location = new Point(31, 99);
             useAgressiveFilling.Name = "useAgressiveFilling";
             useAgressiveFilling.Size = new Size(135, 26);
             useAgressiveFilling.TabIndex = 2;
@@ -128,7 +133,7 @@
             // 
             dontUseAgressiveFilling.AutoSize = true;
             dontUseAgressiveFilling.Font = new Font("Calibri", 13F);
-            dontUseAgressiveFilling.Location = new Point(31, 155);
+            dontUseAgressiveFilling.Location = new Point(31, 131);
             dontUseAgressiveFilling.Name = "dontUseAgressiveFilling";
             dontUseAgressiveFilling.Size = new Size(157, 26);
             dontUseAgressiveFilling.TabIndex = 1;
@@ -137,11 +142,60 @@
             dontUseAgressiveFilling.UseVisualStyleBackColor = true;
             dontUseAgressiveFilling.CheckedChanged += dontUseAgressiveFilling_CheckedChanged;
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(label3);
+            groupBox3.Controls.Add(useAntiAliasing);
+            groupBox3.Controls.Add(dontUseAntiAliasing);
+            groupBox3.Font = new Font("Calibri", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            groupBox3.Location = new Point(12, 418);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(522, 167);
+            groupBox3.TabIndex = 2;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Anti-Aliasing";
+            // 
+            // label3
+            // 
+            label3.Font = new Font("Calibri", 11F);
+            label3.Location = new Point(8, 29);
+            label3.Name = "label3";
+            label3.Size = new Size(508, 64);
+            label3.TabIndex = 3;
+            label3.Text = "Определяет, будет ли использоваться технология сглаживания Anti-Aliasing. Значительно улучшает качество картинки, но может привести к графическим ошибкам при использовании вместе с заливкой";
+            // 
+            // useAntiAliasing
+            // 
+            useAntiAliasing.AutoSize = true;
+            useAntiAliasing.Font = new Font("Calibri", 13F);
+            useAntiAliasing.Location = new Point(31, 96);
+            useAntiAliasing.Name = "useAntiAliasing";
+            useAntiAliasing.Size = new Size(135, 26);
+            useAntiAliasing.TabIndex = 2;
+            useAntiAliasing.TabStop = true;
+            useAntiAliasing.Text = "Использовать";
+            useAntiAliasing.UseVisualStyleBackColor = true;
+            useAntiAliasing.CheckedChanged += useAntiAliasing_CheckedChanged;
+            // 
+            // dontUseAntiAliasing
+            // 
+            dontUseAntiAliasing.AutoSize = true;
+            dontUseAntiAliasing.Font = new Font("Calibri", 13F);
+            dontUseAntiAliasing.Location = new Point(31, 128);
+            dontUseAntiAliasing.Name = "dontUseAntiAliasing";
+            dontUseAntiAliasing.Size = new Size(157, 26);
+            dontUseAntiAliasing.TabIndex = 1;
+            dontUseAntiAliasing.TabStop = true;
+            dontUseAntiAliasing.Text = "Не использовать";
+            dontUseAntiAliasing.UseVisualStyleBackColor = true;
+            dontUseAntiAliasing.CheckedChanged += dontUseAntiAliasing_CheckedChanged;
+            // 
             // SettingsScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(546, 439);
+            ClientSize = new Size(546, 615);
+            Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "SettingsScreen";
@@ -150,6 +204,8 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -163,5 +219,9 @@
         private Label label2;
         private RadioButton useAgressiveFilling;
         private RadioButton dontUseAgressiveFilling;
+        private GroupBox groupBox3;
+        private Label label3;
+        private RadioButton useAntiAliasing;
+        private RadioButton dontUseAntiAliasing;
     }
 }

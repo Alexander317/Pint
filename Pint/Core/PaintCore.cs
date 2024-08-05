@@ -2,6 +2,8 @@
 using Pint.Core.Figures;
 using Pint.Core.Misc;
 using Pint.Core.Pencils;
+using System.Configuration;
+using System.Drawing.Drawing2D;
 
 
 namespace Pint.Core
@@ -29,9 +31,11 @@ namespace Pint.Core
         {
             futureBitmaps.Clear();
             if (MainToolDefiner == MainEnum.Pensils) {
-                CurrentPensil.UsePencil(bitmap, pen, this);
+                CurrentPensil.UsePencil(bitmap, pen, this, 
+                    ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             } else if (MainToolDefiner == MainEnum.Figures) {
-                CurrentFigure.UseFigure(bitmap, pen, arrayPoint);
+                CurrentFigure.UseFigure(bitmap, pen, arrayPoint, 
+                    ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             } else if (MainToolDefiner == MainEnum.Misc) {
                 CurrentMisc.UseMisc(bitmap, pen, PosX, PosY);
             }
@@ -40,7 +44,8 @@ namespace Pint.Core
         {
             arrayPoint.ResetOnlyLast();
             arrayPoint.SetPoint(PosX, PosY);
-            CurrentFigure.UseFigure(bitmap, pen, arrayPoint);
+            CurrentFigure.UseFigure(bitmap, pen, arrayPoint, 
+                ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             return bitmap;
         }
         public void ClearBM(Bitmap bitmap)

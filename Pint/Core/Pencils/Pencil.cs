@@ -1,12 +1,14 @@
-﻿namespace Pint.Core.Pencils
+﻿using System.Drawing.Drawing2D;
+
+namespace Pint.Core.Pencils
 {
     internal class Pencil : MainPencil
     {
-        public override void UsePencil(Bitmap bitmap, Pen pen, PaintCore paintCore)
+        public override void UsePencil(Bitmap bitmap, Pen pen, PaintCore paintCore, SmoothingMode smoothingMode)
         {
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                graphics.SmoothingMode = smoothingMode;
                 Point startPoint = paintCore.arrayPoint.Points[0];
                 Point endPoint = new(paintCore.PosX, paintCore.PosY);
                 graphics.DrawLine(pen, startPoint, endPoint);

@@ -1,8 +1,10 @@
-﻿namespace Pint.Core.Figures
+﻿using System.Drawing.Drawing2D;
+
+namespace Pint.Core.Figures
 {
     internal class Hexagon : MainFigure
     {
-        public override void UseFigure(Bitmap bitmap, Pen pen, ArrayPoint arrayPoint)
+        public override void UseFigure(Bitmap bitmap, Pen pen, ArrayPoint arrayPoint, SmoothingMode smoothingMode)
         {
             Point p1 = arrayPoint.Points[0];
             Point p2 = arrayPoint.Points[1];
@@ -23,10 +25,9 @@
                 );
             }
 
-            // Рисование шестиугольника
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                graphics.SmoothingMode = smoothingMode;
                 graphics.DrawPolygon(pen, hexagonPoints);
             }
         }

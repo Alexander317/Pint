@@ -1,12 +1,14 @@
-﻿namespace Pint.Core.Pencils
+﻿using System.Drawing.Drawing2D;
+
+namespace Pint.Core.Pencils
 {
     internal class Eraser : MainPencil
     {
-        public override void UsePencil(Bitmap bitmap, Pen pen, PaintCore paintCore)
+        public override void UsePencil(Bitmap bitmap, Pen pen, PaintCore paintCore, SmoothingMode smoothingMode)
         {
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                graphics.SmoothingMode = smoothingMode;
                 Pen EraserPen = new(Color.White, pen.Width);
                 PenHandler.MakePenRound(EraserPen);
                 Point startPoint = paintCore.arrayPoint.Points[0];

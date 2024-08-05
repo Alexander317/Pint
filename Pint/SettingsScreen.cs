@@ -22,6 +22,11 @@ namespace Pint
                 useAgressiveFilling.Checked = true;
             else
                 dontUseAgressiveFilling.Checked = true;
+
+            if (ConfigurationManager.AppSettings["Anti-Aliasing"] == "use")
+                useAntiAliasing.Checked = true;
+            else
+                dontUseAntiAliasing.Checked = true;
         }
         #region RADIOBUTTONS
 
@@ -42,6 +47,10 @@ namespace Pint
         private void useAgressiveFilling_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["AgressiveFilling"] = "use";
 
         private void dontUseAgressiveFilling_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["AgressiveFilling"] = "dontUse";
+
+        private void useAntiAliasing_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["Anti-Aliasing"] = "use";
+
+        private void dontUseAntiAliasing_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["Anti-Aliasing"] = "dontUse";
 
         #endregion
 
@@ -75,6 +84,8 @@ namespace Pint
             groupBox1.ForeColor = Color.Black;
             groupBox2.BackColor = Color.FromArgb(245, 245, 245);
             groupBox2.ForeColor = Color.Black;
+            groupBox3.BackColor = Color.FromArgb(245, 245, 245);
+            groupBox3.ForeColor = Color.Black;
 
             SetWindowTheme(false);
         }
@@ -87,6 +98,8 @@ namespace Pint
             groupBox1.ForeColor = Color.WhiteSmoke;
             groupBox2.BackColor = Color.FromArgb(32, 39, 49);
             groupBox2.ForeColor = Color.WhiteSmoke;
+            groupBox3.BackColor = Color.FromArgb(32, 39, 49);
+            groupBox3.ForeColor = Color.WhiteSmoke;
 
             SetWindowTheme(true);
         }
@@ -108,5 +121,6 @@ namespace Pint
         }
 
         #endregion
+
     }
 }

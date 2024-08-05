@@ -1,11 +1,13 @@
-﻿namespace Pint.Core.Figures
+﻿using System.Drawing.Drawing2D;
+
+namespace Pint.Core.Figures
 {
     internal class Line : MainFigure
     {
-        public override void UseFigure(Bitmap bitmap, Pen pen, ArrayPoint arrayPoint)
+        public override void UseFigure(Bitmap bitmap, Pen pen, ArrayPoint arrayPoint, SmoothingMode smoothingMode)
         {
             using Graphics graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            graphics.SmoothingMode = smoothingMode;
             graphics.DrawLine(pen, arrayPoint.Points[0], arrayPoint.Points[1]);
         }
     }
