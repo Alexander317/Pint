@@ -186,6 +186,12 @@ namespace Pint
             PenWidthLabel.Text = pen.Width.ToString();
         }
 
+        private void Settings_Btn_Click(object sender, EventArgs e)
+        {
+            SettingsScreen settingsScreen = new SettingsScreen(changed);
+            settingsScreen.Show();
+        }
+
         #endregion
 
         #region COLOR_CONTROL
@@ -305,22 +311,15 @@ namespace Pint
 
         private void ChangeUITheme()
         {
-            try
+            if (ConfigurationManager.AppSettings["UIMode"] == "light")
             {
-                if (ConfigurationManager.AppSettings["UIMode"] == "light")
-                {
-                    SetLightTheme();
-                    ConfigurationManager.AppSettings["UIMode"] = "dark";
-                }
-                else
-                {
-                    SetDarkTheme();
-                    ConfigurationManager.AppSettings["UIMode"] = "light";
-                }
+                SetLightTheme();
+                ConfigurationManager.AppSettings["UIMode"] = "dark";
             }
-            catch (Exception e)
+            else
             {
-                throw;
+                SetDarkTheme();
+                ConfigurationManager.AppSettings["UIMode"] = "light";
             }
             GC.Collect();
         }
@@ -353,20 +352,19 @@ namespace Pint
             Scribble.BackgroundImage = Properties.Resources.scribble;
             Settings_Btn.BackgroundImage = Properties.Resources.settings;
 
-            /*Invalidate();*/
             SetWindowTheme(false);
             ButtonHandler.UpdateBtnColors();
         }
         private void SetDarkTheme()
         {
             ForeColor = Color.WhiteSmoke;
-            BackColor = Color.FromArgb(17, 24, 34);
-            panel1.BackColor = Color.FromArgb(32, 39, 49);
+            BackColor = Color.FromArgb(24, 24, 24);
+            panel1.BackColor = Color.FromArgb(42, 42, 42);
             panel1.ForeColor = Color.WhiteSmoke;
 
             SetColorDependencies();
 
-            ButtonHandler.SelectColor = Color.FromArgb(87, 94, 104);
+            ButtonHandler.SelectColor = Color.FromArgb(79, 79, 79);
             ButtonHandler.UnselectColor = panel1.BackColor;
 
             Circle_Btn.BackgroundImage = Properties.Resources.circle_inverted;
@@ -386,8 +384,6 @@ namespace Pint
             Scribble.BackgroundImage = Properties.Resources.scribble_inverted;
             Settings_Btn.BackgroundImage = Properties.Resources.settings_inverted;
 
-
-            /*Invalidate();*/
             SetWindowTheme(true);
             ButtonHandler.UpdateBtnColors();
         }
@@ -426,11 +422,5 @@ namespace Pint
             panel5.ForeColor = panel1.ForeColor;
         }
         #endregion
-
-        private void Settings_Btn_Click(object sender, EventArgs e)
-        {
-            SettingsScreen settingsScreen = new SettingsScreen(changed);
-            settingsScreen.Show();
-        }
     }
 }

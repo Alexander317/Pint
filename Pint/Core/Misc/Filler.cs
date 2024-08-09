@@ -1,6 +1,5 @@
 ﻿using System.Configuration;
 using System.Drawing.Imaging;
-using System.Windows.Forms;
 
 namespace Pint.Core.Misc
 {
@@ -8,18 +7,10 @@ namespace Pint.Core.Misc
     {
         public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
         {
-
-            try
-            {
-                if (ConfigurationManager.AppSettings["AgressiveFilling"] == "use")
-                    AgressiveFilling(bitmap, pen, posX, posY);
-                else
-                    SimpleFilling(bitmap, pen, posX, posY);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            if (ConfigurationManager.AppSettings["AgressiveFilling"] == "use")
+                AgressiveFilling(bitmap, pen, posX, posY);
+            else
+                SimpleFilling(bitmap, pen, posX, posY);
         }
 
         private void SimpleFilling(Bitmap bitmap, Pen pen, int posX, int posY)
@@ -60,7 +51,6 @@ namespace Pint.Core.Misc
                         currentPixel[1] = (byte)((penArgb >> 8) & 0xFF);
                         currentPixel[2] = (byte)((penArgb >> 16) & 0xFF);
 
-                        // Push adjacent pixels
                         if (x - 1 >= 0)
                             pixels.Push(new Point(x - 1, y));
                         if (x + 1 < width)
@@ -72,7 +62,6 @@ namespace Pint.Core.Misc
                     }
                     else
                     {
-                        // Repaint the pixel but don't push it to stack
                         currentPixel[0] = (byte)(penArgb & 0xFF);
                         currentPixel[1] = (byte)((penArgb >> 8) & 0xFF);
                         currentPixel[2] = (byte)((penArgb >> 16) & 0xFF);
@@ -122,7 +111,6 @@ namespace Pint.Core.Misc
                         currentPixel[1] = (byte)((penArgb >> 8) & 0xFF);
                         currentPixel[2] = (byte)((penArgb >> 16) & 0xFF);
 
-                        // Push adjacent pixels
                         if (x - 1 >= 0)
                             pixels.Push(new Point(x - 1, y));
                         if (x + 1 < width)
@@ -134,12 +122,10 @@ namespace Pint.Core.Misc
                     }
                     else
                     {
-                        // Repaint the pixel
                         currentPixel[0] = (byte)(penArgb & 0xFF);
                         currentPixel[1] = (byte)((penArgb >> 8) & 0xFF);
                         currentPixel[2] = (byte)((penArgb >> 16) & 0xFF);
 
-                        // Repaint the diagonal neighbors
                         for (int dx = -1; dx <= 1; dx++)
                         {
                             for (int dy = -1; dy <= 1; dy++)
@@ -148,7 +134,6 @@ namespace Pint.Core.Misc
                                 {
                                     byte* neighborPixel = startPtr + (y + dy) * bitmapData.Stride + (x + dx) * bytesPerPixel;
 
-                                    // Repaint the diagonal neighbor pixel
                                     if (Color.FromArgb(neighborPixel[2], neighborPixel[1], neighborPixel[0]).ToArgb() != oldColor.ToArgb())
                                     {
                                         neighborPixel[0] = (byte)(penArgb & 0xFF);

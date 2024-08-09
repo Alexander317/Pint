@@ -1258,7 +1258,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(175, 175, 175);
+            BackColor = Color.FromArgb(195, 195, 195);
             ClientSize = new Size(1626, 927);
             Controls.Add(CoordinatesLabel);
             Controls.Add(panel1);

@@ -58,21 +58,10 @@ namespace Pint
 
         private void ChangeUITheme()
         {
-            try
-            {
-                if (ConfigurationManager.AppSettings["UIMode"] == "dark")
-                {
-                    SetLightTheme();
-                }
-                else
-                {
-                    SetDarkTheme();
-                }
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            if (ConfigurationManager.AppSettings["UIMode"] == "dark")
+                SetLightTheme();
+            else
+                SetDarkTheme();
             GC.Collect();
         }
 
@@ -92,13 +81,13 @@ namespace Pint
 
         private void SetDarkTheme()
         {
-            BackColor = Color.FromArgb(17, 24, 34);
+            BackColor = Color.FromArgb(24, 24, 24);
             ForeColor = Color.WhiteSmoke;
-            groupBox1.BackColor = Color.FromArgb(32, 39, 49);
+            groupBox1.BackColor = Color.FromArgb(42, 42, 42);
             groupBox1.ForeColor = Color.WhiteSmoke;
-            groupBox2.BackColor = Color.FromArgb(32, 39, 49);
+            groupBox2.BackColor = Color.FromArgb(42, 42, 42);
             groupBox2.ForeColor = Color.WhiteSmoke;
-            groupBox3.BackColor = Color.FromArgb(32, 39, 49);
+            groupBox3.BackColor = Color.FromArgb(42, 42, 42);
             groupBox3.ForeColor = Color.WhiteSmoke;
 
             SetWindowTheme(true);

@@ -47,6 +47,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = SystemColors.Control;
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(darkTheme);
             groupBox1.Controls.Add(lightTheme);
@@ -96,6 +97,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.BackColor = SystemColors.Control;
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(useAgressiveFilling);
             groupBox2.Controls.Add(dontUseAgressiveFilling);
@@ -144,6 +146,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.BackColor = SystemColors.Control;
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(useAntiAliasing);
             groupBox3.Controls.Add(dontUseAntiAliasing);
@@ -194,6 +197,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(195, 195, 195);
             ClientSize = new Size(546, 615);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
