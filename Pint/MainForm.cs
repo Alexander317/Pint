@@ -51,7 +51,6 @@ namespace Pint
 
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
-            /*paintCore.AddToPreviousBitmaps(MainBitmap);*/
             paintCore.arrayPoint.SetPoint(e.X, e.Y);
             mouseDown = true;
             if (paintCore.MainToolDefiner == MainEnum.Figures)
@@ -76,6 +75,7 @@ namespace Pint
         {
             DrawingTimer.Enabled = false;
             mouseDown = false;
+            CopyBitmap?.Dispose();
             paintCore.Filter(MainBitmap, pen);
             scrollablePictureBox.SetImage(MainBitmap);
             paintCore.arrayPoint.ResetAll();
@@ -91,7 +91,6 @@ namespace Pint
                 }
                 else
                 {
-                    /*paintCore.AddToPreviousBitmaps(MainBitmap);*/
                     paintCore.Filter(MainBitmap, pen);
                     scrollablePictureBox.SetImage(MainBitmap);
                 }
@@ -152,6 +151,7 @@ namespace Pint
             saveFileDialog1.Filter = "PNG(*.PNG)|*.png";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 scrollablePictureBox.GetImage().Save(saveFileDialog1.FileName);
+            saveFileDialog1.FileName = "";
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -196,22 +196,10 @@ namespace Pint
 
             sizeChooseDialog.SizeChanged += (_, size) =>
             {
-
+                //if MainBm != null then dispose it
                 MainBitmap?.Dispose();
-
                 MainBitmap = paintCore.CreateBitmapBySize(size);
-
-                if (size.Width >= 1500)
-                    scrollablePictureBox.Width = 1500;
-                else
-                    scrollablePictureBox.Width = size.Width;
-                if (size.Height >= 690)
-                    scrollablePictureBox.Height = 690;
-                else
-                    scrollablePictureBox.Height = size.Height;
-
-                scrollablePictureBox.SetImage(MainBitmap);
-                scrollablePictureBox.SetImageSize(size);
+                ProcessPictureBox(size);
             };
 
             sizeChooseDialog.ShowDialog();
@@ -225,21 +213,24 @@ namespace Pint
             {
                 //if MainBm != null then dispose it
                 MainBitmap?.Dispose();
-
                 MainBitmap = new Bitmap(openFileDialog1.FileName);
-
-                if (MainBitmap.Width >= 1500)
-                    scrollablePictureBox.Width = 1500;
-                else
-                    scrollablePictureBox.Width = MainBitmap.Width;
-                if (MainBitmap.Height >= 690)
-                    scrollablePictureBox.Height = 690;
-                else
-                    scrollablePictureBox.Height = MainBitmap.Height;
-
-                scrollablePictureBox.SetImage(MainBitmap);
-                scrollablePictureBox.SetImageSize(new Size(MainBitmap.Width, MainBitmap.Height));
+                ProcessPictureBox(new Size(MainBitmap.Width, MainBitmap.Height));
             }
+        }
+        private void ProcessPictureBox(Size size)
+        {
+            if (MainBitmap.Width >= 1500)
+                scrollablePictureBox.Width = 1500;
+            else
+                scrollablePictureBox.Width = MainBitmap.Width;
+            if (MainBitmap.Height >= 690)
+                scrollablePictureBox.Height = 690;
+            else
+                scrollablePictureBox.Height = MainBitmap.Height;
+
+            scrollablePictureBox.SetImage(MainBitmap);
+            scrollablePictureBox.SetImageSize(size);
+            scrollablePictureBox.Visible = true;
         }
 
         #endregion

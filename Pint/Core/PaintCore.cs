@@ -69,6 +69,7 @@ namespace Pint.Core
 
         #endregion
 
+        //RemakeMePlease
         #region PREVIOUS/FUTURE_BITMAPS
 
         public Bitmap ReturnToPreviousBitmap(Bitmap bitmap)

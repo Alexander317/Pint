@@ -1246,6 +1246,7 @@
             scrollablePictureBox.Name = "scrollablePictureBox";
             scrollablePictureBox.Size = new Size(1500, 690);
             scrollablePictureBox.TabIndex = 47;
+            scrollablePictureBox.Visible = false;
             // 
             // MainForm
             // 
