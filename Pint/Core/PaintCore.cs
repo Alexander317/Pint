@@ -4,6 +4,7 @@ using Pint.Core.Misc;
 using Pint.Core.Pencils;
 using System.Configuration;
 using System.Drawing.Drawing2D;
+using System.Drawing;
 
 
 namespace Pint.Core
@@ -22,6 +23,23 @@ namespace Pint.Core
         private List<Bitmap> previousBitmaps = new();
         private List<Bitmap> futureBitmaps = new();
         public ArrayPoint arrayPoint = new(2);
+
+        #endregion
+
+        #region CREATING_CANVAS
+
+        public Bitmap CreateBitmapBySize(Size size)
+        {
+            Bitmap bitmap = new Bitmap(size.Width, size.Height);
+            ClearBM(bitmap);
+            return bitmap;
+        }
+
+        public void ClearBM(Bitmap bitmap)
+        {
+            using Graphics g = Graphics.FromImage(bitmap);
+            g.Clear(Color.White);
+        }
 
         #endregion
 
@@ -47,11 +65,6 @@ namespace Pint.Core
             CurrentFigure.UseFigure(bitmap, pen, arrayPoint, 
                 ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             return bitmap;
-        }
-        public void ClearBM(Bitmap bitmap)
-        {
-            using Graphics g = Graphics.FromImage(bitmap);
-            g.Clear(Color.White);
         }
 
         #endregion

@@ -94,11 +94,10 @@
             splitContainer1 = new SplitContainer();
             splitContainer2 = new SplitContainer();
             SelectFile_Btn = new Button();
-            DM_Btn = new Button();
+            NewImage_Btn = new Button();
             splitContainer3 = new SplitContainer();
             panel6 = new Panel();
             label2 = new Label();
-            MainImage = new PictureBox();
             DrawingTimer = new System.Windows.Forms.Timer(components);
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
@@ -106,6 +105,7 @@
             Scribble = new PictureBox();
             panel5 = new Panel();
             PenWidthLabel = new Label();
+            scrollablePictureBox = new ScrollablePictureBox();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             panel2.SuspendLayout();
@@ -126,7 +126,6 @@
             splitContainer3.Panel2.SuspendLayout();
             splitContainer3.SuspendLayout();
             panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)MainImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Scribble).BeginInit();
             panel5.SuspendLayout();
             SuspendLayout();
@@ -1097,7 +1096,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            splitContainer2.Panel2.Controls.Add(DM_Btn);
+            splitContainer2.Panel2.Controls.Add(NewImage_Btn);
             splitContainer2.Size = new Size(298, 74);
             splitContainer2.SplitterDistance = 145;
             splitContainer2.SplitterWidth = 1;
@@ -1119,18 +1118,20 @@
             SelectFile_Btn.UseVisualStyleBackColor = false;
             SelectFile_Btn.Click += SelectFile_Btn_Click;
             // 
-            // DM_Btn
+            // NewImage_Btn
             // 
-            DM_Btn.BackColor = Color.Transparent;
-            DM_Btn.Dock = DockStyle.Fill;
-            DM_Btn.FlatAppearance.BorderSize = 0;
-            DM_Btn.FlatStyle = FlatStyle.Popup;
-            DM_Btn.Font = new Font("Calibri", 12F);
-            DM_Btn.Location = new Point(0, 0);
-            DM_Btn.Name = "DM_Btn";
-            DM_Btn.Size = new Size(150, 72);
-            DM_Btn.TabIndex = 57;
-            DM_Btn.UseVisualStyleBackColor = false;
+            NewImage_Btn.BackColor = Color.Transparent;
+            NewImage_Btn.Dock = DockStyle.Fill;
+            NewImage_Btn.FlatAppearance.BorderSize = 0;
+            NewImage_Btn.FlatStyle = FlatStyle.Popup;
+            NewImage_Btn.Font = new Font("Calibri", 12F);
+            NewImage_Btn.Location = new Point(0, 0);
+            NewImage_Btn.Name = "NewImage_Btn";
+            NewImage_Btn.Size = new Size(150, 72);
+            NewImage_Btn.TabIndex = 57;
+            NewImage_Btn.Text = "Новое изображение";
+            NewImage_Btn.UseVisualStyleBackColor = false;
+            NewImage_Btn.Click += NewImage_Btn_Click;
             // 
             // splitContainer3
             // 
@@ -1184,21 +1185,6 @@
             label2.TabIndex = 26;
             label2.Text = "Палитра";
             label2.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // MainImage
-            // 
-            MainImage.Anchor = AnchorStyles.None;
-            MainImage.BackColor = Color.White;
-            MainImage.BorderStyle = BorderStyle.FixedSingle;
-            MainImage.Location = new Point(68, 199);
-            MainImage.Name = "MainImage";
-            MainImage.Size = new Size(1480, 680);
-            MainImage.TabIndex = 43;
-            MainImage.TabStop = false;
-            MainImage.Click += MainImage_Click;
-            MainImage.MouseDown += MainImage_MouseDown;
-            MainImage.MouseMove += MainImage_MouseMove;
-            MainImage.MouseUp += MainImage_MouseUp;
             // 
             // DrawingTimer
             // 
@@ -1254,15 +1240,22 @@
             PenWidthLabel.Text = "0";
             PenWidthLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // scrollablePictureBox
+            // 
+            scrollablePictureBox.Location = new Point(68, 199);
+            scrollablePictureBox.Name = "scrollablePictureBox";
+            scrollablePictureBox.Size = new Size(1500, 690);
+            scrollablePictureBox.TabIndex = 47;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(195, 195, 195);
             ClientSize = new Size(1626, 927);
+            Controls.Add(scrollablePictureBox);
             Controls.Add(CoordinatesLabel);
             Controls.Add(panel1);
-            Controls.Add(MainImage);
             Controls.Add(panel5);
             Icon = Properties.Resources.Icon;
             KeyPreview = true;
@@ -1290,7 +1283,6 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
             splitContainer3.ResumeLayout(false);
             panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)MainImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)Scribble).EndInit();
             panel5.ResumeLayout(false);
             ResumeLayout(false);
@@ -1342,11 +1334,10 @@
         private Label label7;
         private Label label6;
         private TextBox CurrentColorInHTML;
-        public PictureBox MainImage;
         private Button HotPink_Btn;
         private Button LimeGreen_Btn;
         private Button Orange_Btn;
-        private Button DM_Btn;
+        private Button NewImage_Btn;
         private Label CoordinatesLabel;
         private Button ColorPicker_Btn;
         private PictureBox Scribble;
@@ -1375,5 +1366,6 @@
         private SplitContainer splitContainer2;
         private SplitContainer splitContainer3;
         private Button Settings_Btn;
+        private ScrollablePictureBox scrollablePictureBox;
     }
 }

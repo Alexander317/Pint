@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using Pint.Core.Misc;
 using System.Drawing;
+using CustomPaint;
+using System.Security.Policy;
 
 namespace Pint
 {
@@ -28,13 +30,14 @@ namespace Pint
             InitializeComponent();
             InitializeButtons();
 
-            MainBitmap = new(MainImage.Width, MainImage.Height);
-            paintCore.ClearBM(MainBitmap);
-            MainImage.Image = MainBitmap;
-
             SetButtonTags();
             paintCore.MainToolDefiner = MainEnum.Pensils;
             paintCore.CurrentPensil = new Pencil();
+
+            scrollablePictureBox.GetPictureBox().MouseDown += MainImage_MouseDown;
+            scrollablePictureBox.GetPictureBox().MouseMove += MainImage_MouseMove;
+            scrollablePictureBox.GetPictureBox().MouseUp += MainImage_MouseUp;
+            scrollablePictureBox.GetPictureBox().MouseClick += MainImage_Click;
 
             UpdateCurrentColors(pen.Color);
             ButtonHandler.Select(Pencil_Btn);
@@ -66,7 +69,7 @@ namespace Pint
             if (paintCore.MainToolDefiner == MainEnum.Pensils)
             {
                 paintCore.Filter(MainBitmap, pen);
-                MainImage.Image = MainBitmap;
+                scrollablePictureBox.SetImage(MainBitmap);
             }
         }
         private void MainImage_MouseUp(object sender, MouseEventArgs e)
@@ -74,7 +77,7 @@ namespace Pint
             DrawingTimer.Enabled = false;
             mouseDown = false;
             paintCore.Filter(MainBitmap, pen);
-            MainImage.Image = MainBitmap;
+            scrollablePictureBox.SetImage(MainBitmap);
             paintCore.arrayPoint.ResetAll();
         }
         private void MainImage_Click(object sender, EventArgs e)
@@ -90,7 +93,7 @@ namespace Pint
                 {
                     /*paintCore.AddToPreviousBitmaps(MainBitmap);*/
                     paintCore.Filter(MainBitmap, pen);
-                    MainImage.Image = MainBitmap;
+                    scrollablePictureBox.SetImage(MainBitmap);
                 }
             }
         }
@@ -98,7 +101,7 @@ namespace Pint
         {
             CopyBitmap = new(MainBitmap);
             paintCore.DrawOnCopiedBitmap(CopyBitmap, pen);
-            MainImage.Image = CopyBitmap;
+            scrollablePictureBox.SetImage(CopyBitmap);
             GC.Collect();
         }
 
@@ -131,29 +134,24 @@ namespace Pint
 
         private void ClearBoard_Btn_Click(object sender, EventArgs e)
         {
-            paintCore.AddToPreviousBitmaps(MainBitmap);
-            //Temporary fix
-            MainBitmap = new Bitmap(MainImage.Width, MainImage.Height);
+            if (MainBitmap == null)
+                return;
+
+            int w = MainBitmap.Width;
+            int h = MainBitmap.Height;
+
+            MainBitmap?.Dispose();
+
+            MainBitmap = new Bitmap(w, h);
             paintCore.ClearBM(MainBitmap);
-            MainImage.Image = MainBitmap;
+            scrollablePictureBox.SetImage(MainBitmap);
         }
 
         private void SaveFile_Btn_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "PNG(*.PNG)|*.png";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                MainImage.Image.Save(saveFileDialog1.FileName);
-        }
-
-        private void SelectFile_Btn_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Filter = "Image Files(*.bmp;*.jpg;*.png)|*.bmp;*.jpg;*.png";
-            openFileDialog1.FileName = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                MainBitmap = new Bitmap(openFileDialog1.FileName);
-                MainImage.Image = MainBitmap;
-            }
+                scrollablePictureBox.GetImage().Save(saveFileDialog1.FileName);
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -190,6 +188,58 @@ namespace Pint
         {
             SettingsScreen settingsScreen = new SettingsScreen(changed);
             settingsScreen.Show();
+        }
+
+        private void NewImage_Btn_Click(object sender, EventArgs e)
+        {
+            SizeChooseDialog sizeChooseDialog = new SizeChooseDialog();
+
+            sizeChooseDialog.SizeChanged += (_, size) =>
+            {
+
+                MainBitmap?.Dispose();
+
+                MainBitmap = paintCore.CreateBitmapBySize(size);
+
+                if (size.Width >= 1500)
+                    scrollablePictureBox.Width = 1500;
+                else
+                    scrollablePictureBox.Width = size.Width;
+                if (size.Height >= 690)
+                    scrollablePictureBox.Height = 690;
+                else
+                    scrollablePictureBox.Height = size.Height;
+
+                scrollablePictureBox.SetImage(MainBitmap);
+                scrollablePictureBox.SetImageSize(size);
+            };
+
+            sizeChooseDialog.ShowDialog();
+        }
+
+        private void SelectFile_Btn_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Image Files(*.bmp;*.jpg;*.png)|*.bmp;*.jpg;*.png";
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //if MainBm != null then dispose it
+                MainBitmap?.Dispose();
+
+                MainBitmap = new Bitmap(openFileDialog1.FileName);
+
+                if (MainBitmap.Width >= 1500)
+                    scrollablePictureBox.Width = 1500;
+                else
+                    scrollablePictureBox.Width = MainBitmap.Width;
+                if (MainBitmap.Height >= 690)
+                    scrollablePictureBox.Height = 690;
+                else
+                    scrollablePictureBox.Height = MainBitmap.Height;
+
+                scrollablePictureBox.SetImage(MainBitmap);
+                scrollablePictureBox.SetImageSize(new Size(MainBitmap.Width, MainBitmap.Height));
+            }
         }
 
         #endregion
