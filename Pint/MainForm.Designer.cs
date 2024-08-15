@@ -106,6 +106,8 @@
             panel5 = new Panel();
             PenWidthLabel = new Label();
             scrollablePictureBox = new ScrollablePictureBox();
+            SizeLabel = new Label();
+            panel3 = new Panel();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             panel2.SuspendLayout();
@@ -128,6 +130,7 @@
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Scribble).BeginInit();
             panel5.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // ClearBoard_Btn
@@ -1045,7 +1048,7 @@
             panel1.ForeColor = Color.Black;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1626, 150);
+            panel1.Size = new Size(1634, 150);
             panel1.TabIndex = 42;
             // 
             // Settings_Btn
@@ -1057,7 +1060,7 @@
             Settings_Btn.FlatAppearance.BorderSize = 0;
             Settings_Btn.FlatStyle = FlatStyle.Flat;
             Settings_Btn.ForeColor = Color.Black;
-            Settings_Btn.Location = new Point(1582, 12);
+            Settings_Btn.Location = new Point(1590, 12);
             Settings_Btn.Name = "Settings_Btn";
             Settings_Btn.Size = new Size(32, 32);
             Settings_Btn.TabIndex = 61;
@@ -1188,7 +1191,7 @@
             // 
             // DrawingTimer
             // 
-            DrawingTimer.Interval = 10;
+            DrawingTimer.Interval = 5;
             DrawingTimer.Tick += DrawingTimer_Tick;
             // 
             // openFileDialog1
@@ -1197,14 +1200,15 @@
             // 
             // CoordinatesLabel
             // 
-            CoordinatesLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            CoordinatesLabel.BorderStyle = BorderStyle.FixedSingle;
+            CoordinatesLabel.Dock = DockStyle.Left;
             CoordinatesLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            CoordinatesLabel.Location = new Point(12, 895);
+            CoordinatesLabel.Location = new Point(0, 0);
             CoordinatesLabel.Name = "CoordinatesLabel";
-            CoordinatesLabel.Size = new Size(114, 23);
+            CoordinatesLabel.Size = new Size(142, 27);
             CoordinatesLabel.TabIndex = 44;
             CoordinatesLabel.Text = "0, 0пкс";
-            CoordinatesLabel.TextAlign = ContentAlignment.BottomLeft;
+            CoordinatesLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Scribble
             // 
@@ -1224,7 +1228,7 @@
             panel5.Controls.Add(Scribble);
             panel5.Controls.Add(trackBar1);
             panel5.ForeColor = Color.Black;
-            panel5.Location = new Point(5, 316);
+            panel5.Location = new Point(12, 294);
             panel5.Name = "panel5";
             panel5.Size = new Size(45, 479);
             panel5.TabIndex = 46;
@@ -1242,27 +1246,51 @@
             // 
             // scrollablePictureBox
             // 
-            scrollablePictureBox.Location = new Point(68, 199);
+            scrollablePictureBox.Anchor = AnchorStyles.None;
+            scrollablePictureBox.Location = new Point(70, 190);
             scrollablePictureBox.Name = "scrollablePictureBox";
-            scrollablePictureBox.Size = new Size(1500, 690);
+            scrollablePictureBox.Size = new Size(1500, 680);
             scrollablePictureBox.TabIndex = 47;
             scrollablePictureBox.Visible = false;
+            // 
+            // SizeLabel
+            // 
+            SizeLabel.BorderStyle = BorderStyle.FixedSingle;
+            SizeLabel.Dock = DockStyle.Right;
+            SizeLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            SizeLabel.Location = new Point(136, 0);
+            SizeLabel.Name = "SizeLabel";
+            SizeLabel.Size = new Size(145, 27);
+            SizeLabel.TabIndex = 48;
+            SizeLabel.Text = "Нет изображения";
+            SizeLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(SizeLabel);
+            panel3.Controls.Add(CoordinatesLabel);
+            panel3.Location = new Point(0, 882);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(281, 27);
+            panel3.TabIndex = 49;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(195, 195, 195);
-            ClientSize = new Size(1626, 927);
+            ClientSize = new Size(1634, 909);
             Controls.Add(scrollablePictureBox);
-            Controls.Add(CoordinatesLabel);
             Controls.Add(panel1);
             Controls.Add(panel5);
+            Controls.Add(panel3);
             Icon = Properties.Resources.Icon;
             KeyPreview = true;
+            MinimumSize = new Size(1400, 900);
             Name = "MainForm";
             Text = "Pint v4.1.0";
             KeyDown += MainForm_KeyDown;
+            Resize += MainForm_Resize;
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             panel2.ResumeLayout(false);
@@ -1286,6 +1314,7 @@
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Scribble).EndInit();
             panel5.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -1368,5 +1397,7 @@
         private SplitContainer splitContainer3;
         private Button Settings_Btn;
         private ScrollablePictureBox scrollablePictureBox;
+        private Label SizeLabel;
+        private Panel panel3;
     }
 }

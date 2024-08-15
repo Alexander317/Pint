@@ -42,52 +42,55 @@
             applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             applyButton.FlatAppearance.BorderSize = 0;
             applyButton.FlatStyle = FlatStyle.Popup;
+            applyButton.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             applyButton.Location = new Point(29, 125);
             applyButton.Margin = new Padding(20, 3, 20, 3);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(132, 40);
             applyButton.TabIndex = 0;
-            applyButton.Text = "Change";
+            applyButton.Text = "Create";
             applyButton.UseVisualStyleBackColor = true;
             applyButton.Click += ApplyButton_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Calibri", 12F);
             label1.Location = new Point(29, 14);
             label1.Name = "label1";
-            label1.Size = new Size(39, 15);
+            label1.Size = new Size(48, 19);
             label1.TabIndex = 3;
             label1.Text = "Width";
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Calibri", 12F);
             label2.Location = new Point(25, 46);
             label2.Name = "label2";
-            label2.Size = new Size(43, 15);
+            label2.Size = new Size(52, 19);
             label2.TabIndex = 4;
             label2.Text = "Height";
             // 
             // widthNumeric
             // 
-            widthNumeric.Location = new Point(94, 12);
+            widthNumeric.Location = new Point(94, 15);
             widthNumeric.Maximum = new decimal(new int[] { 16384, 0, 0, 0 });
             widthNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             widthNumeric.Name = "widthNumeric";
             widthNumeric.Size = new Size(84, 23);
             widthNumeric.TabIndex = 5;
-            widthNumeric.Value = new decimal(new int[] { 1024, 0, 0, 0 });
+            widthNumeric.Value = new decimal(new int[] { 1920, 0, 0, 0 });
             // 
             // heightNumeric
             // 
-            heightNumeric.Location = new Point(94, 44);
+            heightNumeric.Location = new Point(94, 47);
             heightNumeric.Maximum = new decimal(new int[] { 16384, 0, 0, 0 });
             heightNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             heightNumeric.Name = "heightNumeric";
             heightNumeric.Size = new Size(84, 23);
             heightNumeric.TabIndex = 6;
-            heightNumeric.Value = new decimal(new int[] { 1024, 0, 0, 0 });
+            heightNumeric.Value = new decimal(new int[] { 1080, 0, 0, 0 });
             // 
             // SizeChooseDialog
             // 

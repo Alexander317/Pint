@@ -200,6 +200,7 @@ namespace Pint
                 MainBitmap?.Dispose();
                 MainBitmap = paintCore.CreateBitmapBySize(size);
                 ProcessPictureBox(size);
+                SizeLabel.Text = $"{size.Width}x{size.Height}";
             };
 
             sizeChooseDialog.ShowDialog();
@@ -215,22 +216,32 @@ namespace Pint
                 MainBitmap?.Dispose();
                 MainBitmap = new Bitmap(openFileDialog1.FileName);
                 ProcessPictureBox(new Size(MainBitmap.Width, MainBitmap.Height));
+                SizeLabel.Text = $"{MainBitmap.Width}x{MainBitmap.Height}";
             }
         }
         private void ProcessPictureBox(Size size)
         {
-            if (MainBitmap.Width >= 1500)
-                scrollablePictureBox.Width = 1500;
-            else
-                scrollablePictureBox.Width = MainBitmap.Width;
-            if (MainBitmap.Height >= 690)
-                scrollablePictureBox.Height = 690;
-            else
-                scrollablePictureBox.Height = MainBitmap.Height;
+            CalculatePictureBoxSize();
 
             scrollablePictureBox.SetImage(MainBitmap);
             scrollablePictureBox.SetImageSize(size);
             scrollablePictureBox.Visible = true;
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (MainBitmap != null)
+                CalculatePictureBoxSize();
+        }
+
+        private void CalculatePictureBoxSize()
+        {
+            scrollablePictureBox.Size = new Size(
+                Math.Min(MainBitmap.Width, Width - 70 - 70),
+                Math.Min(MainBitmap.Height, Height - 190) - 2 * 40
+            );
+            CoordinatesLabel.Text = $"{Width}, {Height}";
+            scrollablePictureBox.Location = new Point(70, 190);
         }
 
         #endregion
@@ -461,7 +472,10 @@ namespace Pint
             ColorSlider_B.BackColor = panel1.BackColor;
             panel5.BackColor = panel1.BackColor;
             panel5.ForeColor = panel1.ForeColor;
+            panel3.ForeColor = panel1.ForeColor;
+            panel3.BackColor = panel1.BackColor;
         }
         #endregion
+
     }
 }
