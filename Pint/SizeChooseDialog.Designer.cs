@@ -28,99 +28,127 @@
         /// </summary>
         private void InitializeComponent()
         {
-            applyButton = new Button();
             label1 = new Label();
             label2 = new Label();
             widthNumeric = new NumericUpDown();
             heightNumeric = new NumericUpDown();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            applyButton = new Button();
             ((System.ComponentModel.ISupportInitialize)widthNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)heightNumeric).BeginInit();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // applyButton
-            // 
-            applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            applyButton.FlatAppearance.BorderSize = 0;
-            applyButton.FlatStyle = FlatStyle.Popup;
-            applyButton.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            applyButton.Location = new Point(29, 125);
-            applyButton.Margin = new Padding(20, 3, 20, 3);
-            applyButton.Name = "applyButton";
-            applyButton.Size = new Size(132, 40);
-            applyButton.TabIndex = 0;
-            applyButton.Text = "Create";
-            applyButton.UseVisualStyleBackColor = true;
-            applyButton.Click += ApplyButton_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Calibri", 12F);
-            label1.Location = new Point(29, 14);
+            label1.Location = new Point(11, 12);
             label1.Name = "label1";
-            label1.Size = new Size(48, 19);
+            label1.Size = new Size(164, 19);
             label1.TabIndex = 3;
-            label1.Text = "Width";
+            label1.Text = "Ширина изображения";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Calibri", 12F);
-            label2.Location = new Point(25, 46);
+            label2.Location = new Point(11, 41);
             label2.Name = "label2";
-            label2.Size = new Size(52, 19);
+            label2.Size = new Size(156, 19);
             label2.TabIndex = 4;
-            label2.Text = "Height";
+            label2.Text = "Высота изображения";
             // 
             // widthNumeric
             // 
-            widthNumeric.Location = new Point(94, 15);
+            widthNumeric.Font = new Font("Segoe UI", 9.75F);
+            widthNumeric.Location = new Point(181, 12);
             widthNumeric.Maximum = new decimal(new int[] { 3840, 0, 0, 0 });
             widthNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             widthNumeric.Name = "widthNumeric";
-            widthNumeric.Size = new Size(84, 23);
+            widthNumeric.Size = new Size(84, 25);
             widthNumeric.TabIndex = 5;
             widthNumeric.Value = new decimal(new int[] { 1920, 0, 0, 0 });
             // 
             // heightNumeric
             // 
-            heightNumeric.Location = new Point(94, 47);
+            heightNumeric.Font = new Font("Segoe UI", 9.75F);
+            heightNumeric.Location = new Point(181, 41);
             heightNumeric.Maximum = new decimal(new int[] { 2160, 0, 0, 0 });
             heightNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             heightNumeric.Name = "heightNumeric";
-            heightNumeric.Size = new Size(84, 23);
+            heightNumeric.Size = new Size(84, 25);
             heightNumeric.TabIndex = 6;
             heightNumeric.Value = new decimal(new int[] { 1080, 0, 0, 0 });
+            // 
+            // panel1
+            // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(heightNumeric);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(widthNumeric);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(280, 78);
+            panel1.TabIndex = 7;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(applyButton);
+            panel2.Location = new Point(30, 98);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(220, 40);
+            panel2.TabIndex = 8;
+            // 
+            // applyButton
+            // 
+            applyButton.BackColor = Color.Transparent;
+            applyButton.Dock = DockStyle.Fill;
+            applyButton.FlatAppearance.BorderColor = Color.Black;
+            applyButton.FlatAppearance.BorderSize = 0;
+            applyButton.FlatStyle = FlatStyle.Popup;
+            applyButton.Font = new Font("Calibri", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            applyButton.Location = new Point(0, 0);
+            applyButton.Name = "applyButton";
+            applyButton.Size = new Size(220, 40);
+            applyButton.TabIndex = 43;
+            applyButton.Text = "Создать";
+            applyButton.UseVisualStyleBackColor = false;
+            applyButton.Click += ApplyButton_Click;
             // 
             // SizeChooseDialog
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(190, 177);
-            Controls.Add(heightNumeric);
-            Controls.Add(widthNumeric);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(applyButton);
+            ClientSize = new Size(280, 148);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "SizeChooseDialog";
             ShowInTaskbar = false;
-            Text = "Choose Canvas Size";
+            Text = "Выберите размер изображения";
             TopMost = true;
             ((System.ComponentModel.ISupportInitialize)widthNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)heightNumeric).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Button applyButton;
         private Label label1;
         private Label label2;
         private NumericUpDown widthNumeric;
         private NumericUpDown heightNumeric;
+        private Panel panel1;
+        private Panel panel2;
+        private Button applyButton;
     }
 }

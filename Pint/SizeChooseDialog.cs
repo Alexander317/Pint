@@ -32,8 +32,10 @@ namespace CustomPaint
 
         private void SetLightTheme()
         {
-            ForeColor = Color.Black;
             BackColor = Color.FromArgb(195, 195, 195);
+
+            panel1.BackColor = Color.FromArgb(245, 245, 245);
+            panel1.ForeColor = Color.Black;
 
             applyButton.BackColor = Color.FromArgb(245, 245, 245);
             applyButton.ForeColor = Color.Black;
@@ -48,10 +50,12 @@ namespace CustomPaint
         private void SetDarkTheme()
         {
             BackColor = Color.FromArgb(24, 24, 24);
-            ForeColor = Color.WhiteSmoke;
 
-            applyButton.BackColor = Color.FromArgb(42, 42, 42);
-            applyButton.ForeColor = Color.WhiteSmoke;
+            panel1.BackColor = Color.FromArgb(42, 42, 42);
+            panel1.ForeColor = Color.WhiteSmoke;
+
+            panel2.BackColor = Color.FromArgb(42, 42, 42);
+            panel2.ForeColor = Color.WhiteSmoke;
             widthNumeric.BackColor = Color.FromArgb(42, 42, 42);
             widthNumeric.ForeColor = Color.WhiteSmoke;
             heightNumeric.BackColor = Color.FromArgb(42, 42, 42);
@@ -66,8 +70,7 @@ namespace CustomPaint
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            var uiMode = ConfigurationManager.AppSettings["UIMode"];
-            SetWindowTheme(uiMode != "light");
+            SetWindowTheme(ConfigurationManager.AppSettings["UIMode"] != "light");
         }
         private void SetWindowTheme(bool dark)
         {

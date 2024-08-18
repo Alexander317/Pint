@@ -442,7 +442,7 @@
             // 
             trackBar1.Anchor = AnchorStyles.None;
             trackBar1.AutoSize = false;
-            trackBar1.Location = new Point(11, 44);
+            trackBar1.Location = new Point(12, 44);
             trackBar1.Maximum = 99;
             trackBar1.Name = "trackBar1";
             trackBar1.Orientation = Orientation.Vertical;
@@ -1237,7 +1237,7 @@
             // 
             PenWidthLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             PenWidthLabel.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            PenWidthLabel.Location = new Point(0, 18);
+            PenWidthLabel.Location = new Point(1, 18);
             PenWidthLabel.Name = "PenWidthLabel";
             PenWidthLabel.Size = new Size(43, 23);
             PenWidthLabel.TabIndex = 46;
@@ -1288,6 +1288,7 @@
             KeyPreview = true;
             MinimumSize = new Size(1400, 900);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Pint v4.1.0";
             KeyDown += MainForm_KeyDown;
             Resize += MainForm_Resize;

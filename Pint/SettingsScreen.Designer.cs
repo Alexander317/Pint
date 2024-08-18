@@ -65,9 +65,9 @@
             label1.Font = new Font("Calibri", 12F);
             label1.Location = new Point(8, 29);
             label1.Name = "label1";
-            label1.Size = new Size(328, 19);
+            label1.Size = new Size(342, 19);
             label1.TabIndex = 3;
-            label1.Text = "Выберите тему приложения для отображения";
+            label1.Text = "Определяет тему приложения для отображения";
             // 
             // darkTheme
             // 
@@ -102,7 +102,7 @@
             groupBox2.Controls.Add(useAgressiveFilling);
             groupBox2.Controls.Add(dontUseAgressiveFilling);
             groupBox2.Font = new Font("Calibri", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox2.Location = new Point(12, 202);
+            groupBox2.Location = new Point(12, 207);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(522, 173);
             groupBox2.TabIndex = 1;
@@ -156,7 +156,7 @@
             groupBox3.Size = new Size(522, 167);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Anti-Aliasing";
+            groupBox3.Text = "Технология Anti-Aliasing";
             // 
             // label3
             // 

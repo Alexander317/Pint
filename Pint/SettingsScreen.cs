@@ -97,8 +97,7 @@ namespace Pint
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            var uiMode = ConfigurationManager.AppSettings["UIMode"];
-            SetWindowTheme(uiMode != "light");
+            SetWindowTheme(ConfigurationManager.AppSettings["UIMode"] != "light");
         }
         private void SetWindowTheme(bool dark)
         {
