@@ -6,17 +6,15 @@ namespace Pint
 {
     public partial class SettingsScreen : Form
     {
-        public event OnThemeChanged changed;
-        public SettingsScreen(OnThemeChanged changed)
+        public event OnThemeChanged ThemeChanged;
+        public SettingsScreen()
         {
             InitializeComponent();
-            this.changed = changed;
-            ChangeUITheme();
 
             if (ConfigurationManager.AppSettings["UIMode"] == "dark")
-                lightTheme.Checked = true;
-            else
                 darkTheme.Checked = true;
+            else
+                lightTheme.Checked = true;
 
             if (ConfigurationManager.AppSettings["AgressiveFilling"] == "use")
                 useAgressiveFilling.Checked = true;
@@ -28,20 +26,20 @@ namespace Pint
             else
                 dontUseAntiAliasing.Checked = true;
         }
-        #region RADIOBUTTONS
 
+        #region Radiobuttons
         private void lightTheme_CheckedChanged(object sender, EventArgs e)
         {
             ConfigurationManager.AppSettings["UIMode"] = "light";
-            changed.Invoke();
-            ChangeUITheme();
+            SetUITheme();
+            ThemeChanged?.Invoke();
         }
 
         private void darkTheme_CheckedChanged(object sender, EventArgs e)
         {
             ConfigurationManager.AppSettings["UIMode"] = "dark";
-            changed.Invoke();
-            ChangeUITheme();
+            SetUITheme();
+            ThemeChanged?.Invoke();
         }
 
         private void useAgressiveFilling_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["AgressiveFilling"] = "use";
@@ -56,9 +54,9 @@ namespace Pint
 
         #region WINDOW_THEME_CONTROL
 
-        private void ChangeUITheme()
+        private void SetUITheme()
         {
-            if (ConfigurationManager.AppSettings["UIMode"] == "dark")
+            if (ConfigurationManager.AppSettings["UIMode"] == "light")
                 SetLightTheme();
             else
                 SetDarkTheme();

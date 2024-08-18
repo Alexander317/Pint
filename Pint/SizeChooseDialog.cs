@@ -6,7 +6,6 @@ namespace CustomPaint
     public partial class SizeChooseDialog : Form
     {
         public event EventHandler<Size> SizeChanged;
-        public event EventHandler FormClosed; 
         public SizeChooseDialog()
         {
             InitializeComponent();
@@ -17,7 +16,6 @@ namespace CustomPaint
         {
             Size size = new Size((int)widthNumeric.Value, (int)heightNumeric.Value);
             SizeChanged?.Invoke(this, size);
-            FormClosed?.Invoke(this, null);
             Close();
         }
 
@@ -25,7 +23,7 @@ namespace CustomPaint
 
         private void SetUITheme()
         {
-            if (ConfigurationManager.AppSettings["UIMode"] == "dark")
+            if (ConfigurationManager.AppSettings["UIMode"] == "light")
                 SetLightTheme();
             else
                 SetDarkTheme();

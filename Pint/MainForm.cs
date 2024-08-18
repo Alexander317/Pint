@@ -5,9 +5,7 @@ using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using Pint.Core.Misc;
-using System.Drawing;
 using CustomPaint;
-using System.Security.Policy;
 
 namespace Pint
 {
@@ -16,7 +14,6 @@ namespace Pint
     {
         #region FIELDS
 
-        public event OnThemeChanged changed;
         private PaintCore paintCore = new();
         private Pen pen = new(Color.Black, 1);
         private Bitmap MainBitmap;
@@ -41,8 +38,7 @@ namespace Pint
 
             UpdateCurrentColors(pen.Color);
             ButtonHandler.Select(Pencil_Btn);
-            ChangeUITheme();
-            changed += ChangeUITheme;
+            SetUITheme();
             trackBar1_Scroll(null, null);
             PenHandler.MakePenRound(pen);
         }
@@ -140,19 +136,24 @@ namespace Pint
             int h = MainBitmap.Height;
 
             MainBitmap?.Dispose();
-
-            MainBitmap = new Bitmap(w, h);
-            paintCore.ClearBM(MainBitmap);
+            MainBitmap = paintCore.CreateBitmapBySize(new Size(w, h));
             scrollablePictureBox.SetImage(MainBitmap);
         }
 
         private void SaveFile_Btn_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "PNG(*.PNG)|*.png";
+            saveFileDialog1.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|PNG Image|*.png";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                scrollablePictureBox.GetImage().Save(saveFileDialog1.FileName);
-            saveFileDialog1.FileName = "";
+                MainBitmap.Save(saveFileDialog1.FileName, GetImageFormat(Path.GetExtension(saveFileDialog1.FileName).ToLower().TrimStart('.')));
         }
+
+        private ImageFormat GetImageFormat(string extension) => extension switch
+        {
+            "jpg" or "jpeg" => ImageFormat.Jpeg,
+            "png" => ImageFormat.Png,
+            "gif" => ImageFormat.Gif,
+            _ => ImageFormat.Bmp,
+        };
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -186,7 +187,8 @@ namespace Pint
 
         private void Settings_Btn_Click(object sender, EventArgs e)
         {
-            SettingsScreen settingsScreen = new SettingsScreen(changed);
+            SettingsScreen settingsScreen = new SettingsScreen();
+            settingsScreen.ThemeChanged += SetUITheme; 
             settingsScreen.Show();
         }
 
@@ -237,8 +239,8 @@ namespace Pint
         private void CalculatePictureBoxSize()
         {
             scrollablePictureBox.Size = new Size(
-                Math.Min(MainBitmap.Width, Width - 70 - 70),
-                Math.Min(MainBitmap.Height, Height - 190) - 2 * 40
+                Math.Min(MainBitmap.Width, Width - 140),
+                Math.Min(MainBitmap.Height, Height - 190) - 80
             );
             CoordinatesLabel.Text = $"{Width}, {Height}";
             scrollablePictureBox.Location = new Point(70, 190);
@@ -336,7 +338,6 @@ namespace Pint
             Eraser_Btn.Tag = PensilsEnum.Eraser;
             Filler_Btn.Tag = MiscEnum.Filler;
             ColorPicker_Btn.Tag = MiscEnum.ColorPicker;
-            /*TextLabel_Btn.Tag = MiscEnum.TextLabel;*/
         }
         public void InitializeButtons()
         {
@@ -354,7 +355,6 @@ namespace Pint
             ButtonHandler.Allbuttons.Add(Eraser_Btn);
             ButtonHandler.Allbuttons.Add(Filler_Btn);
             ButtonHandler.Allbuttons.Add(ColorPicker_Btn);
-            /*ButtonHandler.Allbuttons.Add(TextLabel_Btn);*/
         }
 
         #endregion
@@ -364,15 +364,16 @@ namespace Pint
         private void ChangeUITheme()
         {
             if (ConfigurationManager.AppSettings["UIMode"] == "light")
-            {
-                SetLightTheme();
                 ConfigurationManager.AppSettings["UIMode"] = "dark";
-            }
             else
-            {
-                SetDarkTheme();
                 ConfigurationManager.AppSettings["UIMode"] = "light";
-            }
+        }
+        private void SetUITheme()
+        {
+            if (ConfigurationManager.AppSettings["UIMode"] == "light")
+                SetLightTheme();
+            else
+                SetDarkTheme();
             GC.Collect();
         }
         private void SetLightTheme()

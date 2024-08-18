@@ -75,7 +75,7 @@
             // widthNumeric
             // 
             widthNumeric.Location = new Point(94, 15);
-            widthNumeric.Maximum = new decimal(new int[] { 16384, 0, 0, 0 });
+            widthNumeric.Maximum = new decimal(new int[] { 3840, 0, 0, 0 });
             widthNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             widthNumeric.Name = "widthNumeric";
             widthNumeric.Size = new Size(84, 23);
@@ -85,7 +85,7 @@
             // heightNumeric
             // 
             heightNumeric.Location = new Point(94, 47);
-            heightNumeric.Maximum = new decimal(new int[] { 16384, 0, 0, 0 });
+            heightNumeric.Maximum = new decimal(new int[] { 2160, 0, 0, 0 });
             heightNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             heightNumeric.Name = "heightNumeric";
             heightNumeric.Size = new Size(84, 23);

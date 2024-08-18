@@ -30,7 +30,7 @@ namespace Pint.Core
 
         public Bitmap CreateBitmapBySize(Size size)
         {
-            Bitmap bitmap = new Bitmap(size.Width, size.Height);
+            Bitmap bitmap = new(size.Width, size.Height);
             ClearBM(bitmap);
             return bitmap;
         }
@@ -48,13 +48,18 @@ namespace Pint.Core
         public void Filter(Bitmap bitmap, Pen pen)
         {
             futureBitmaps.Clear();
-            if (MainToolDefiner == MainEnum.Pensils) {
-                CurrentPensil.UsePencil(bitmap, pen, this, 
+            if (MainToolDefiner == MainEnum.Pensils)
+            {
+                CurrentPensil.UsePencil(bitmap, pen, this,
                     ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
-            } else if (MainToolDefiner == MainEnum.Figures) {
-                CurrentFigure.UseFigure(bitmap, pen, arrayPoint, 
+            }
+            else if (MainToolDefiner == MainEnum.Figures)
+            {
+                CurrentFigure.UseFigure(bitmap, pen, arrayPoint,
                     ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
-            } else if (MainToolDefiner == MainEnum.Misc) {
+            }
+            else if (MainToolDefiner == MainEnum.Misc)
+            {
                 CurrentMisc.UseMisc(bitmap, pen, PosX, PosY);
             }
         }
@@ -62,7 +67,7 @@ namespace Pint.Core
         {
             arrayPoint.ResetOnlyLast();
             arrayPoint.SetPoint(PosX, PosY);
-            CurrentFigure.UseFigure(bitmap, pen, arrayPoint, 
+            CurrentFigure.UseFigure(bitmap, pen, arrayPoint,
                 ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             return bitmap;
         }
