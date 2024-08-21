@@ -66,7 +66,7 @@ namespace Pint
         private void SetLightTheme()
         {
             ForeColor = Color.Black;
-            BackColor = Color.FromArgb(195, 195, 195);
+            BackColor = Color.FromArgb(205, 205, 205);
             groupBox1.BackColor = Color.FromArgb(245, 245, 245);
             groupBox1.ForeColor = Color.Black;
             groupBox2.BackColor = Color.FromArgb(245, 245, 245);

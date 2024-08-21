@@ -385,13 +385,13 @@ namespace Pint
         private void SetLightTheme()
         {
             ForeColor = Color.Black;
-            BackColor = Color.FromArgb(195, 195, 195);
+            BackColor = Color.FromArgb(205, 205, 205);
             panel1.BackColor = Color.FromArgb(245, 245, 245);
             panel1.ForeColor = Color.Black;
 
             SetColorDependencies();
 
-            ButtonHandler.SelectColor = Color.FromArgb(195, 195, 195);
+            ButtonHandler.SelectColor = Color.FromArgb(205, 205, 205);
             ButtonHandler.UnselectColor = Color.WhiteSmoke;
 
             Circle_Btn.BackgroundImage = Properties.Resources.circle;

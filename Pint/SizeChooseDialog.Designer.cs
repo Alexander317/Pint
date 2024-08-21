@@ -33,12 +33,10 @@
             widthNumeric = new NumericUpDown();
             heightNumeric = new NumericUpDown();
             panel1 = new Panel();
-            panel2 = new Panel();
             applyButton = new Button();
             ((System.ComponentModel.ISupportInitialize)widthNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)heightNumeric).BeginInit();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -85,7 +83,6 @@
             // 
             // panel1
             // 
-            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(heightNumeric);
             panel1.Controls.Add(label2);
@@ -96,23 +93,14 @@
             panel1.Size = new Size(280, 78);
             panel1.TabIndex = 7;
             // 
-            // panel2
-            // 
-            panel2.Controls.Add(applyButton);
-            panel2.Location = new Point(30, 98);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(220, 40);
-            panel2.TabIndex = 8;
-            // 
             // applyButton
             // 
             applyButton.BackColor = Color.Transparent;
-            applyButton.Dock = DockStyle.Fill;
             applyButton.FlatAppearance.BorderColor = Color.Black;
             applyButton.FlatAppearance.BorderSize = 0;
             applyButton.FlatStyle = FlatStyle.Popup;
             applyButton.Font = new Font("Calibri", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            applyButton.Location = new Point(0, 0);
+            applyButton.Location = new Point(31, 96);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(220, 40);
             applyButton.TabIndex = 43;
@@ -125,7 +113,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(280, 148);
-            Controls.Add(panel2);
+            Controls.Add(applyButton);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -138,7 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)heightNumeric).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -148,7 +135,6 @@
         private NumericUpDown widthNumeric;
         private NumericUpDown heightNumeric;
         private Panel panel1;
-        private Panel panel2;
         private Button applyButton;
     }
 }

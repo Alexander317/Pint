@@ -1205,7 +1205,7 @@
             CoordinatesLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             CoordinatesLabel.Location = new Point(0, 0);
             CoordinatesLabel.Name = "CoordinatesLabel";
-            CoordinatesLabel.Size = new Size(142, 27);
+            CoordinatesLabel.Size = new Size(136, 27);
             CoordinatesLabel.TabIndex = 44;
             CoordinatesLabel.Text = "0, 0пкс";
             CoordinatesLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -1258,7 +1258,7 @@
             SizeLabel.BorderStyle = BorderStyle.FixedSingle;
             SizeLabel.Dock = DockStyle.Right;
             SizeLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            SizeLabel.Location = new Point(136, 0);
+            SizeLabel.Location = new Point(135, 0);
             SizeLabel.Name = "SizeLabel";
             SizeLabel.Size = new Size(145, 27);
             SizeLabel.TabIndex = 48;
@@ -1267,18 +1267,19 @@
             // 
             // panel3
             // 
+            panel3.BackColor = Color.WhiteSmoke;
             panel3.Controls.Add(SizeLabel);
             panel3.Controls.Add(CoordinatesLabel);
             panel3.Location = new Point(0, 882);
             panel3.Name = "panel3";
-            panel3.Size = new Size(281, 27);
+            panel3.Size = new Size(280, 27);
             panel3.TabIndex = 49;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(195, 195, 195);
+            BackColor = Color.FromArgb(205, 205, 205);
             ClientSize = new Size(1634, 909);
             Controls.Add(scrollablePictureBox);
             Controls.Add(panel1);

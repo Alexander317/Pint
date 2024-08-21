@@ -32,7 +32,7 @@ namespace CustomPaint
 
         private void SetLightTheme()
         {
-            BackColor = Color.FromArgb(195, 195, 195);
+            BackColor = Color.FromArgb(205, 205, 205);
 
             panel1.BackColor = Color.FromArgb(245, 245, 245);
             panel1.ForeColor = Color.Black;
@@ -54,8 +54,8 @@ namespace CustomPaint
             panel1.BackColor = Color.FromArgb(42, 42, 42);
             panel1.ForeColor = Color.WhiteSmoke;
 
-            panel2.BackColor = Color.FromArgb(42, 42, 42);
-            panel2.ForeColor = Color.WhiteSmoke;
+            applyButton.BackColor = Color.FromArgb(42, 42, 42);
+            applyButton.ForeColor = Color.WhiteSmoke;
             widthNumeric.BackColor = Color.FromArgb(42, 42, 42);
             widthNumeric.ForeColor = Color.WhiteSmoke;
             heightNumeric.BackColor = Color.FromArgb(42, 42, 42);
