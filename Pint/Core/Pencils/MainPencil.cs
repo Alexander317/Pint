@@ -4,6 +4,6 @@ namespace Pint.Core.Pencils
 {
     public abstract class MainPencil
     {
-        public abstract void UsePencil(Bitmap bitmap, Pen pen, PaintCore paintCore, SmoothingMode smoothingMode);
+        public abstract void UsePencil(Bitmap bitmap, Pen pen, ArrayPoint arrayPoint, SmoothingMode smoothingMode);
     }
 }

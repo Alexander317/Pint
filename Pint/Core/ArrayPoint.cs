@@ -17,6 +17,13 @@
             Points[Index] = new Point(x, y);
             Index++;
         }
+        public void SetPoint(Point lastPoint)
+        {
+            if (Index >= Points.Length)
+                Index = 0;
+            Points[Index] = lastPoint;
+            Index++;
+        }
         public void ResetAll() => Index = 0;
         public void ResetOnlyLast() => Index = 1;
         public void FlipPoints()

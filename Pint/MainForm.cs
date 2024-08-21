@@ -55,14 +55,14 @@ namespace Pint
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
             CoordinatesLabel.Text = $"{e.X}, {e.Y}пкс";
-            paintCore.PosX = e.X;
-            paintCore.PosY = e.Y;
+            paintCore.LastPos = new Point(e.X, e.Y);
             if (!mouseDown)
                 return;
 
 
             if (paintCore.MainToolDefiner == MainEnum.Pensils)
             {
+                paintCore.arrayPoint.SetPoint(paintCore.LastPos);
                 paintCore.Filter(MainBitmap, pen);
                 scrollablePictureBox.SetImage(MainBitmap);
             }
@@ -82,7 +82,7 @@ namespace Pint
             {
                 if (paintCore.CurrentMisc is ColorPicker)
                 {
-                    pen.Color = MainBitmap.GetPixel(paintCore.PosX, paintCore.PosY);
+                    pen.Color = MainBitmap.GetPixel(paintCore.LastPos.X, paintCore.LastPos.Y);
                     UpdateCurrentColors(pen.Color);
                 }
                 else

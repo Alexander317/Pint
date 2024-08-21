@@ -14,9 +14,8 @@ namespace Pint.Core
 
         #region FIELDS
 
-        public int PosX { get; set; } = 0;
-        public int PosY { get; set; } = 0;
         public MainEnum MainToolDefiner { get; set; }
+        public Point LastPos { get; set; }
         public MainFigure CurrentFigure { get; set; }
         public MainPencil CurrentPensil { get; set; }
         public MainMisc CurrentMisc { get; set; }
@@ -50,7 +49,7 @@ namespace Pint.Core
             futureBitmaps.Clear();
             if (MainToolDefiner == MainEnum.Pensils)
             {
-                CurrentPensil.UsePencil(bitmap, pen, this,
+                CurrentPensil.UsePencil(bitmap, pen, arrayPoint, 
                     ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             }
             else if (MainToolDefiner == MainEnum.Figures)
@@ -60,13 +59,13 @@ namespace Pint.Core
             }
             else if (MainToolDefiner == MainEnum.Misc)
             {
-                CurrentMisc.UseMisc(bitmap, pen, PosX, PosY);
+                CurrentMisc.UseMisc(bitmap, pen, LastPos);
             }
         }
         public Bitmap DrawOnCopiedBitmap(Bitmap bitmap, Pen pen)
         {
             arrayPoint.ResetOnlyLast();
-            arrayPoint.SetPoint(PosX, PosY);
+            arrayPoint.SetPoint(LastPos);
             CurrentFigure.UseFigure(bitmap, pen, arrayPoint,
                 ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             return bitmap;

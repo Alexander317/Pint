@@ -5,17 +5,17 @@ namespace Pint.Core.Misc
 {
     internal class Filler : MainMisc
     {
-        public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
+        public override void UseMisc(Bitmap bitmap, Pen pen, Point lastPos)
         {
             if (ConfigurationManager.AppSettings["AgressiveFilling"] == "use")
-                AgressiveFilling(bitmap, pen, posX, posY);
+                AgressiveFilling(bitmap, pen, lastPos);
             else
-                SimpleFilling(bitmap, pen, posX, posY);
+                SimpleFilling(bitmap, pen, lastPos);
         }
 
-        private void SimpleFilling(Bitmap bitmap, Pen pen, int posX, int posY)
+        private void SimpleFilling(Bitmap bitmap, Pen pen, Point lastPos)
         {
-            Color oldColor = bitmap.GetPixel(posX, posY);
+            Color oldColor = bitmap.GetPixel(lastPos.X, lastPos.Y);
 
             if (oldColor.ToArgb() == pen.Color.ToArgb())
                 return;
@@ -25,7 +25,7 @@ namespace Pint.Core.Misc
             int penArgb = pen.Color.ToArgb();
 
             Stack<Point> pixels = new Stack<Point>();
-            pixels.Push(new Point(posX, posY));
+            pixels.Push(new Point(lastPos.X, lastPos.Y));
 
             BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
             int bytesPerPixel = Image.GetPixelFormatSize(bitmap.PixelFormat) / 8;
@@ -73,9 +73,9 @@ namespace Pint.Core.Misc
         }
 
         //Более агрессивный метод, норм юзать если граница и заливка одного цвета, в остальных случаях просто хавает границу
-        private void AgressiveFilling(Bitmap bitmap, Pen pen, int posX, int posY)
+        private void AgressiveFilling(Bitmap bitmap, Pen pen, Point lastPos)
         {
-            Color oldColor = bitmap.GetPixel(posX, posY);
+            Color oldColor = bitmap.GetPixel(lastPos.X, lastPos.Y);
 
             if (oldColor.ToArgb() == pen.Color.ToArgb())
                 return;
@@ -85,7 +85,7 @@ namespace Pint.Core.Misc
             int penArgb = pen.Color.ToArgb();
 
             Stack<Point> pixels = new Stack<Point>();
-            pixels.Push(new Point(posX, posY));
+            pixels.Push(new Point(lastPos.X, lastPos.Y));
 
             BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
             int bytesPerPixel = Image.GetPixelFormatSize(bitmap.PixelFormat) / 8;

@@ -2,9 +2,9 @@
 {
     public class ColorPicker : MainMisc
     {
-        public override void UseMisc(Bitmap bitmap, Pen pen, int posX, int posY)
+        public override void UseMisc(Bitmap bitmap, Pen pen, Point lastPos)
         {
-            
+            //Emtpy cuz everything happens in MainForm
         }
     }
 }
