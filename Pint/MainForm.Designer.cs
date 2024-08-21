@@ -63,9 +63,9 @@
             LightGray_Btn = new Button();
             Purple_Btn = new Button();
             Blue_Btn = new Button();
-            CurrentColorInHTML = new TextBox();
+            CurrentColorHTML = new TextBox();
             HotPink_Btn = new Button();
-            CurrentColor_Btn = new Button();
+            CurrentColor = new Button();
             ColorSlider_R = new TrackBar();
             Orange_Btn = new Button();
             CurrentColor_B = new TextBox();
@@ -481,9 +481,9 @@
             panel2.Controls.Add(LightGray_Btn);
             panel2.Controls.Add(Purple_Btn);
             panel2.Controls.Add(Blue_Btn);
-            panel2.Controls.Add(CurrentColorInHTML);
+            panel2.Controls.Add(CurrentColorHTML);
             panel2.Controls.Add(HotPink_Btn);
-            panel2.Controls.Add(CurrentColor_Btn);
+            panel2.Controls.Add(CurrentColor);
             panel2.Controls.Add(ColorSlider_R);
             panel2.Controls.Add(Orange_Btn);
             panel2.Controls.Add(CurrentColor_B);
@@ -681,19 +681,19 @@
             Blue_Btn.UseVisualStyleBackColor = false;
             Blue_Btn.Click += SelectColor;
             // 
-            // CurrentColorInHTML
+            // CurrentColorHTML
             // 
-            CurrentColorInHTML.Anchor = AnchorStyles.None;
-            CurrentColorInHTML.BackColor = Color.WhiteSmoke;
-            CurrentColorInHTML.BorderStyle = BorderStyle.FixedSingle;
-            CurrentColorInHTML.Font = new Font("Calibri", 12F);
-            CurrentColorInHTML.ForeColor = Color.Black;
-            CurrentColorInHTML.Location = new Point(416, 5);
-            CurrentColorInHTML.Name = "CurrentColorInHTML";
-            CurrentColorInHTML.Size = new Size(115, 27);
-            CurrentColorInHTML.TabIndex = 50;
-            CurrentColorInHTML.TextAlign = HorizontalAlignment.Center;
-            CurrentColorInHTML.KeyPress += ColorInHTML_KeyPress;
+            CurrentColorHTML.Anchor = AnchorStyles.None;
+            CurrentColorHTML.BackColor = Color.WhiteSmoke;
+            CurrentColorHTML.BorderStyle = BorderStyle.FixedSingle;
+            CurrentColorHTML.Font = new Font("Calibri", 12F);
+            CurrentColorHTML.ForeColor = Color.Black;
+            CurrentColorHTML.Location = new Point(416, 5);
+            CurrentColorHTML.Name = "CurrentColorHTML";
+            CurrentColorHTML.Size = new Size(115, 27);
+            CurrentColorHTML.TabIndex = 50;
+            CurrentColorHTML.TextAlign = HorizontalAlignment.Center;
+            CurrentColorHTML.KeyPress += ColorHTMLChanged;
             // 
             // HotPink_Btn
             // 
@@ -709,18 +709,18 @@
             HotPink_Btn.UseVisualStyleBackColor = false;
             HotPink_Btn.Click += SelectColor;
             // 
-            // CurrentColor_Btn
+            // CurrentColor
             // 
-            CurrentColor_Btn.Anchor = AnchorStyles.None;
-            CurrentColor_Btn.BackColor = Color.Fuchsia;
-            CurrentColor_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
-            CurrentColor_Btn.FlatAppearance.BorderSize = 0;
-            CurrentColor_Btn.FlatStyle = FlatStyle.Popup;
-            CurrentColor_Btn.Location = new Point(323, 7);
-            CurrentColor_Btn.Name = "CurrentColor_Btn";
-            CurrentColor_Btn.Size = new Size(89, 23);
-            CurrentColor_Btn.TabIndex = 45;
-            CurrentColor_Btn.UseVisualStyleBackColor = false;
+            CurrentColor.Anchor = AnchorStyles.None;
+            CurrentColor.BackColor = Color.Fuchsia;
+            CurrentColor.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            CurrentColor.FlatAppearance.BorderSize = 0;
+            CurrentColor.FlatStyle = FlatStyle.Popup;
+            CurrentColor.Location = new Point(323, 7);
+            CurrentColor.Name = "CurrentColor";
+            CurrentColor.Size = new Size(89, 23);
+            CurrentColor.TabIndex = 45;
+            CurrentColor.UseVisualStyleBackColor = false;
             // 
             // ColorSlider_R
             // 
@@ -733,7 +733,7 @@
             ColorSlider_R.Size = new Size(145, 27);
             ColorSlider_R.TabIndex = 47;
             ColorSlider_R.TickStyle = TickStyle.None;
-            ColorSlider_R.Scroll += ColorFromChangingSlider;
+            ColorSlider_R.Scroll += ColorSliderChanged;
             // 
             // Orange_Btn
             // 
@@ -761,7 +761,7 @@
             CurrentColor_B.Size = new Size(37, 27);
             CurrentColor_B.TabIndex = 56;
             CurrentColor_B.TextAlign = HorizontalAlignment.Center;
-            CurrentColor_B.KeyPress += ColorFromChangingRGBTextboxes;
+            CurrentColor_B.KeyPress += RGBTextboxChanged;
             // 
             // BlueViolet_Btn
             // 
@@ -788,7 +788,7 @@
             ColorSlider_G.Size = new Size(145, 27);
             ColorSlider_G.TabIndex = 48;
             ColorSlider_G.TickStyle = TickStyle.None;
-            ColorSlider_G.Scroll += ColorFromChangingSlider;
+            ColorSlider_G.Scroll += ColorSliderChanged;
             // 
             // LimeGreen_Btn
             // 
@@ -816,7 +816,7 @@
             CurrentColor_G.Size = new Size(37, 27);
             CurrentColor_G.TabIndex = 55;
             CurrentColor_G.TextAlign = HorizontalAlignment.Center;
-            CurrentColor_G.KeyPress += ColorFromChangingRGBTextboxes;
+            CurrentColor_G.KeyPress += RGBTextboxChanged;
             // 
             // DeepSkyBlue_Btn
             // 
@@ -843,7 +843,7 @@
             ColorSlider_B.Size = new Size(145, 27);
             ColorSlider_B.TabIndex = 49;
             ColorSlider_B.TickStyle = TickStyle.None;
-            ColorSlider_B.Scroll += ColorFromChangingSlider;
+            ColorSlider_B.Scroll += ColorSliderChanged;
             // 
             // Fuchsia_Btn
             // 
@@ -871,7 +871,7 @@
             CurrentColor_R.Size = new Size(37, 27);
             CurrentColor_R.TabIndex = 54;
             CurrentColor_R.TextAlign = HorizontalAlignment.Center;
-            CurrentColor_R.KeyPress += ColorFromChangingRGBTextboxes;
+            CurrentColor_R.KeyPress += RGBTextboxChanged;
             // 
             // RoyalBlue_Btn
             // 
@@ -1357,14 +1357,14 @@
         private TrackBar ColorSlider_G;
         private TrackBar ColorSlider_R;
         private Label ColorHTML_Label;
-        private Button CurrentColor_Btn;
+        private Button CurrentColor;
         private TextBox CurrentColor_B;
         private TextBox CurrentColor_G;
         private TextBox CurrentColor_R;
         private Label label8;
         private Label label7;
         private Label label6;
-        private TextBox CurrentColorInHTML;
+        private TextBox CurrentColorHTML;
         private Button HotPink_Btn;
         private Button LimeGreen_Btn;
         private Button Orange_Btn;

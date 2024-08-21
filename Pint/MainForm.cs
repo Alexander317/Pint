@@ -202,7 +202,6 @@ namespace Pint
                 MainBitmap?.Dispose();
                 MainBitmap = paintCore.CreateBitmapBySize(size);
                 ProcessPictureBox(size);
-                SizeLabel.Text = $"{size.Width}x{size.Height}";
             };
 
             sizeChooseDialog.ShowDialog();
@@ -218,7 +217,6 @@ namespace Pint
                 MainBitmap?.Dispose();
                 MainBitmap = new Bitmap(openFileDialog1.FileName);
                 ProcessPictureBox(new Size(MainBitmap.Width, MainBitmap.Height));
-                SizeLabel.Text = $"{MainBitmap.Width}x{MainBitmap.Height}";
             }
         }
         private void ProcessPictureBox(Size size)
@@ -228,6 +226,8 @@ namespace Pint
             scrollablePictureBox.SetImage(MainBitmap);
             scrollablePictureBox.SetImageSize(size);
             scrollablePictureBox.Visible = true;
+
+            SizeLabel.Text = $"{size.Width}x{size.Height}";
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -250,13 +250,14 @@ namespace Pint
 
         #region COLOR_CONTROL
 
-        private void ColorInHTML_KeyPress(object sender, KeyPressEventArgs e)
+        private void ColorHTMLChanged(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter && CurrentColorInHTML.Text.Replace(" ", "") != "")
+            CurrentColorHTML.Text = CurrentColorHTML.Text.Replace(" ", "");
+            if (e.KeyChar == (char)Keys.Enter && CurrentColorHTML.Text != "")
             {
                 try
                 {
-                    Color color = ColorTranslator.FromHtml(CurrentColorInHTML.Text.Replace(" ", ""));
+                    Color color = ColorTranslator.FromHtml(CurrentColorHTML.Text);
                     UpdateCurrentColors(color);
                     pen.Color = color;
                 }
@@ -271,14 +272,16 @@ namespace Pint
             }
         }
 
-        private void ColorFromChangingRGBTextboxes(object sender, KeyPressEventArgs e)
+        private void RGBTextboxChanged(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter && ((TextBox)sender).Text.Replace(" ", "") != "")
+            if (e.KeyChar == (char)Keys.Enter && !string.IsNullOrWhiteSpace(((TextBox)sender).Text))
             {
                 try
                 {
-                    Color color = Color.FromArgb(Convert.ToInt32(CurrentColor_R.Text),
-                            Convert.ToInt32(CurrentColor_G.Text), Convert.ToInt32(CurrentColor_B.Text));
+                    Color color = Color.FromArgb(
+                        Convert.ToInt32(CurrentColor_R.Text),
+                        Convert.ToInt32(CurrentColor_G.Text), 
+                        Convert.ToInt32(CurrentColor_B.Text));
                     UpdateCurrentColors(color);
                     pen.Color = color;
                 }
@@ -293,9 +296,12 @@ namespace Pint
             }
         }
 
-        private void ColorFromChangingSlider(object sender, EventArgs e)
+        private void ColorSliderChanged(object sender, EventArgs e)
         {
-            Color color = Color.FromArgb(ColorSlider_R.Value, ColorSlider_G.Value, ColorSlider_B.Value);
+            Color color = Color.FromArgb(
+                ColorSlider_R.Value, 
+                ColorSlider_G.Value, 
+                ColorSlider_B.Value);
             UpdateCurrentColors(color);
             pen.Color = color;
         }
@@ -308,8 +314,8 @@ namespace Pint
             ColorSlider_R.Value = color.R;
             ColorSlider_G.Value = color.G;
             ColorSlider_B.Value = color.B;
-            CurrentColorInHTML.Text = ColorTranslator.ToHtml(color);
-            CurrentColor_Btn.BackColor = color;
+            CurrentColorHTML.Text = ColorTranslator.ToHtml(color);
+            CurrentColor.BackColor = color;
         }
 
         private void SelectColor(object sender, EventArgs e)
@@ -458,12 +464,12 @@ namespace Pint
 
         private void SetColorDependencies()
         {
-            CurrentColorInHTML.BackColor = panel1.BackColor;
+            CurrentColorHTML.BackColor = panel1.BackColor;
             CurrentColor_R.BackColor = panel1.BackColor;
             CurrentColor_G.BackColor = panel1.BackColor;
             CurrentColor_B.BackColor = panel1.BackColor;
 
-            CurrentColorInHTML.ForeColor = panel1.ForeColor;
+            CurrentColorHTML.ForeColor = panel1.ForeColor;
             CurrentColor_R.ForeColor = panel1.ForeColor;
             CurrentColor_G.ForeColor = panel1.ForeColor;
             CurrentColor_B.ForeColor = panel1.ForeColor;
