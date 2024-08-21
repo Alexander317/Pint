@@ -177,7 +177,7 @@
             panel4.Controls.Add(Eraser_Btn);
             panel4.Location = new Point(767, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(143, 150);
+            panel4.Size = new Size(123, 150);
             panel4.TabIndex = 33;
             // 
             // ColorPicker_Btn
@@ -189,9 +189,9 @@
             ColorPicker_Btn.FlatAppearance.BorderSize = 0;
             ColorPicker_Btn.FlatStyle = FlatStyle.Flat;
             ColorPicker_Btn.ForeColor = Color.Black;
-            ColorPicker_Btn.Location = new Point(53, 79);
+            ColorPicker_Btn.Location = new Point(62, 75);
             ColorPicker_Btn.Name = "ColorPicker_Btn";
-            ColorPicker_Btn.Size = new Size(32, 32);
+            ColorPicker_Btn.Size = new Size(35, 35);
             ColorPicker_Btn.TabIndex = 4;
             ColorPicker_Btn.UseVisualStyleBackColor = false;
             ColorPicker_Btn.Click += MainSelect;
@@ -205,9 +205,9 @@
             Filler_Btn.FlatAppearance.BorderSize = 0;
             Filler_Btn.FlatStyle = FlatStyle.Flat;
             Filler_Btn.ForeColor = Color.Black;
-            Filler_Btn.Location = new Point(91, 40);
+            Filler_Btn.Location = new Point(24, 74);
             Filler_Btn.Name = "Filler_Btn";
-            Filler_Btn.Size = new Size(32, 32);
+            Filler_Btn.Size = new Size(35, 35);
             Filler_Btn.TabIndex = 3;
             Filler_Btn.UseVisualStyleBackColor = false;
             Filler_Btn.Click += MainSelect;
@@ -217,9 +217,9 @@
             label4.Anchor = AnchorStyles.None;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Calibri", 12F);
-            label4.Location = new Point(-3, 120);
+            label4.Location = new Point(-1, 120);
             label4.Name = "label4";
-            label4.Size = new Size(148, 30);
+            label4.Size = new Size(123, 28);
             label4.TabIndex = 32;
             label4.Text = "Инструменты";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -233,9 +233,9 @@
             Pencil_Btn.FlatAppearance.BorderSize = 0;
             Pencil_Btn.FlatStyle = FlatStyle.Flat;
             Pencil_Btn.ForeColor = Color.Black;
-            Pencil_Btn.Location = new Point(53, 40);
+            Pencil_Btn.Location = new Point(62, 36);
             Pencil_Btn.Name = "Pencil_Btn";
-            Pencil_Btn.Size = new Size(32, 32);
+            Pencil_Btn.Size = new Size(35, 35);
             Pencil_Btn.TabIndex = 2;
             Pencil_Btn.UseVisualStyleBackColor = false;
             Pencil_Btn.Click += MainSelect;
@@ -249,9 +249,9 @@
             Eraser_Btn.FlatAppearance.BorderSize = 0;
             Eraser_Btn.FlatStyle = FlatStyle.Flat;
             Eraser_Btn.ForeColor = Color.Black;
-            Eraser_Btn.Location = new Point(15, 40);
+            Eraser_Btn.Location = new Point(24, 36);
             Eraser_Btn.Name = "Eraser_Btn";
-            Eraser_Btn.Size = new Size(32, 32);
+            Eraser_Btn.Size = new Size(35, 35);
             Eraser_Btn.TabIndex = 1;
             Eraser_Btn.UseVisualStyleBackColor = false;
             Eraser_Btn.Click += MainSelect;
@@ -263,7 +263,7 @@
             label3.Font = new Font("Calibri", 12F);
             label3.Location = new Point(37, 120);
             label3.Name = "label3";
-            label3.Size = new Size(141, 30);
+            label3.Size = new Size(141, 28);
             label3.TabIndex = 31;
             label3.Text = "Фигуры";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -277,9 +277,9 @@
             Hexagon_Btn.FlatAppearance.BorderSize = 0;
             Hexagon_Btn.FlatStyle = FlatStyle.Flat;
             Hexagon_Btn.ForeColor = Color.Black;
-            Hexagon_Btn.Location = new Point(174, 79);
+            Hexagon_Btn.Location = new Point(172, 74);
             Hexagon_Btn.Name = "Hexagon_Btn";
-            Hexagon_Btn.Size = new Size(32, 32);
+            Hexagon_Btn.Size = new Size(35, 35);
             Hexagon_Btn.TabIndex = 10;
             Hexagon_Btn.Tag = "";
             Hexagon_Btn.UseVisualStyleBackColor = false;
@@ -294,9 +294,9 @@
             Rhombus_Btn.FlatAppearance.BorderSize = 0;
             Rhombus_Btn.FlatStyle = FlatStyle.Flat;
             Rhombus_Btn.ForeColor = Color.Black;
-            Rhombus_Btn.Location = new Point(133, 79);
+            Rhombus_Btn.Location = new Point(131, 74);
             Rhombus_Btn.Name = "Rhombus_Btn";
-            Rhombus_Btn.Size = new Size(32, 32);
+            Rhombus_Btn.Size = new Size(35, 35);
             Rhombus_Btn.TabIndex = 9;
             Rhombus_Btn.Tag = "";
             Rhombus_Btn.UseVisualStyleBackColor = false;
@@ -311,9 +311,9 @@
             StarEight_Btn.FlatAppearance.BorderSize = 0;
             StarEight_Btn.FlatStyle = FlatStyle.Flat;
             StarEight_Btn.ForeColor = Color.Black;
-            StarEight_Btn.Location = new Point(92, 79);
+            StarEight_Btn.Location = new Point(90, 74);
             StarEight_Btn.Name = "StarEight_Btn";
-            StarEight_Btn.Size = new Size(32, 32);
+            StarEight_Btn.Size = new Size(35, 35);
             StarEight_Btn.TabIndex = 8;
             StarEight_Btn.Tag = "";
             StarEight_Btn.UseVisualStyleBackColor = false;
@@ -328,9 +328,9 @@
             StarSix_Btn.FlatAppearance.BorderSize = 0;
             StarSix_Btn.FlatStyle = FlatStyle.Flat;
             StarSix_Btn.ForeColor = Color.Black;
-            StarSix_Btn.Location = new Point(51, 79);
+            StarSix_Btn.Location = new Point(49, 74);
             StarSix_Btn.Name = "StarSix_Btn";
-            StarSix_Btn.Size = new Size(32, 32);
+            StarSix_Btn.Size = new Size(35, 35);
             StarSix_Btn.TabIndex = 7;
             StarSix_Btn.Tag = "";
             StarSix_Btn.UseVisualStyleBackColor = false;
@@ -345,9 +345,9 @@
             StarFive_Btn.FlatAppearance.BorderSize = 0;
             StarFive_Btn.FlatStyle = FlatStyle.Flat;
             StarFive_Btn.ForeColor = Color.Black;
-            StarFive_Btn.Location = new Point(10, 79);
+            StarFive_Btn.Location = new Point(8, 74);
             StarFive_Btn.Name = "StarFive_Btn";
-            StarFive_Btn.Size = new Size(32, 32);
+            StarFive_Btn.Size = new Size(35, 35);
             StarFive_Btn.TabIndex = 6;
             StarFive_Btn.Tag = "";
             StarFive_Btn.UseVisualStyleBackColor = false;
@@ -362,9 +362,9 @@
             RegularTriangle_Btn.FlatAppearance.BorderSize = 0;
             RegularTriangle_Btn.FlatStyle = FlatStyle.Flat;
             RegularTriangle_Btn.ForeColor = Color.Black;
-            RegularTriangle_Btn.Location = new Point(51, 40);
+            RegularTriangle_Btn.Location = new Point(49, 35);
             RegularTriangle_Btn.Name = "RegularTriangle_Btn";
-            RegularTriangle_Btn.Size = new Size(32, 32);
+            RegularTriangle_Btn.Size = new Size(35, 35);
             RegularTriangle_Btn.TabIndex = 5;
             RegularTriangle_Btn.Tag = "";
             RegularTriangle_Btn.UseVisualStyleBackColor = false;
@@ -379,9 +379,9 @@
             RightTriangle_Btn.FlatAppearance.BorderSize = 0;
             RightTriangle_Btn.FlatStyle = FlatStyle.Flat;
             RightTriangle_Btn.ForeColor = Color.Black;
-            RightTriangle_Btn.Location = new Point(133, 40);
+            RightTriangle_Btn.Location = new Point(131, 35);
             RightTriangle_Btn.Name = "RightTriangle_Btn";
-            RightTriangle_Btn.Size = new Size(32, 32);
+            RightTriangle_Btn.Size = new Size(35, 35);
             RightTriangle_Btn.TabIndex = 4;
             RightTriangle_Btn.Tag = "";
             RightTriangle_Btn.UseVisualStyleBackColor = false;
@@ -396,9 +396,9 @@
             Line_Btn.FlatAppearance.BorderSize = 0;
             Line_Btn.FlatStyle = FlatStyle.Flat;
             Line_Btn.ForeColor = Color.Black;
-            Line_Btn.Location = new Point(174, 40);
+            Line_Btn.Location = new Point(172, 35);
             Line_Btn.Name = "Line_Btn";
-            Line_Btn.Size = new Size(32, 32);
+            Line_Btn.Size = new Size(35, 35);
             Line_Btn.TabIndex = 3;
             Line_Btn.Tag = "";
             Line_Btn.UseVisualStyleBackColor = false;
@@ -413,9 +413,9 @@
             Circle_Btn.FlatAppearance.BorderSize = 0;
             Circle_Btn.FlatStyle = FlatStyle.Flat;
             Circle_Btn.ForeColor = Color.Black;
-            Circle_Btn.Location = new Point(10, 40);
+            Circle_Btn.Location = new Point(8, 35);
             Circle_Btn.Name = "Circle_Btn";
-            Circle_Btn.Size = new Size(32, 32);
+            Circle_Btn.Size = new Size(35, 35);
             Circle_Btn.TabIndex = 2;
             Circle_Btn.Tag = "";
             Circle_Btn.UseVisualStyleBackColor = false;
@@ -430,9 +430,9 @@
             Rectangle_Btn.FlatAppearance.BorderSize = 0;
             Rectangle_Btn.FlatStyle = FlatStyle.Flat;
             Rectangle_Btn.ForeColor = Color.Black;
-            Rectangle_Btn.Location = new Point(92, 40);
+            Rectangle_Btn.Location = new Point(90, 35);
             Rectangle_Btn.Name = "Rectangle_Btn";
-            Rectangle_Btn.Size = new Size(32, 32);
+            Rectangle_Btn.Size = new Size(35, 35);
             Rectangle_Btn.TabIndex = 1;
             Rectangle_Btn.Tag = "";
             Rectangle_Btn.UseVisualStyleBackColor = false;
@@ -1070,7 +1070,7 @@
             // splitContainer1
             // 
             splitContainer1.BorderStyle = BorderStyle.FixedSingle;
-            splitContainer1.Location = new Point(909, 0);
+            splitContainer1.Location = new Point(889, 0);
             splitContainer1.Name = "splitContainer1";
             splitContainer1.Orientation = Orientation.Horizontal;
             // 
