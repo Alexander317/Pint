@@ -4,7 +4,7 @@
     {
         public override void UseMisc(Bitmap bitmap, Pen pen, Point lastPos)
         {
-            //Emtpy cuz everything happens in MainForm
+            //Emtpy because everything happens in MainForm
         }
     }
 }

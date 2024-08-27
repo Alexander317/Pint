@@ -5,14 +5,14 @@ using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using Pint.Core.Misc;
-using CustomPaint;
+using Pint.Properties;
 
 namespace Pint
 {
     public delegate void OnThemeChanged();
     public partial class MainForm : Form
     {
-        #region FIELDS
+        #region Fields
 
         private PaintCore paintCore = new();
         private Pen pen = new(Color.Black, 1);
@@ -39,15 +39,15 @@ namespace Pint
             UpdateCurrentColors(pen.Color);
             ButtonHandler.Select(Pencil_Btn);
             SetUITheme();
-            trackBar1_Scroll(null, null);
+            PenTrackBar_Scroll(new object(), new EventArgs());
             PenHandler.MakePenRound(pen);
         }
 
-        #region MAIN_IMAGE_HANDLERS
+        #region Main Image Handlers
 
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
-            paintCore.arrayPoint.SetPoint(e.X, e.Y);
+            paintCore.ArrayPoint.SetPoint(e.X, e.Y);
             mouseDown = true;
             if (paintCore.MainToolDefiner == MainEnum.Figures)
                 DrawingTimer.Enabled = true;
@@ -62,7 +62,7 @@ namespace Pint
 
             if (paintCore.MainToolDefiner == MainEnum.Pensils)
             {
-                paintCore.arrayPoint.SetPoint(paintCore.LastPos);
+                paintCore.ArrayPoint.SetPoint(paintCore.LastPos);
                 paintCore.Filter(MainBitmap, pen);
                 scrollablePictureBox.SetImage(MainBitmap);
             }
@@ -74,7 +74,7 @@ namespace Pint
             CopyBitmap?.Dispose();
             paintCore.Filter(MainBitmap, pen);
             scrollablePictureBox.SetImage(MainBitmap);
-            paintCore.arrayPoint.ResetAll();
+            paintCore.ArrayPoint.ResetAll();
         }
         private void MainImage_Click(object sender, EventArgs e)
         {
@@ -102,7 +102,7 @@ namespace Pint
 
         private void MainSelect(object sender, EventArgs e)
         {
-            object tag = ((Button)sender).Tag;
+            object? tag = ((Button)sender).Tag;
 
             if (tag is FiguresEnum)
             {
@@ -125,7 +125,7 @@ namespace Pint
 
         #endregion
 
-        #region OTHER_HANDLERS
+        #region Other Handlers
 
         private void ClearBoard_Btn_Click(object sender, EventArgs e)
         {
@@ -171,30 +171,30 @@ namespace Pint
                 }
                 else */
                 if (e.KeyCode == Keys.S)
-                    SaveFile_Btn_Click(sender, null);
+                    SaveFile_Btn_Click(sender, new EventArgs());
                 else if (e.KeyCode == Keys.C)
-                    ClearBoard_Btn_Click(sender, null);
+                    ClearBoard_Btn_Click(sender, new EventArgs());
                 else if (e.KeyCode == Keys.O)
-                    SelectFile_Btn_Click(sender, null);
+                    SelectFile_Btn_Click(sender, new EventArgs());
             }
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        private void PenTrackBar_Scroll(object sender, EventArgs e)
         {
-            PenHandler.SetPenParameters(pen, trackBar1.Value + 1, pen.Color);
+            PenHandler.SetPenParameters(pen, PenTrackBar.Value + 1, pen.Color);
             PenWidthLabel.Text = pen.Width.ToString();
         }
 
         private void Settings_Btn_Click(object sender, EventArgs e)
         {
             SettingsScreen settingsScreen = new SettingsScreen();
-            settingsScreen.ThemeChanged += SetUITheme; 
+            settingsScreen.ThemeChanged += SetUITheme;
             settingsScreen.Show();
         }
 
         private void NewImage_Btn_Click(object sender, EventArgs e)
         {
-            SizeChooseDialog sizeChooseDialog = new SizeChooseDialog();
+            SizeChooseDialog sizeChooseDialog = new();
 
             sizeChooseDialog.SizeChanged += (_, size) =>
             {
@@ -248,7 +248,7 @@ namespace Pint
 
         #endregion
 
-        #region COLOR_CONTROL
+        #region Color Handlers
 
         private void ColorHTMLChanged(object sender, KeyPressEventArgs e)
         {
@@ -280,7 +280,7 @@ namespace Pint
                 {
                     Color color = Color.FromArgb(
                         Convert.ToInt32(CurrentColor_R.Text),
-                        Convert.ToInt32(CurrentColor_G.Text), 
+                        Convert.ToInt32(CurrentColor_G.Text),
                         Convert.ToInt32(CurrentColor_B.Text));
                     UpdateCurrentColors(color);
                     pen.Color = color;
@@ -299,8 +299,8 @@ namespace Pint
         private void ColorSliderChanged(object sender, EventArgs e)
         {
             Color color = Color.FromArgb(
-                ColorSlider_R.Value, 
-                ColorSlider_G.Value, 
+                ColorSlider_R.Value,
+                ColorSlider_G.Value,
                 ColorSlider_B.Value);
             UpdateCurrentColors(color);
             pen.Color = color;
@@ -320,13 +320,13 @@ namespace Pint
 
         private void SelectColor(object sender, EventArgs e)
         {
-            Color color = (sender as Button).BackColor;
+            Color color = ((Button)sender).BackColor;
             UpdateCurrentColors(color);
             pen.Color = color;
         }
         #endregion
 
-        #region BUTTON_HANDLERS
+        #region Button Handlers
 
         private void SetButtonTags()
         {
@@ -365,86 +365,89 @@ namespace Pint
 
         #endregion
 
-        #region THEME_CONTROL
+        #region Theme Handlers
 
-        private void ChangeUITheme()
-        {
-            if (ConfigurationManager.AppSettings["UIMode"] == "light")
-                ConfigurationManager.AppSettings["UIMode"] = "dark";
-            else
-                ConfigurationManager.AppSettings["UIMode"] = "light";
-        }
         private void SetUITheme()
         {
-            if (ConfigurationManager.AppSettings["UIMode"] == "light")
-                SetLightTheme();
-            else
-                SetDarkTheme();
+            bool isLightTheme = ConfigurationManager.AppSettings["UIMode"] == "light";
+            SetTheme(isLightTheme);
             GC.Collect();
         }
-        private void SetLightTheme()
+
+        Color panelsColor_Light = Color.FromArgb(245, 245, 245);
+        Color formColor_Light = Color.FromArgb(205, 205, 205);
+        Color mouseOverBackColor_Light = Color.FromArgb(235, 235, 235);
+        Color selectColor_Light = Color.FromArgb(205, 205, 205);
+
+        Color panelsColor_Dark = Color.FromArgb(42, 42, 42);
+        Color formColor_Dark = Color.FromArgb(24, 24, 24);
+        Color mouseOverBackColor_Dark = Color.FromArgb(52, 52, 52);
+        Color selectColor_Dark = Color.FromArgb(79, 79, 79);
+
+        private void SetTheme(bool isLightTheme)
         {
-            ForeColor = Color.Black;
-            BackColor = Color.FromArgb(205, 205, 205);
-            panel1.BackColor = Color.FromArgb(245, 245, 245);
-            panel1.ForeColor = Color.Black;
+            Color foreColor = isLightTheme ? Color.Black : Color.WhiteSmoke;
+            Color backColor = isLightTheme ? formColor_Light : formColor_Dark;
+            Color panelBackColor = isLightTheme ? panelsColor_Light : panelsColor_Dark;
+            Color mouseOverColor = isLightTheme ? mouseOverBackColor_Light : mouseOverBackColor_Dark;
+            Color selectColor = isLightTheme ? selectColor_Light : selectColor_Dark;
 
-            SetColorDependencies();
 
-            ButtonHandler.SelectColor = Color.FromArgb(205, 205, 205);
-            ButtonHandler.UnselectColor = Color.WhiteSmoke;
+            ForeColor = foreColor;
+            BackColor = backColor;
+            panel1.BackColor = panelBackColor;
+            panel1.ForeColor = foreColor;
+            Settings_Btn.FlatAppearance.BorderColor = panelBackColor;
 
-            Circle_Btn.BackgroundImage = Properties.Resources.circle;
-            Rectangle_Btn.BackgroundImage = Properties.Resources.rectangle;
-            RegularTriangle_Btn.BackgroundImage = Properties.Resources.regular_triangle;
-            RightTriangle_Btn.BackgroundImage = Properties.Resources.right_triangle;
-            Line_Btn.BackgroundImage = Properties.Resources.line;
-            StarFive_Btn.BackgroundImage = Properties.Resources.star_five;
-            StarSix_Btn.BackgroundImage = Properties.Resources.star_six;
-            StarEight_Btn.BackgroundImage = Properties.Resources.star_eight;
-            Rhombus_Btn.BackgroundImage = Properties.Resources.rhombus;
-            Hexagon_Btn.BackgroundImage = Properties.Resources.hexagon;
-            Filler_Btn.BackgroundImage = Properties.Resources.Filler;
-            Pencil_Btn.BackgroundImage = Properties.Resources.pencil;
-            Eraser_Btn.BackgroundImage = Properties.Resources.eraser;
-            ColorPicker_Btn.BackgroundImage = Properties.Resources.color_picker;
-            Scribble.BackgroundImage = Properties.Resources.scribble;
-            Settings_Btn.BackgroundImage = Properties.Resources.settings;
+            SetColorDependencies(panelBackColor, foreColor);
 
-            SetWindowTheme(false);
+            ButtonHandler.SelectColor = selectColor;
+            ButtonHandler.UnselectColor = isLightTheme ? Color.WhiteSmoke : panelBackColor;
+
+            var buttons = new Button[] { SelectFile_Btn, SaveFile_Btn, NewImage_Btn, ClearBoard_Btn, Settings_Btn };
+            foreach (var btn in buttons)
+            {
+                btn.FlatAppearance.MouseOverBackColor = mouseOverColor;
+            }
+
+            var buttonImages = new Dictionary<Button, Image>
+    {
+        { Circle_Btn, isLightTheme ?  Resources.circle : Resources.circle_inverted },
+        { Rectangle_Btn, isLightTheme ? Resources.rectangle : Resources.rectangle_inverted },
+        { RegularTriangle_Btn, isLightTheme ? Resources.regular_triangle : Resources.regular_triangle_inverted },
+        { RightTriangle_Btn, isLightTheme ? Resources.right_triangle : Resources.right_triangle_inverted },
+        { Line_Btn, isLightTheme ? Resources.line : Resources.line_inverted },
+        { StarFive_Btn, isLightTheme ? Resources.star_five : Resources.star_five_inverted },
+        { StarSix_Btn, isLightTheme ? Resources.star_six : Resources.star_six_inverted },
+        { StarEight_Btn, isLightTheme ? Resources.star_eight : Resources.star_eight_inverted },
+        { Rhombus_Btn, isLightTheme ? Resources.rhombus : Resources.rhombus_inverted },
+        { Hexagon_Btn, isLightTheme ? Resources.hexagon : Resources.hexagon_inverted },
+        { Filler_Btn, isLightTheme ? Resources.Filler : Resources.filler_inverted },
+        { Pencil_Btn, isLightTheme ? Resources.pencil : Resources.pencil_inverted },
+        { Eraser_Btn, isLightTheme ? Resources.eraser : Resources.eraser_inverted },
+        { ColorPicker_Btn, isLightTheme ? Resources.color_picker : Resources.color_picker_inverted },
+        { Settings_Btn, isLightTheme ? Resources.settings : Resources.settings_inverted }
+    };
+
+            foreach (var kvp in buttonImages)
+            {
+                kvp.Key.BackgroundImage = kvp.Value;
+            }
+
+            Scribble.BackgroundImage = isLightTheme ? Properties.Resources.scribble : Properties.Resources.scribble_inverted;
+
+            SetWindowTheme(!isLightTheme);
             ButtonHandler.UpdateBtnColors();
         }
-        private void SetDarkTheme()
+
+        private void SetColorDependencies(Color panelBackColor, Color panelForeColor)
         {
-            ForeColor = Color.WhiteSmoke;
-            BackColor = Color.FromArgb(24, 24, 24);
-            panel1.BackColor = Color.FromArgb(42, 42, 42);
-            panel1.ForeColor = Color.WhiteSmoke;
-
-            SetColorDependencies();
-
-            ButtonHandler.SelectColor = Color.FromArgb(79, 79, 79);
-            ButtonHandler.UnselectColor = panel1.BackColor;
-
-            Circle_Btn.BackgroundImage = Properties.Resources.circle_inverted;
-            Rectangle_Btn.BackgroundImage = Properties.Resources.rectangle_inverted;
-            RegularTriangle_Btn.BackgroundImage = Properties.Resources.regular_triangle_inverted;
-            RightTriangle_Btn.BackgroundImage = Properties.Resources.right_triangle_inverted;
-            Line_Btn.BackgroundImage = Properties.Resources.line_inverted;
-            StarFive_Btn.BackgroundImage = Properties.Resources.star_five_inverted;
-            StarSix_Btn.BackgroundImage = Properties.Resources.star_six_inverted;
-            StarEight_Btn.BackgroundImage = Properties.Resources.star_eight_inverted;
-            Rhombus_Btn.BackgroundImage = Properties.Resources.rhombus_inverted;
-            Hexagon_Btn.BackgroundImage = Properties.Resources.hexagon_inverted;
-            Filler_Btn.BackgroundImage = Properties.Resources.filler_inverted;
-            Pencil_Btn.BackgroundImage = Properties.Resources.pencil_inverted;
-            Eraser_Btn.BackgroundImage = Properties.Resources.eraser_inverted;
-            ColorPicker_Btn.BackgroundImage = Properties.Resources.color_picker_inverted;
-            Scribble.BackgroundImage = Properties.Resources.scribble_inverted;
-            Settings_Btn.BackgroundImage = Properties.Resources.settings_inverted;
-
-            SetWindowTheme(true);
-            ButtonHandler.UpdateBtnColors();
+            var controls = new Control[] { CurrentColorHTML, CurrentColor_R, CurrentColor_G, CurrentColor_B, ColorSlider_R, ColorSlider_G, ColorSlider_B, roundPanel1, roundPanel2 };
+            foreach (var control in controls)
+            {
+                control.BackColor = panelBackColor;
+                control.ForeColor = panelForeColor;
+            }
         }
 
         [DllImport("DwmApi")]
@@ -461,27 +464,6 @@ namespace Pint
             DwmSetWindowAttribute(Handle, 19, useDarkMode, sizeof(int));
             DwmSetWindowAttribute(Handle, 20, useDarkMode, sizeof(int));
         }
-
-        private void SetColorDependencies()
-        {
-            CurrentColorHTML.BackColor = panel1.BackColor;
-            CurrentColor_R.BackColor = panel1.BackColor;
-            CurrentColor_G.BackColor = panel1.BackColor;
-            CurrentColor_B.BackColor = panel1.BackColor;
-
-            CurrentColorHTML.ForeColor = panel1.ForeColor;
-            CurrentColor_R.ForeColor = panel1.ForeColor;
-            CurrentColor_G.ForeColor = panel1.ForeColor;
-            CurrentColor_B.ForeColor = panel1.ForeColor;
-            ColorSlider_R.BackColor = panel1.BackColor;
-            ColorSlider_G.BackColor = panel1.BackColor;
-            ColorSlider_B.BackColor = panel1.BackColor;
-            panel5.BackColor = panel1.BackColor;
-            panel5.ForeColor = panel1.ForeColor;
-            panel3.ForeColor = panel1.ForeColor;
-            panel3.BackColor = panel1.BackColor;
-        }
         #endregion
-
     }
 }

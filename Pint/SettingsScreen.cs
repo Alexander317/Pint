@@ -52,7 +52,7 @@ namespace Pint
 
         #endregion
 
-        #region WINDOW_THEME_CONTROL
+        #region Theme Handlers
 
         private void SetUITheme()
         {

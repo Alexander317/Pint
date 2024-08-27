@@ -2,37 +2,55 @@
 {
     public class ArrayPoint
     {
-        public int Index {  get; private set; }
-        public Point[] Points { get; private set; }
+
+        #region Fields
+
+        private int index;
+        private Point[] points;
+
+        #endregion
+
+        #region Properties
+
+        public int Index {  get => index; }
+        public Point[] Points { get => points; }
+
+        #endregion
+
         public ArrayPoint(int size)
         {
             if (size <= 0)
                 size = 2;
-            Points = new Point[size];
+            points = new Point[size];
         }
+
+        #region Functional
+
         public void SetPoint(int x, int y)
         {
             if (Index >= Points.Length)
-                Index = 0;
-            Points[Index] = new Point(x, y);
-            Index++;
+                index = 0;
+            points[Index] = new Point(x, y);
+            index++;
         }
         public void SetPoint(Point lastPoint)
         {
-            if (Index >= Points.Length)
-                Index = 0;
-            Points[Index] = lastPoint;
-            Index++;
+            if (index >= points.Length)
+                index = 0;
+            points[index] = lastPoint;
+            index++;
         }
-        public void ResetAll() => Index = 0;
-        public void ResetOnlyLast() => Index = 1;
+        public void ResetAll() => index = 0;
+        public void ResetOnlyLast() => index = 1;
         public void FlipPoints()
         {
-            if (Index < 2)
+            if (index < 2)
                 return;
-            Point point = Points[1];
-            Points[1] = Points[0];
-            Points[0] = point;
+            var point = points[1];
+            points[1] = points[0];
+            points[0] = point;
         }
+
+        #endregion
     }
 }

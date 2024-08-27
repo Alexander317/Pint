@@ -4,28 +4,38 @@ using Pint.Core.Misc;
 using Pint.Core.Pencils;
 using System.Configuration;
 using System.Drawing.Drawing2D;
-using System.Drawing;
 
 
 namespace Pint.Core
 {
     public class PaintCore
     {
+        #region Fields
 
-        #region FIELDS
-
-        public MainEnum MainToolDefiner { get; set; }
-        public Point LastPos { get; set; }
-        public MainFigure CurrentFigure { get; set; }
-        public MainPencil CurrentPensil { get; set; }
-        public MainMisc CurrentMisc { get; set; }
+        private MainEnum mainToolDefiner;
+        private Point lastPos;
+        private MainFigure currentFigure;
+        private MainPencil currentPencil;
+        private MainMisc currentMisc;
         private List<Bitmap> previousBitmaps = new();
         private List<Bitmap> futureBitmaps = new();
-        public ArrayPoint arrayPoint = new(2);
+
+        private ArrayPoint arrayPoint = new(2);
 
         #endregion
 
-        #region CREATING_CANVAS
+        #region Properties
+
+        public MainEnum MainToolDefiner {  get => mainToolDefiner; set => mainToolDefiner = value;  }
+        public Point LastPos { get => lastPos; set => lastPos = value; }
+        public MainFigure CurrentFigure { get => currentFigure; set => currentFigure = value; }
+        public MainPencil CurrentPensil { get => currentPencil; set => currentPencil = value; }
+        public MainMisc CurrentMisc { get => currentMisc; set => currentMisc = value; }
+        public ArrayPoint ArrayPoint { get => arrayPoint; }
+
+        #endregion
+
+        #region Bitmap Formatting
 
         public Bitmap CreateBitmapBySize(Size size)
         {
@@ -42,31 +52,31 @@ namespace Pint.Core
 
         #endregion
 
-        #region DRAWING
+        #region Drawing
 
         public void Filter(Bitmap bitmap, Pen pen)
         {
             futureBitmaps.Clear();
-            if (MainToolDefiner == MainEnum.Pensils)
+            if (mainToolDefiner == MainEnum.Pensils)
             {
-                CurrentPensil.UsePencil(bitmap, pen, arrayPoint, 
+                currentPencil.UsePencil(bitmap, pen, arrayPoint, 
                     ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             }
-            else if (MainToolDefiner == MainEnum.Figures)
+            else if (mainToolDefiner == MainEnum.Figures)
             {
-                CurrentFigure.UseFigure(bitmap, pen, arrayPoint,
+                currentFigure.UseFigure(bitmap, pen, arrayPoint,
                     ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             }
-            else if (MainToolDefiner == MainEnum.Misc)
+            else if (mainToolDefiner == MainEnum.Misc)
             {
-                CurrentMisc.UseMisc(bitmap, pen, LastPos);
+                currentMisc.UseMisc(bitmap, pen, lastPos);
             }
         }
         public Bitmap DrawOnCopiedBitmap(Bitmap bitmap, Pen pen)
         {
             arrayPoint.ResetOnlyLast();
-            arrayPoint.SetPoint(LastPos);
-            CurrentFigure.UseFigure(bitmap, pen, arrayPoint,
+            arrayPoint.SetPoint(lastPos);
+            currentFigure.UseFigure(bitmap, pen, arrayPoint,
                 ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             return bitmap;
         }
@@ -74,7 +84,7 @@ namespace Pint.Core
         #endregion
 
         //RemakeMePlease
-        #region PREVIOUS/FUTURE_BITMAPS
+        #region Prev/Fut Bitmaps
 
         public Bitmap ReturnToPreviousBitmap(Bitmap bitmap)
         {

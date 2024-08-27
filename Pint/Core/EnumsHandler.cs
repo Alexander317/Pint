@@ -7,6 +7,8 @@ namespace Pint.Core
 {
     public static class EnumsHandler
     {
+        #region Enum Translators
+        
         public static MainFigure getFigure(FiguresEnum figuresEnum) {
             switch (figuresEnum)
             {
@@ -41,5 +43,7 @@ namespace Pint.Core
              }
             return null;
         }
+
+        #endregion
     }
 }

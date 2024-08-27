@@ -4,23 +4,40 @@ namespace Pint.Core
 {
     public static class ButtonHandler
     {
-        public static List<Button> Allbuttons = new();
-        public static Color UnselectColor { get; set; } = Color.WhiteSmoke;
-        public static Color SelectColor { get; set; } = Color.FromArgb(185, 185, 185);
-        static Button lastSelectedBtn;
+        #region Fields
+
+        private static List<Button> allbuttons = new();
+        private static Color unselectColor { get; set; }
+        private static Color selectColor { get; set; }
+        private static Button lastSelectedBtn;
+        
+        #endregion
+
+        #region Properties
+
+        public static List<Button> Allbuttons { get => allbuttons; }
+        public static Color UnselectColor { set => unselectColor = value; }
+        public static Color SelectColor { set => selectColor = value; }
+        
+        #endregion
+
+        #region Button Handlers
+
         public static void UnselectAll() {
             foreach (var btn in Allbuttons) {
-                btn.BackColor = UnselectColor;
+                btn.BackColor = unselectColor;
             }
         }
         public static void Select(Button btn)
         {
-            btn.BackColor = SelectColor;
+            btn.BackColor = selectColor;
             lastSelectedBtn = btn;
         }
         public static void UpdateBtnColors() {
             UnselectAll();
-            lastSelectedBtn.BackColor = SelectColor;
+            lastSelectedBtn.BackColor = selectColor;
         }
+
+        #endregion
     }
 }

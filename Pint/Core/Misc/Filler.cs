@@ -72,7 +72,6 @@ namespace Pint.Core.Misc
             bitmap.UnlockBits(bitmapData);
         }
 
-        //Более агрессивный метод, норм юзать если граница и заливка одного цвета, в остальных случаях просто хавает границу
         private void AgressiveFilling(Bitmap bitmap, Pen pen, Point lastPos)
         {
             Color oldColor = bitmap.GetPixel(lastPos.X, lastPos.Y);

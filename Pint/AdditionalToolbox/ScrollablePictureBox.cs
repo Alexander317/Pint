@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Pint
+﻿namespace Pint
 {
     public partial class ScrollablePictureBox : UserControl
     {
@@ -16,6 +6,8 @@ namespace Pint
         {
             InitializeComponent();
         }
+
+        #region Functional
 
         public void SetImage(Image image) => pictureBox.Image = image;
 
@@ -30,5 +22,7 @@ namespace Pint
         {
             return pictureBox;
         }
+
+        #endregion
     }
 }

@@ -2,6 +2,8 @@
 {
     public static class PenHandler
     {
+        #region Pen Handler
+
         public static void MakePenRound(Pen pen)
         {
             pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
@@ -12,5 +14,7 @@
             pen.Color = color;
             pen.Width = width;
         }
+
+        #endregion
     }
 }

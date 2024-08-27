@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using System.Runtime.InteropServices;
 
-namespace CustomPaint
+namespace Pint
 {
     public partial class SizeChooseDialog : Form
     {
@@ -12,6 +12,8 @@ namespace CustomPaint
             SetUITheme();
         }
 
+        #region Button Handlers
+
         private void ApplyButton_Click(object sender, EventArgs e)
         {
             Size size = new Size((int)widthNumeric.Value, (int)heightNumeric.Value);
@@ -19,7 +21,9 @@ namespace CustomPaint
             Close();
         }
 
-        #region WINDOW_THEME_CONTROL
+        #endregion
+
+        #region Theme Handlers
 
         private void SetUITheme()
         {
@@ -39,6 +43,7 @@ namespace CustomPaint
 
             applyButton.BackColor = Color.FromArgb(245, 245, 245);
             applyButton.ForeColor = Color.Black;
+            applyButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(235, 235, 235);
             widthNumeric.BackColor = Color.FromArgb(245, 245, 245);
             widthNumeric.ForeColor = Color.Black;
             heightNumeric.BackColor = Color.FromArgb(245, 245, 245);
@@ -56,6 +61,7 @@ namespace CustomPaint
 
             applyButton.BackColor = Color.FromArgb(42, 42, 42);
             applyButton.ForeColor = Color.WhiteSmoke;
+            applyButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 52, 52);
             widthNumeric.BackColor = Color.FromArgb(42, 42, 42);
             widthNumeric.ForeColor = Color.WhiteSmoke;
             heightNumeric.BackColor = Color.FromArgb(42, 42, 42);

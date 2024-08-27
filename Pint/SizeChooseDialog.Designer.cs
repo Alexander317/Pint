@@ -1,4 +1,4 @@
-﻿namespace CustomPaint
+﻿namespace Pint
 {
     partial class SizeChooseDialog
     {
@@ -33,7 +33,7 @@
             widthNumeric = new NumericUpDown();
             heightNumeric = new NumericUpDown();
             panel1 = new Panel();
-            applyButton = new Button();
+            applyButton = new RoundButton();
             ((System.ComponentModel.ISupportInitialize)widthNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)heightNumeric).BeginInit();
             panel1.SuspendLayout();
@@ -96,13 +96,19 @@
             // applyButton
             // 
             applyButton.BackColor = Color.Transparent;
+            applyButton.BorderRadius = 12;
             applyButton.FlatAppearance.BorderColor = Color.Black;
             applyButton.FlatAppearance.BorderSize = 0;
-            applyButton.FlatStyle = FlatStyle.Popup;
+            applyButton.FlatStyle = FlatStyle.Flat;
             applyButton.Font = new Font("Calibri", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            applyButton.Location = new Point(31, 96);
+            applyButton.ForeColor = Color.Black;
+            applyButton.Location = new Point(44, 95);
             applyButton.Name = "applyButton";
-            applyButton.Size = new Size(220, 40);
+            applyButton.RoundBottomLeft = true;
+            applyButton.RoundBottomRight = true;
+            applyButton.RoundTopLeft = true;
+            applyButton.RoundTopRight = true;
+            applyButton.Size = new Size(192, 41);
             applyButton.TabIndex = 43;
             applyButton.Text = "Создать";
             applyButton.UseVisualStyleBackColor = false;
@@ -135,6 +141,6 @@
         private NumericUpDown widthNumeric;
         private NumericUpDown heightNumeric;
         private Panel panel1;
-        private Button applyButton;
+        private RoundButton applyButton;
     }
 }
