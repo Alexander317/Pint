@@ -83,6 +83,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.WhiteSmoke;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(heightNumeric);
             panel1.Controls.Add(label2);
@@ -95,7 +96,7 @@
             // 
             // applyButton
             // 
-            applyButton.BackColor = Color.Transparent;
+            applyButton.BackColor = Color.WhiteSmoke;
             applyButton.BorderRadius = 12;
             applyButton.FlatAppearance.BorderColor = Color.Black;
             applyButton.FlatAppearance.BorderSize = 0;
@@ -118,6 +119,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(205, 205, 205);
             ClientSize = new Size(280, 148);
             Controls.Add(applyButton);
             Controls.Add(panel1);

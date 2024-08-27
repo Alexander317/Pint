@@ -19,8 +19,9 @@ namespace Pint.Core
         private MainMisc currentMisc;
         private List<Bitmap> previousBitmaps = new();
         private List<Bitmap> futureBitmaps = new();
-
         private ArrayPoint arrayPoint = new(2);
+        private ArrayPoint buttonAP = new(2);
+        private Bitmap buttonBitmap;
 
         #endregion
 
@@ -52,7 +53,7 @@ namespace Pint.Core
 
         #endregion
 
-        #region Drawing
+        #region Main Drawing
 
         public void Filter(Bitmap bitmap, Pen pen)
         {
@@ -79,6 +80,27 @@ namespace Pint.Core
             currentFigure.UseFigure(bitmap, pen, arrayPoint,
                 ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             return bitmap;
+        }
+
+        #endregion
+
+        #region Button Drawing
+
+        public void SetArrayPoint()
+        {
+            buttonAP.SetPoint(18, 18);
+            buttonAP.SetPoint(44, 44);
+        }
+
+        public void DrawOnButton(Button button)
+        {
+            buttonBitmap = new Bitmap(64, 64);
+            using (Graphics g = Graphics.FromImage(buttonBitmap))
+            {
+                currentFigure = EnumsHandler.getFigure((FiguresEnum)button.Tag); 
+                currentFigure.UseFigure(buttonBitmap, new Pen(ConfigurationManager.AppSettings["UIMode"] == "light" ? Color.Black : Color.White, 2), buttonAP, SmoothingMode.AntiAlias);
+                button.Image = buttonBitmap;
+            }
         }
 
         #endregion

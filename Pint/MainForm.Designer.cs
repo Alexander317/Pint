@@ -35,22 +35,22 @@ namespace Pint
             ClearBoard_Btn = new Button();
             SaveFile_Btn = new Button();
             panel4 = new Panel();
-            ColorPicker_Btn = new Button();
-            Filler_Btn = new Button();
+            ColorPicker_Btn = new RoundButton();
+            Filler_Btn = new RoundButton();
             label4 = new Label();
-            Pencil_Btn = new Button();
-            Eraser_Btn = new Button();
+            Pencil_Btn = new RoundButton();
+            Eraser_Btn = new RoundButton();
             label3 = new Label();
-            Hexagon_Btn = new Button();
-            Rhombus_Btn = new Button();
-            StarEight_Btn = new Button();
-            StarSix_Btn = new Button();
-            StarFive_Btn = new Button();
-            RegularTriangle_Btn = new Button();
-            RightTriangle_Btn = new Button();
-            Line_Btn = new Button();
-            Circle_Btn = new Button();
-            Rectangle_Btn = new Button();
+            Hexagon_Btn = new RoundButton();
+            Rhombus_Btn = new RoundButton();
+            StarEight_Btn = new RoundButton();
+            StarSix_Btn = new RoundButton();
+            StarFive_Btn = new RoundButton();
+            RegularTriangle_Btn = new RoundButton();
+            RightTriangle_Btn = new RoundButton();
+            Line_Btn = new RoundButton();
+            Circle_Btn = new RoundButton();
+            Rectangle_Btn = new RoundButton();
             label1 = new Label();
             panel2 = new Panel();
             CurrentColor = new PictureBox();
@@ -92,7 +92,7 @@ namespace Pint
             Black_Btn = new Button();
             Cyan_Btn = new Button();
             panel1 = new Panel();
-            Settings_Btn = new Button();
+            Settings_Btn = new RoundButton();
             splitContainer1 = new SplitContainer();
             splitContainer2 = new SplitContainer();
             SelectFile_Btn = new Button();
@@ -187,14 +187,20 @@ namespace Pint
             // ColorPicker_Btn
             // 
             ColorPicker_Btn.Anchor = AnchorStyles.None;
+            ColorPicker_Btn.BackColor = Color.Transparent;
             ColorPicker_Btn.BackgroundImage = Resources.color_picker;
-            ColorPicker_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            ColorPicker_Btn.BackgroundImageLayout = ImageLayout.Zoom;
+            ColorPicker_Btn.BorderRadius = 4;
             ColorPicker_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             ColorPicker_Btn.FlatAppearance.BorderSize = 0;
             ColorPicker_Btn.FlatStyle = FlatStyle.Flat;
             ColorPicker_Btn.ForeColor = Color.Black;
             ColorPicker_Btn.Location = new Point(60, 70);
             ColorPicker_Btn.Name = "ColorPicker_Btn";
+            ColorPicker_Btn.RoundBottomLeft = true;
+            ColorPicker_Btn.RoundBottomRight = true;
+            ColorPicker_Btn.RoundTopLeft = true;
+            ColorPicker_Btn.RoundTopRight = true;
             ColorPicker_Btn.Size = new Size(35, 35);
             ColorPicker_Btn.TabIndex = 4;
             ColorPicker_Btn.UseVisualStyleBackColor = false;
@@ -203,14 +209,20 @@ namespace Pint
             // Filler_Btn
             // 
             Filler_Btn.Anchor = AnchorStyles.None;
+            Filler_Btn.BackColor = Color.Transparent;
             Filler_Btn.BackgroundImage = Resources.Filler;
-            Filler_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Filler_Btn.BackgroundImageLayout = ImageLayout.Zoom;
+            Filler_Btn.BorderRadius = 4;
             Filler_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Filler_Btn.FlatAppearance.BorderSize = 0;
             Filler_Btn.FlatStyle = FlatStyle.Flat;
             Filler_Btn.ForeColor = Color.Black;
             Filler_Btn.Location = new Point(19, 70);
             Filler_Btn.Name = "Filler_Btn";
+            Filler_Btn.RoundBottomLeft = true;
+            Filler_Btn.RoundBottomRight = true;
+            Filler_Btn.RoundTopLeft = true;
+            Filler_Btn.RoundTopRight = true;
             Filler_Btn.Size = new Size(35, 35);
             Filler_Btn.TabIndex = 3;
             Filler_Btn.UseVisualStyleBackColor = false;
@@ -231,14 +243,20 @@ namespace Pint
             // Pencil_Btn
             // 
             Pencil_Btn.Anchor = AnchorStyles.None;
+            Pencil_Btn.BackColor = Color.Transparent;
             Pencil_Btn.BackgroundImage = Resources.pencil;
-            Pencil_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Pencil_Btn.BackgroundImageLayout = ImageLayout.Zoom;
+            Pencil_Btn.BorderRadius = 4;
             Pencil_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Pencil_Btn.FlatAppearance.BorderSize = 0;
             Pencil_Btn.FlatStyle = FlatStyle.Flat;
             Pencil_Btn.ForeColor = Color.Black;
             Pencil_Btn.Location = new Point(60, 34);
             Pencil_Btn.Name = "Pencil_Btn";
+            Pencil_Btn.RoundBottomLeft = true;
+            Pencil_Btn.RoundBottomRight = true;
+            Pencil_Btn.RoundTopLeft = true;
+            Pencil_Btn.RoundTopRight = true;
             Pencil_Btn.Size = new Size(35, 35);
             Pencil_Btn.TabIndex = 2;
             Pencil_Btn.UseVisualStyleBackColor = false;
@@ -247,14 +265,20 @@ namespace Pint
             // Eraser_Btn
             // 
             Eraser_Btn.Anchor = AnchorStyles.None;
+            Eraser_Btn.BackColor = Color.Transparent;
             Eraser_Btn.BackgroundImage = Resources.eraser;
-            Eraser_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Eraser_Btn.BackgroundImageLayout = ImageLayout.Zoom;
+            Eraser_Btn.BorderRadius = 4;
             Eraser_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Eraser_Btn.FlatAppearance.BorderSize = 0;
             Eraser_Btn.FlatStyle = FlatStyle.Flat;
             Eraser_Btn.ForeColor = Color.Black;
             Eraser_Btn.Location = new Point(19, 34);
             Eraser_Btn.Name = "Eraser_Btn";
+            Eraser_Btn.RoundBottomLeft = true;
+            Eraser_Btn.RoundBottomRight = true;
+            Eraser_Btn.RoundTopLeft = true;
+            Eraser_Btn.RoundTopRight = true;
             Eraser_Btn.Size = new Size(35, 35);
             Eraser_Btn.TabIndex = 1;
             Eraser_Btn.UseVisualStyleBackColor = false;
@@ -275,14 +299,19 @@ namespace Pint
             // Hexagon_Btn
             // 
             Hexagon_Btn.Anchor = AnchorStyles.None;
-            Hexagon_Btn.BackgroundImage = Resources.hexagon;
+            Hexagon_Btn.BackColor = Color.Transparent;
             Hexagon_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Hexagon_Btn.BorderRadius = 4;
             Hexagon_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Hexagon_Btn.FlatAppearance.BorderSize = 0;
             Hexagon_Btn.FlatStyle = FlatStyle.Flat;
             Hexagon_Btn.ForeColor = Color.Black;
             Hexagon_Btn.Location = new Point(175, 70);
             Hexagon_Btn.Name = "Hexagon_Btn";
+            Hexagon_Btn.RoundBottomLeft = true;
+            Hexagon_Btn.RoundBottomRight = true;
+            Hexagon_Btn.RoundTopLeft = true;
+            Hexagon_Btn.RoundTopRight = true;
             Hexagon_Btn.Size = new Size(35, 35);
             Hexagon_Btn.TabIndex = 10;
             Hexagon_Btn.Tag = "";
@@ -292,14 +321,19 @@ namespace Pint
             // Rhombus_Btn
             // 
             Rhombus_Btn.Anchor = AnchorStyles.None;
-            Rhombus_Btn.BackgroundImage = Resources.rhombus;
+            Rhombus_Btn.BackColor = Color.Transparent;
             Rhombus_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Rhombus_Btn.BorderRadius = 4;
             Rhombus_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Rhombus_Btn.FlatAppearance.BorderSize = 0;
             Rhombus_Btn.FlatStyle = FlatStyle.Flat;
             Rhombus_Btn.ForeColor = Color.Black;
             Rhombus_Btn.Location = new Point(134, 70);
             Rhombus_Btn.Name = "Rhombus_Btn";
+            Rhombus_Btn.RoundBottomLeft = true;
+            Rhombus_Btn.RoundBottomRight = true;
+            Rhombus_Btn.RoundTopLeft = true;
+            Rhombus_Btn.RoundTopRight = true;
             Rhombus_Btn.Size = new Size(35, 35);
             Rhombus_Btn.TabIndex = 9;
             Rhombus_Btn.Tag = "";
@@ -309,14 +343,19 @@ namespace Pint
             // StarEight_Btn
             // 
             StarEight_Btn.Anchor = AnchorStyles.None;
-            StarEight_Btn.BackgroundImage = Resources.star_eight;
+            StarEight_Btn.BackColor = Color.Transparent;
             StarEight_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            StarEight_Btn.BorderRadius = 4;
             StarEight_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             StarEight_Btn.FlatAppearance.BorderSize = 0;
             StarEight_Btn.FlatStyle = FlatStyle.Flat;
             StarEight_Btn.ForeColor = Color.Black;
             StarEight_Btn.Location = new Point(93, 70);
             StarEight_Btn.Name = "StarEight_Btn";
+            StarEight_Btn.RoundBottomLeft = true;
+            StarEight_Btn.RoundBottomRight = true;
+            StarEight_Btn.RoundTopLeft = true;
+            StarEight_Btn.RoundTopRight = true;
             StarEight_Btn.Size = new Size(35, 35);
             StarEight_Btn.TabIndex = 8;
             StarEight_Btn.Tag = "";
@@ -326,14 +365,19 @@ namespace Pint
             // StarSix_Btn
             // 
             StarSix_Btn.Anchor = AnchorStyles.None;
-            StarSix_Btn.BackgroundImage = Resources.star_six;
+            StarSix_Btn.BackColor = Color.Transparent;
             StarSix_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            StarSix_Btn.BorderRadius = 4;
             StarSix_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             StarSix_Btn.FlatAppearance.BorderSize = 0;
             StarSix_Btn.FlatStyle = FlatStyle.Flat;
             StarSix_Btn.ForeColor = Color.Black;
             StarSix_Btn.Location = new Point(52, 70);
             StarSix_Btn.Name = "StarSix_Btn";
+            StarSix_Btn.RoundBottomLeft = true;
+            StarSix_Btn.RoundBottomRight = true;
+            StarSix_Btn.RoundTopLeft = true;
+            StarSix_Btn.RoundTopRight = true;
             StarSix_Btn.Size = new Size(35, 35);
             StarSix_Btn.TabIndex = 7;
             StarSix_Btn.Tag = "";
@@ -343,14 +387,19 @@ namespace Pint
             // StarFive_Btn
             // 
             StarFive_Btn.Anchor = AnchorStyles.None;
-            StarFive_Btn.BackgroundImage = Resources.star_five;
+            StarFive_Btn.BackColor = Color.Transparent;
             StarFive_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            StarFive_Btn.BorderRadius = 4;
             StarFive_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             StarFive_Btn.FlatAppearance.BorderSize = 0;
             StarFive_Btn.FlatStyle = FlatStyle.Flat;
             StarFive_Btn.ForeColor = Color.Black;
             StarFive_Btn.Location = new Point(11, 70);
             StarFive_Btn.Name = "StarFive_Btn";
+            StarFive_Btn.RoundBottomLeft = true;
+            StarFive_Btn.RoundBottomRight = true;
+            StarFive_Btn.RoundTopLeft = true;
+            StarFive_Btn.RoundTopRight = true;
             StarFive_Btn.Size = new Size(35, 35);
             StarFive_Btn.TabIndex = 6;
             StarFive_Btn.Tag = "";
@@ -360,14 +409,19 @@ namespace Pint
             // RegularTriangle_Btn
             // 
             RegularTriangle_Btn.Anchor = AnchorStyles.None;
-            RegularTriangle_Btn.BackgroundImage = Resources.regular_triangle;
+            RegularTriangle_Btn.BackColor = Color.Transparent;
             RegularTriangle_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            RegularTriangle_Btn.BorderRadius = 4;
             RegularTriangle_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             RegularTriangle_Btn.FlatAppearance.BorderSize = 0;
             RegularTriangle_Btn.FlatStyle = FlatStyle.Flat;
             RegularTriangle_Btn.ForeColor = Color.Black;
             RegularTriangle_Btn.Location = new Point(52, 35);
             RegularTriangle_Btn.Name = "RegularTriangle_Btn";
+            RegularTriangle_Btn.RoundBottomLeft = true;
+            RegularTriangle_Btn.RoundBottomRight = true;
+            RegularTriangle_Btn.RoundTopLeft = true;
+            RegularTriangle_Btn.RoundTopRight = true;
             RegularTriangle_Btn.Size = new Size(35, 35);
             RegularTriangle_Btn.TabIndex = 5;
             RegularTriangle_Btn.Tag = "";
@@ -377,14 +431,19 @@ namespace Pint
             // RightTriangle_Btn
             // 
             RightTriangle_Btn.Anchor = AnchorStyles.None;
-            RightTriangle_Btn.BackgroundImage = Resources.right_triangle;
+            RightTriangle_Btn.BackColor = Color.Transparent;
             RightTriangle_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            RightTriangle_Btn.BorderRadius = 4;
             RightTriangle_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             RightTriangle_Btn.FlatAppearance.BorderSize = 0;
             RightTriangle_Btn.FlatStyle = FlatStyle.Flat;
             RightTriangle_Btn.ForeColor = Color.Black;
             RightTriangle_Btn.Location = new Point(134, 35);
             RightTriangle_Btn.Name = "RightTriangle_Btn";
+            RightTriangle_Btn.RoundBottomLeft = true;
+            RightTriangle_Btn.RoundBottomRight = true;
+            RightTriangle_Btn.RoundTopLeft = true;
+            RightTriangle_Btn.RoundTopRight = true;
             RightTriangle_Btn.Size = new Size(35, 35);
             RightTriangle_Btn.TabIndex = 4;
             RightTriangle_Btn.Tag = "";
@@ -394,14 +453,19 @@ namespace Pint
             // Line_Btn
             // 
             Line_Btn.Anchor = AnchorStyles.None;
-            Line_Btn.BackgroundImage = Resources.line;
+            Line_Btn.BackColor = Color.Transparent;
             Line_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Line_Btn.BorderRadius = 4;
             Line_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Line_Btn.FlatAppearance.BorderSize = 0;
             Line_Btn.FlatStyle = FlatStyle.Flat;
             Line_Btn.ForeColor = Color.Black;
             Line_Btn.Location = new Point(175, 34);
             Line_Btn.Name = "Line_Btn";
+            Line_Btn.RoundBottomLeft = true;
+            Line_Btn.RoundBottomRight = true;
+            Line_Btn.RoundTopLeft = true;
+            Line_Btn.RoundTopRight = true;
             Line_Btn.Size = new Size(35, 35);
             Line_Btn.TabIndex = 3;
             Line_Btn.Tag = "";
@@ -411,14 +475,19 @@ namespace Pint
             // Circle_Btn
             // 
             Circle_Btn.Anchor = AnchorStyles.None;
-            Circle_Btn.BackgroundImage = Resources.circle;
+            Circle_Btn.BackColor = Color.Transparent;
             Circle_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Circle_Btn.BorderRadius = 4;
             Circle_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Circle_Btn.FlatAppearance.BorderSize = 0;
             Circle_Btn.FlatStyle = FlatStyle.Flat;
             Circle_Btn.ForeColor = Color.Black;
             Circle_Btn.Location = new Point(11, 34);
             Circle_Btn.Name = "Circle_Btn";
+            Circle_Btn.RoundBottomLeft = true;
+            Circle_Btn.RoundBottomRight = true;
+            Circle_Btn.RoundTopLeft = true;
+            Circle_Btn.RoundTopRight = true;
             Circle_Btn.Size = new Size(35, 35);
             Circle_Btn.TabIndex = 2;
             Circle_Btn.Tag = "";
@@ -428,14 +497,19 @@ namespace Pint
             // Rectangle_Btn
             // 
             Rectangle_Btn.Anchor = AnchorStyles.None;
-            Rectangle_Btn.BackgroundImage = Resources.rectangle;
+            Rectangle_Btn.BackColor = Color.Transparent;
             Rectangle_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Rectangle_Btn.BorderRadius = 4;
             Rectangle_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Rectangle_Btn.FlatAppearance.BorderSize = 0;
             Rectangle_Btn.FlatStyle = FlatStyle.Flat;
             Rectangle_Btn.ForeColor = Color.Black;
             Rectangle_Btn.Location = new Point(93, 35);
             Rectangle_Btn.Name = "Rectangle_Btn";
+            Rectangle_Btn.RoundBottomLeft = true;
+            Rectangle_Btn.RoundBottomRight = true;
+            Rectangle_Btn.RoundTopLeft = true;
+            Rectangle_Btn.RoundTopRight = true;
             Rectangle_Btn.Size = new Size(35, 35);
             Rectangle_Btn.TabIndex = 1;
             Rectangle_Btn.Tag = "";
@@ -1040,15 +1114,21 @@ namespace Pint
             // 
             // Settings_Btn
             // 
-            Settings_Btn.Anchor = AnchorStyles.Right;
+            Settings_Btn.Anchor = AnchorStyles.None;
+            Settings_Btn.BackColor = Color.Transparent;
             Settings_Btn.BackgroundImage = Resources.settings;
             Settings_Btn.BackgroundImageLayout = ImageLayout.Zoom;
+            Settings_Btn.BorderRadius = 4;
             Settings_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Settings_Btn.FlatAppearance.BorderSize = 0;
             Settings_Btn.FlatStyle = FlatStyle.Flat;
             Settings_Btn.ForeColor = Color.Black;
             Settings_Btn.Location = new Point(1596, 3);
             Settings_Btn.Name = "Settings_Btn";
+            Settings_Btn.RoundBottomLeft = true;
+            Settings_Btn.RoundBottomRight = true;
+            Settings_Btn.RoundTopLeft = true;
+            Settings_Btn.RoundTopRight = true;
             Settings_Btn.Size = new Size(35, 35);
             Settings_Btn.TabIndex = 61;
             Settings_Btn.UseVisualStyleBackColor = false;
@@ -1186,6 +1266,7 @@ namespace Pint
             // 
             // CoordinatesLabel
             // 
+            CoordinatesLabel.BackColor = Color.Transparent;
             CoordinatesLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             CoordinatesLabel.Location = new Point(3, 5);
             CoordinatesLabel.Name = "CoordinatesLabel";
@@ -1205,6 +1286,7 @@ namespace Pint
             // 
             // SizeLabel
             // 
+            SizeLabel.BackColor = Color.Transparent;
             SizeLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             SizeLabel.Location = new Point(144, 5);
             SizeLabel.Name = "SizeLabel";
@@ -1215,7 +1297,7 @@ namespace Pint
             // 
             // roundPanel1
             // 
-            roundPanel1.BackColor = Color.White;
+            roundPanel1.BackColor = Color.WhiteSmoke;
             roundPanel1.BorderRadius = 13;
             roundPanel1.Controls.Add(PenWidthLabel);
             roundPanel1.Controls.Add(Scribble);
@@ -1268,7 +1350,7 @@ namespace Pint
             // 
             // roundPanel2
             // 
-            roundPanel2.BackColor = Color.White;
+            roundPanel2.BackColor = Color.WhiteSmoke;
             roundPanel2.BorderRadius = 12;
             roundPanel2.Controls.Add(SizeLabel);
             roundPanel2.Controls.Add(CoordinatesLabel);
@@ -1292,10 +1374,10 @@ namespace Pint
             Controls.Add(roundPanel1);
             Controls.Add(panel1);
             Controls.Add(scrollablePictureBox);
+            Icon = Resources.Icon;
             KeyPreview = true;
             MinimumSize = new Size(1400, 900);
             Name = "MainForm";
-            Icon = Resources.Icon;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Pint v4.2.0";
             KeyDown += MainForm_KeyDown;
@@ -1332,16 +1414,8 @@ namespace Pint
         private Button ClearBoard_Btn;
         private Button SaveFile_Btn;
         private Panel panel4;
-        private Button Filler_Btn;
-        private Button Pencil_Btn;
-        private Button Eraser_Btn;
         private Label label4;
         private Label label3;
-        private Button RegularTriangle_Btn;
-        private Button RightTriangle_Btn;
-        private Button Line_Btn;
-        private Button Circle_Btn;
-        private Button Rectangle_Btn;
         private TrackBar trackBar1;
         private Label label1;
         private Panel panel2;
@@ -1378,15 +1452,9 @@ namespace Pint
         private Button Orange_Btn;
         private Button NewImage_Btn;
         private Label CoordinatesLabel;
-        private Button ColorPicker_Btn;
         private PictureBox Scribble;
         private Panel panel5;
         private Label PenWidthLabel;
-        private Button StarFive_Btn;
-        private Button StarEight_Btn;
-        private Button StarSix_Btn;
-        private Button Rhombus_Btn;
-        private Button Hexagon_Btn;
         private Panel panel6;
         private Label label2;
         private Button Blue_Btn;
@@ -1404,7 +1472,6 @@ namespace Pint
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
         private SplitContainer splitContainer3;
-        private Button Settings_Btn;
         private ScrollablePictureBox scrollablePictureBox;
         private Label SizeLabel;
         private RoundPanel roundPanel1;
@@ -1412,5 +1479,20 @@ namespace Pint
         private PictureBox CurrentColor;
         private TrackBar PenTrackBar;
         private RoundPanel roundPanel2;
+        private RoundButton Filler_Btn;
+        private RoundButton Pencil_Btn;
+        private RoundButton Eraser_Btn;
+        private RoundButton RegularTriangle_Btn;
+        private RoundButton RightTriangle_Btn;
+        private RoundButton Line_Btn;
+        private RoundButton Circle_Btn;
+        private RoundButton Rectangle_Btn;
+        private RoundButton ColorPicker_Btn;
+        private RoundButton StarFive_Btn;
+        private RoundButton StarEight_Btn;
+        private RoundButton StarSix_Btn;
+        private RoundButton Rhombus_Btn;
+        private RoundButton Hexagon_Btn;
+        private RoundButton Settings_Btn;
     }
 }

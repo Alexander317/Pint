@@ -7,7 +7,6 @@ namespace Pint.Core
         #region Fields
 
         private static List<Button> allbuttons = new();
-        private static Color unselectColor { get; set; }
         private static Color selectColor { get; set; }
         private static Button lastSelectedBtn;
         
@@ -16,7 +15,6 @@ namespace Pint.Core
         #region Properties
 
         public static List<Button> Allbuttons { get => allbuttons; }
-        public static Color UnselectColor { set => unselectColor = value; }
         public static Color SelectColor { set => selectColor = value; }
         
         #endregion
@@ -25,7 +23,7 @@ namespace Pint.Core
 
         public static void UnselectAll() {
             foreach (var btn in Allbuttons) {
-                btn.BackColor = unselectColor;
+                btn.BackColor = Color.Transparent;
             }
         }
         public static void Select(Button btn)

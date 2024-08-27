@@ -27,47 +27,37 @@ namespace Pint
 
         private void SetUITheme()
         {
-            if (ConfigurationManager.AppSettings["UIMode"] == "light")
-                SetLightTheme();
-            else
-                SetDarkTheme();
+            bool isLightTheme = ConfigurationManager.AppSettings["UIMode"] == "light";
+            SetTheme(isLightTheme);
             GC.Collect();
         }
 
-        private void SetLightTheme()
+        Color panelsColor_Light = Color.FromArgb(245, 245, 245);
+        Color formColor_Light = Color.FromArgb(205, 205, 205);
+        Color mouseOverBackColor_Light = Color.FromArgb(230, 230, 230);
+
+        Color panelsColor_Dark = Color.FromArgb(42, 42, 42);
+        Color formColor_Dark = Color.FromArgb(24, 24, 24);
+        Color mouseOverBackColor_Dark = Color.FromArgb(57, 57, 57);
+
+        private void SetTheme(bool isLightTheme)
         {
-            BackColor = Color.FromArgb(205, 205, 205);
+            Color foreColor = isLightTheme ? Color.Black : Color.WhiteSmoke;
+            Color backColor = isLightTheme ? formColor_Light : formColor_Dark;
+            Color panelsBackColor = isLightTheme ? panelsColor_Light : panelsColor_Dark;
+            Color mouseOverColor = isLightTheme ? mouseOverBackColor_Light : mouseOverBackColor_Dark;
 
-            panel1.BackColor = Color.FromArgb(245, 245, 245);
-            panel1.ForeColor = Color.Black;
+            BackColor = backColor;
+            ForeColor = foreColor;
 
-            applyButton.BackColor = Color.FromArgb(245, 245, 245);
-            applyButton.ForeColor = Color.Black;
-            applyButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(235, 235, 235);
-            widthNumeric.BackColor = Color.FromArgb(245, 245, 245);
-            widthNumeric.ForeColor = Color.Black;
-            heightNumeric.BackColor = Color.FromArgb(245, 245, 245);
-            heightNumeric.ForeColor = Color.Black;
-
-            SetWindowTheme(false);
-        }
-
-        private void SetDarkTheme()
-        {
-            BackColor = Color.FromArgb(24, 24, 24);
-
-            panel1.BackColor = Color.FromArgb(42, 42, 42);
-            panel1.ForeColor = Color.WhiteSmoke;
-
-            applyButton.BackColor = Color.FromArgb(42, 42, 42);
-            applyButton.ForeColor = Color.WhiteSmoke;
-            applyButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 52, 52);
-            widthNumeric.BackColor = Color.FromArgb(42, 42, 42);
-            widthNumeric.ForeColor = Color.WhiteSmoke;
-            heightNumeric.BackColor = Color.FromArgb(42, 42, 42);
-            heightNumeric.ForeColor = Color.WhiteSmoke;
-
-            SetWindowTheme(true);
+            Control[] controls = { panel1, applyButton, widthNumeric, heightNumeric };
+            foreach(var control in controls)
+            {
+                control.BackColor = panelsBackColor;
+                control.ForeColor = foreColor;
+            }
+            applyButton.FlatAppearance.MouseOverBackColor = mouseOverColor;
+            SetWindowTheme(!isLightTheme);
         }
 
         [DllImport("DwmApi")]

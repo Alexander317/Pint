@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using Pint.Core.Misc;
 using Pint.Properties;
+using Pint.Core.Figures;
 
 namespace Pint
 {
@@ -39,6 +40,7 @@ namespace Pint
             UpdateCurrentColors(pen.Color);
             ButtonHandler.Select(Pencil_Btn);
             SetUITheme();
+            DrawOnButtons();
             PenTrackBar_Scroll(new object(), new EventArgs());
             PenHandler.MakePenRound(pen);
         }
@@ -363,6 +365,16 @@ namespace Pint
             ButtonHandler.Allbuttons.Add(ColorPicker_Btn);
         }
 
+        public void DrawOnButtons()
+        {
+            paintCore.SetArrayPoint();
+            foreach (var btn in ButtonHandler.Allbuttons)
+            {
+                if (btn.Tag is FiguresEnum)
+                    paintCore.DrawOnButton(btn);
+            }
+        }
+
         #endregion
 
         #region Theme Handlers
@@ -376,12 +388,12 @@ namespace Pint
 
         Color panelsColor_Light = Color.FromArgb(245, 245, 245);
         Color formColor_Light = Color.FromArgb(205, 205, 205);
-        Color mouseOverBackColor_Light = Color.FromArgb(235, 235, 235);
+        Color mouseOverBackColor_Light = Color.FromArgb(230, 230, 230);
         Color selectColor_Light = Color.FromArgb(205, 205, 205);
 
         Color panelsColor_Dark = Color.FromArgb(42, 42, 42);
         Color formColor_Dark = Color.FromArgb(24, 24, 24);
-        Color mouseOverBackColor_Dark = Color.FromArgb(52, 52, 52);
+        Color mouseOverBackColor_Dark = Color.FromArgb(57, 57, 57);
         Color selectColor_Dark = Color.FromArgb(79, 79, 79);
 
         private void SetTheme(bool isLightTheme)
@@ -402,7 +414,6 @@ namespace Pint
             SetColorDependencies(panelBackColor, foreColor);
 
             ButtonHandler.SelectColor = selectColor;
-            ButtonHandler.UnselectColor = isLightTheme ? Color.WhiteSmoke : panelBackColor;
 
             var buttons = new Button[] { SelectFile_Btn, SaveFile_Btn, NewImage_Btn, ClearBoard_Btn, Settings_Btn };
             foreach (var btn in buttons)
@@ -411,30 +422,27 @@ namespace Pint
             }
 
             var buttonImages = new Dictionary<Button, Image>
-    {
-        { Circle_Btn, isLightTheme ?  Resources.circle : Resources.circle_inverted },
-        { Rectangle_Btn, isLightTheme ? Resources.rectangle : Resources.rectangle_inverted },
-        { RegularTriangle_Btn, isLightTheme ? Resources.regular_triangle : Resources.regular_triangle_inverted },
-        { RightTriangle_Btn, isLightTheme ? Resources.right_triangle : Resources.right_triangle_inverted },
-        { Line_Btn, isLightTheme ? Resources.line : Resources.line_inverted },
-        { StarFive_Btn, isLightTheme ? Resources.star_five : Resources.star_five_inverted },
-        { StarSix_Btn, isLightTheme ? Resources.star_six : Resources.star_six_inverted },
-        { StarEight_Btn, isLightTheme ? Resources.star_eight : Resources.star_eight_inverted },
-        { Rhombus_Btn, isLightTheme ? Resources.rhombus : Resources.rhombus_inverted },
-        { Hexagon_Btn, isLightTheme ? Resources.hexagon : Resources.hexagon_inverted },
-        { Filler_Btn, isLightTheme ? Resources.Filler : Resources.filler_inverted },
-        { Pencil_Btn, isLightTheme ? Resources.pencil : Resources.pencil_inverted },
-        { Eraser_Btn, isLightTheme ? Resources.eraser : Resources.eraser_inverted },
-        { ColorPicker_Btn, isLightTheme ? Resources.color_picker : Resources.color_picker_inverted },
-        { Settings_Btn, isLightTheme ? Resources.settings : Resources.settings_inverted }
-    };
+            {
+                { Filler_Btn, isLightTheme ? Resources.Filler : Resources.filler_inverted },
+                { Pencil_Btn, isLightTheme ? Resources.pencil : Resources.pencil_inverted },
+                { Eraser_Btn, isLightTheme ? Resources.eraser : Resources.eraser_inverted },
+                { ColorPicker_Btn, isLightTheme ? Resources.color_picker : Resources.color_picker_inverted },
+                { Settings_Btn, isLightTheme ? Resources.settings : Resources.settings_inverted }
+            };
 
             foreach (var kvp in buttonImages)
             {
                 kvp.Key.BackgroundImage = kvp.Value;
             }
 
-            Scribble.BackgroundImage = isLightTheme ? Properties.Resources.scribble : Properties.Resources.scribble_inverted;
+            DrawOnButtons();
+
+            foreach (var btn in ButtonHandler.Allbuttons)
+            {
+                btn.FlatAppearance.MouseOverBackColor = mouseOverColor;
+            }
+
+            Scribble.BackgroundImage = isLightTheme ? Resources.scribble : Resources.scribble_inverted;
 
             SetWindowTheme(!isLightTheme);
             ButtonHandler.UpdateBtnColors();

@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using Pint.AdditionalToolbox;
+using Pint.Properties;
+using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -56,39 +58,34 @@ namespace Pint
 
         private void SetUITheme()
         {
-            if (ConfigurationManager.AppSettings["UIMode"] == "light")
-                SetLightTheme();
-            else
-                SetDarkTheme();
+            bool isLightTheme = ConfigurationManager.AppSettings["UIMode"] == "light";
+            SetTheme(isLightTheme);
             GC.Collect();
         }
 
-        private void SetLightTheme()
+        Color groupBoxColor_Light = Color.FromArgb(245, 245, 245);
+        Color formColor_Light = Color.FromArgb(205, 205, 205);
+
+        Color groupBoxColor_Dark = Color.FromArgb(42, 42, 42);
+        Color formColor_Dark = Color.FromArgb(24, 24, 24);
+
+        private void SetTheme(bool isLightTheme)
         {
-            ForeColor = Color.Black;
-            BackColor = Color.FromArgb(205, 205, 205);
-            groupBox1.BackColor = Color.FromArgb(245, 245, 245);
-            groupBox1.ForeColor = Color.Black;
-            groupBox2.BackColor = Color.FromArgb(245, 245, 245);
-            groupBox2.ForeColor = Color.Black;
-            groupBox3.BackColor = Color.FromArgb(245, 245, 245);
-            groupBox3.ForeColor = Color.Black;
+            Color foreColor = isLightTheme ? Color.Black : Color.WhiteSmoke;
+            Color backColor = isLightTheme ? formColor_Light : formColor_Dark;
+            Color groupBoxBackColor = isLightTheme ? groupBoxColor_Light : groupBoxColor_Dark;
 
-            SetWindowTheme(false);
-        }
+            ForeColor = foreColor;
+            BackColor = backColor;
 
-        private void SetDarkTheme()
-        {
-            BackColor = Color.FromArgb(24, 24, 24);
-            ForeColor = Color.WhiteSmoke;
-            groupBox1.BackColor = Color.FromArgb(42, 42, 42);
-            groupBox1.ForeColor = Color.WhiteSmoke;
-            groupBox2.BackColor = Color.FromArgb(42, 42, 42);
-            groupBox2.ForeColor = Color.WhiteSmoke;
-            groupBox3.BackColor = Color.FromArgb(42, 42, 42);
-            groupBox3.ForeColor = Color.WhiteSmoke;
+            RoundGroupBox[] groupBoxes = { groupBox1, groupBox2, groupBox3 };
+            foreach (var groupBox in groupBoxes)
+            {
+                groupBox.BackColor = groupBoxBackColor;
+                groupBox.ForeColor = foreColor;
+            }
 
-            SetWindowTheme(true);
+            SetWindowTheme(!isLightTheme);
         }
 
         [DllImport("DwmApi")]
