@@ -21,7 +21,7 @@ namespace Pint.AdditionalToolbox
 
         #endregion
 
-        #region Properties
+        #region Params
 
         public int BorderRadius { get => borderRadius; set { borderRadius = value; Invalidate(); } }
         public bool RoundTopLeft { get => roundTopLeft; set { roundTopLeft = value; Invalidate(); } }
@@ -36,7 +36,7 @@ namespace Pint.AdditionalToolbox
         private GraphicsPath GetGraphicsPath(RectangleF rect, float radius)
         {
             float diameter = radius * 2;
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
 
             if (roundTopLeft)
                 path.AddArc(rect.X, rect.Y, diameter, diameter, 180, 90);

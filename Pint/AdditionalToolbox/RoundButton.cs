@@ -1,4 +1,5 @@
-﻿using System.Drawing.Drawing2D;
+﻿using Pint.Core;
+using System.Drawing.Drawing2D;
 
 namespace Pint
 {
@@ -14,6 +15,7 @@ namespace Pint
         #region Fields
 
         private int borderRadius = 12;
+        private float borderWidth = 2f;
         private bool roundTopLeft = true;
         private bool roundTopRight = true;
         private bool roundBottomLeft = true;
@@ -21,9 +23,10 @@ namespace Pint
 
         #endregion
 
-        #region Properties
+        #region Params
 
         public int BorderRadius { get => borderRadius; set { borderRadius = value; Invalidate(); } }
+        public float BorderWidth { get => borderWidth; set { borderWidth = value; Invalidate(); } }
         public bool RoundTopLeft { get => roundTopLeft; set { roundTopLeft = value; Invalidate(); } }
         public bool RoundTopRight { get => roundTopRight; set { roundTopRight = value; Invalidate(); } }
         public bool RoundBottomLeft { get => roundBottomLeft; set { roundBottomLeft = value; Invalidate(); } }
@@ -36,7 +39,7 @@ namespace Pint
         private GraphicsPath GetGraphicsPath(RectangleF rect, float radius)
         {
             float diameter = radius * 2;
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
 
             if (roundTopLeft)
                 path.AddArc(rect.X, rect.Y, diameter, diameter, 180, 90);
@@ -67,12 +70,14 @@ namespace Pint
             base.OnPaint(e);
             if (borderRadius > 2)
             {
-                using (GraphicsPath path = GetGraphicsPath(new RectangleF(0, 0, Width, Height), borderRadius))
-                using (Pen pen = new Pen(Parent.BackColor, 2))
+                e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+                using (GraphicsPath borderPath = GetGraphicsPath(new RectangleF(-1, -1, Width, Height), borderRadius))
+                using (Pen pen = new Pen(borderWidth == 0 ? BackColor : FlatAppearance.BorderColor, borderWidth))
                 {
-                    Region = new Region(path);
-                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.DrawPath(pen, path);
+                    PenHandler.MakePenRound(pen);
+                    e.Graphics.DrawPath(pen, borderPath);
+                    Region = new Region(borderPath);
                 }
             }
             else

@@ -21,7 +21,7 @@ namespace Pint.AdditionalToolbox
 
         #endregion
 
-        #region Properties
+        #region Params
 
         public int BorderRadius { get => borderRadius; set { borderRadius = value; Invalidate(); } }
         public bool RoundTopLeft { get => roundTopLeft; set { roundTopLeft = value; Invalidate(); } }

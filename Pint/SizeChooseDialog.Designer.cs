@@ -30,13 +30,13 @@
         {
             label1 = new Label();
             label2 = new Label();
-            widthNumeric = new NumericUpDown();
-            heightNumeric = new NumericUpDown();
             panel1 = new Panel();
+            heightNumeric = new NumericUpDown();
+            widthNumeric = new NumericUpDown();
             applyButton = new RoundButton();
-            ((System.ComponentModel.ISupportInitialize)widthNumeric).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)heightNumeric).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)heightNumeric).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)widthNumeric).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -53,51 +53,55 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Calibri", 12F);
-            label2.Location = new Point(11, 41);
+            label2.Location = new Point(11, 45);
             label2.Name = "label2";
             label2.Size = new Size(156, 19);
             label2.TabIndex = 4;
             label2.Text = "Высота изображения";
             // 
-            // widthNumeric
-            // 
-            widthNumeric.Font = new Font("Segoe UI", 9.75F);
-            widthNumeric.Location = new Point(181, 12);
-            widthNumeric.Maximum = new decimal(new int[] { 3840, 0, 0, 0 });
-            widthNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            widthNumeric.Name = "widthNumeric";
-            widthNumeric.Size = new Size(84, 25);
-            widthNumeric.TabIndex = 5;
-            widthNumeric.Value = new decimal(new int[] { 1920, 0, 0, 0 });
-            // 
-            // heightNumeric
-            // 
-            heightNumeric.Font = new Font("Segoe UI", 9.75F);
-            heightNumeric.Location = new Point(181, 41);
-            heightNumeric.Maximum = new decimal(new int[] { 2160, 0, 0, 0 });
-            heightNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            heightNumeric.Name = "heightNumeric";
-            heightNumeric.Size = new Size(84, 25);
-            heightNumeric.TabIndex = 6;
-            heightNumeric.Value = new decimal(new int[] { 1080, 0, 0, 0 });
-            // 
             // panel1
             // 
             panel1.BackColor = Color.WhiteSmoke;
-            panel1.Controls.Add(label1);
             panel1.Controls.Add(heightNumeric);
-            panel1.Controls.Add(label2);
             panel1.Controls.Add(widthNumeric);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(280, 78);
             panel1.TabIndex = 7;
             // 
+            // heightNumeric
+            // 
+            heightNumeric.Font = new Font("Calibri", 12F);
+            heightNumeric.InterceptArrowKeys = false;
+            heightNumeric.Location = new Point(181, 44);
+            heightNumeric.Maximum = new decimal(new int[] { 32768, 0, 0, 0 });
+            heightNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            heightNumeric.Name = "heightNumeric";
+            heightNumeric.Size = new Size(84, 27);
+            heightNumeric.TabIndex = 45;
+            heightNumeric.Value = new decimal(new int[] { 1080, 0, 0, 0 });
+            heightNumeric.KeyDown += Numerics_KeyDown;
+            // 
+            // widthNumeric
+            // 
+            widthNumeric.Font = new Font("Calibri", 12F);
+            widthNumeric.InterceptArrowKeys = false;
+            widthNumeric.Location = new Point(181, 10);
+            widthNumeric.Maximum = new decimal(new int[] { 32768, 0, 0, 0 });
+            widthNumeric.Name = "widthNumeric";
+            widthNumeric.Size = new Size(84, 27);
+            widthNumeric.TabIndex = 44;
+            widthNumeric.Value = new decimal(new int[] { 1920, 0, 0, 0 });
+            widthNumeric.KeyDown += Numerics_KeyDown;
+            // 
             // applyButton
             // 
             applyButton.BackColor = Color.WhiteSmoke;
-            applyButton.BorderRadius = 12;
+            applyButton.BorderRadius = 16;
+            applyButton.BorderWidth = 0F;
             applyButton.FlatAppearance.BorderColor = Color.Black;
             applyButton.FlatAppearance.BorderSize = 0;
             applyButton.FlatStyle = FlatStyle.Flat;
@@ -130,19 +134,19 @@
             ShowInTaskbar = false;
             Text = "Выберите размер изображения";
             TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)widthNumeric).EndInit();
-            ((System.ComponentModel.ISupportInitialize)heightNumeric).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)heightNumeric).EndInit();
+            ((System.ComponentModel.ISupportInitialize)widthNumeric).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
         private Label label1;
         private Label label2;
-        private NumericUpDown widthNumeric;
-        private NumericUpDown heightNumeric;
         private Panel panel1;
         private RoundButton applyButton;
+        private NumericUpDown heightNumeric;
+        private NumericUpDown widthNumeric;
     }
 }

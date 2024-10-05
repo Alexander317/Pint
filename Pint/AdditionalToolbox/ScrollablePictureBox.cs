@@ -9,13 +9,24 @@
 
         #region Functional
 
-        public void SetImage(Image image) => pictureBox.Image = image;
+        public void SetImage(Image image)
+        {
+            SetPBSize(image.Size);
+            pictureBox.Image = image;
+        }
 
-        public Image GetImage() => pictureBox.Image;
+        public Image GetImage()
+        {
+            return pictureBox.Image;
+        }
 
-        public void SetImageSize(Size size)
+        public void SetPBSize(Size size)
         {
             pictureBox.Size = size;
+        }
+        public void SetPBSize(int Width, int Height)
+        {
+            pictureBox.Size = new Size(Width, Height);
         }
 
         public PictureBox GetPictureBox()

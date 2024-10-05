@@ -35,10 +35,12 @@ namespace Pint
         Color panelsColor_Light = Color.FromArgb(245, 245, 245);
         Color formColor_Light = Color.FromArgb(205, 205, 205);
         Color mouseOverBackColor_Light = Color.FromArgb(230, 230, 230);
+        Color mouseDownBackColor_Light = Color.FromArgb(220, 220, 220);
 
         Color panelsColor_Dark = Color.FromArgb(42, 42, 42);
         Color formColor_Dark = Color.FromArgb(24, 24, 24);
         Color mouseOverBackColor_Dark = Color.FromArgb(57, 57, 57);
+        Color mouseDownBackColor_Dark = Color.FromArgb(67, 67, 67);
 
         private void SetTheme(bool isLightTheme)
         {
@@ -46,17 +48,20 @@ namespace Pint
             Color backColor = isLightTheme ? formColor_Light : formColor_Dark;
             Color panelsBackColor = isLightTheme ? panelsColor_Light : panelsColor_Dark;
             Color mouseOverColor = isLightTheme ? mouseOverBackColor_Light : mouseOverBackColor_Dark;
+            Color mouseDownColor = isLightTheme ? mouseDownBackColor_Light : mouseDownBackColor_Dark;
 
             BackColor = backColor;
             ForeColor = foreColor;
 
             Control[] controls = { panel1, applyButton, widthNumeric, heightNumeric };
-            foreach(var control in controls)
+            foreach (var control in controls)
             {
                 control.BackColor = panelsBackColor;
                 control.ForeColor = foreColor;
             }
             applyButton.FlatAppearance.MouseOverBackColor = mouseOverColor;
+            applyButton.FlatAppearance.MouseDownBackColor = mouseDownColor;
+            applyButton.FlatAppearance.BorderColor = foreColor;
             SetWindowTheme(!isLightTheme);
         }
 
@@ -76,5 +81,15 @@ namespace Pint
         }
 
         #endregion
+
+        private void Numerics_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up && !widthNumeric.Focused)
+                widthNumeric.Focus();
+            else if (e.KeyCode == Keys.Down && !heightNumeric.Focused)
+                heightNumeric.Focus();
+            else if (e.KeyCode == Keys.Enter)
+                ApplyButton_Click(new object(), EventArgs.Empty);
+        }
     }
 }

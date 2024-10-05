@@ -32,8 +32,6 @@ namespace Pint
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            ClearBoard_Btn = new Button();
-            SaveFile_Btn = new Button();
             panel4 = new Panel();
             ColorPicker_Btn = new RoundButton();
             Filler_Btn = new RoundButton();
@@ -53,7 +51,9 @@ namespace Pint
             Rectangle_Btn = new RoundButton();
             label1 = new Label();
             panel2 = new Panel();
+            rotatableLineControl3 = new LineControl();
             CurrentColor = new PictureBox();
+            rotatableLineControl1 = new LineControl();
             DeepPink_Btn = new Button();
             Navy_Btn = new Button();
             Sienna_Btn = new Button();
@@ -92,25 +92,26 @@ namespace Pint
             Black_Btn = new Button();
             Cyan_Btn = new Button();
             panel1 = new Panel();
-            Settings_Btn = new RoundButton();
-            splitContainer1 = new SplitContainer();
-            splitContainer2 = new SplitContainer();
-            SelectFile_Btn = new Button();
-            NewImage_Btn = new Button();
-            splitContainer3 = new SplitContainer();
-            panel6 = new Panel();
+            panel3 = new Panel();
+            ExportImageButton = new RoundButton();
+            NewImageButton = new RoundButton();
             label2 = new Label();
+            ClearImageButton = new RoundButton();
+            ImportImageButton = new RoundButton();
+            Settings_Btn = new RoundButton();
+            panel6 = new Panel();
+            rotatableLineControl2 = new LineControl();
             DrawingTimer = new System.Windows.Forms.Timer(components);
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
             CoordinatesLabel = new Label();
-            scrollablePictureBox = new ScrollablePictureBox();
             SizeLabel = new Label();
             roundPanel1 = new RoundPanel();
             PenWidthLabel = new Label();
             Scribble = new PictureBox();
             PenTrackBar = new TrackBar();
             roundPanel2 = new RoundPanel();
+            MainImage = new ScrollablePictureBox();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CurrentColor).BeginInit();
@@ -118,18 +119,7 @@ namespace Pint
             ((System.ComponentModel.ISupportInitialize)ColorSlider_G).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ColorSlider_B).BeginInit();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
-            splitContainer2.Panel1.SuspendLayout();
-            splitContainer2.Panel2.SuspendLayout();
-            splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
-            splitContainer3.Panel1.SuspendLayout();
-            splitContainer3.Panel2.SuspendLayout();
-            splitContainer3.SuspendLayout();
+            panel3.SuspendLayout();
             panel6.SuspendLayout();
             roundPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Scribble).BeginInit();
@@ -137,49 +127,16 @@ namespace Pint
             roundPanel2.SuspendLayout();
             SuspendLayout();
             // 
-            // ClearBoard_Btn
-            // 
-            ClearBoard_Btn.BackColor = Color.Transparent;
-            ClearBoard_Btn.Dock = DockStyle.Fill;
-            ClearBoard_Btn.FlatAppearance.BorderColor = Color.Black;
-            ClearBoard_Btn.FlatAppearance.BorderSize = 0;
-            ClearBoard_Btn.FlatStyle = FlatStyle.Flat;
-            ClearBoard_Btn.Font = new Font("Calibri", 12F);
-            ClearBoard_Btn.Location = new Point(0, 0);
-            ClearBoard_Btn.Name = "ClearBoard_Btn";
-            ClearBoard_Btn.Size = new Size(152, 75);
-            ClearBoard_Btn.TabIndex = 37;
-            ClearBoard_Btn.Text = "Очистить изображение";
-            ClearBoard_Btn.UseVisualStyleBackColor = false;
-            ClearBoard_Btn.Click += ClearBoard_Btn_Click;
-            // 
-            // SaveFile_Btn
-            // 
-            SaveFile_Btn.BackColor = Color.Transparent;
-            SaveFile_Btn.Dock = DockStyle.Fill;
-            SaveFile_Btn.FlatAppearance.BorderColor = Color.Black;
-            SaveFile_Btn.FlatAppearance.BorderSize = 0;
-            SaveFile_Btn.FlatStyle = FlatStyle.Flat;
-            SaveFile_Btn.Font = new Font("Calibri", 12F);
-            SaveFile_Btn.Location = new Point(0, 0);
-            SaveFile_Btn.Name = "SaveFile_Btn";
-            SaveFile_Btn.Size = new Size(143, 75);
-            SaveFile_Btn.TabIndex = 36;
-            SaveFile_Btn.Text = "Сохранить изображение";
-            SaveFile_Btn.UseVisualStyleBackColor = false;
-            SaveFile_Btn.Click += SaveFile_Btn_Click;
-            // 
             // panel4
             // 
             panel4.Anchor = AnchorStyles.Left;
             panel4.BackColor = Color.Transparent;
-            panel4.BorderStyle = BorderStyle.FixedSingle;
             panel4.Controls.Add(ColorPicker_Btn);
             panel4.Controls.Add(Filler_Btn);
             panel4.Controls.Add(label4);
             panel4.Controls.Add(Pencil_Btn);
             panel4.Controls.Add(Eraser_Btn);
-            panel4.Location = new Point(771, 0);
+            panel4.Location = new Point(225, 0);
             panel4.Name = "panel4";
             panel4.Size = new Size(116, 150);
             panel4.TabIndex = 33;
@@ -191,11 +148,12 @@ namespace Pint
             ColorPicker_Btn.BackgroundImage = Resources.color_picker;
             ColorPicker_Btn.BackgroundImageLayout = ImageLayout.Zoom;
             ColorPicker_Btn.BorderRadius = 4;
+            ColorPicker_Btn.BorderWidth = 0F;
             ColorPicker_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             ColorPicker_Btn.FlatAppearance.BorderSize = 0;
             ColorPicker_Btn.FlatStyle = FlatStyle.Flat;
             ColorPicker_Btn.ForeColor = Color.Black;
-            ColorPicker_Btn.Location = new Point(60, 70);
+            ColorPicker_Btn.Location = new Point(61, 71);
             ColorPicker_Btn.Name = "ColorPicker_Btn";
             ColorPicker_Btn.RoundBottomLeft = true;
             ColorPicker_Btn.RoundBottomRight = true;
@@ -213,11 +171,12 @@ namespace Pint
             Filler_Btn.BackgroundImage = Resources.Filler;
             Filler_Btn.BackgroundImageLayout = ImageLayout.Zoom;
             Filler_Btn.BorderRadius = 4;
+            Filler_Btn.BorderWidth = 0F;
             Filler_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Filler_Btn.FlatAppearance.BorderSize = 0;
             Filler_Btn.FlatStyle = FlatStyle.Flat;
             Filler_Btn.ForeColor = Color.Black;
-            Filler_Btn.Location = new Point(19, 70);
+            Filler_Btn.Location = new Point(20, 71);
             Filler_Btn.Name = "Filler_Btn";
             Filler_Btn.RoundBottomLeft = true;
             Filler_Btn.RoundBottomRight = true;
@@ -233,7 +192,7 @@ namespace Pint
             label4.Anchor = AnchorStyles.None;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Calibri", 12F);
-            label4.Location = new Point(-4, 120);
+            label4.Location = new Point(-3, 121);
             label4.Name = "label4";
             label4.Size = new Size(123, 28);
             label4.TabIndex = 32;
@@ -247,11 +206,12 @@ namespace Pint
             Pencil_Btn.BackgroundImage = Resources.pencil;
             Pencil_Btn.BackgroundImageLayout = ImageLayout.Zoom;
             Pencil_Btn.BorderRadius = 4;
+            Pencil_Btn.BorderWidth = 0F;
             Pencil_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Pencil_Btn.FlatAppearance.BorderSize = 0;
             Pencil_Btn.FlatStyle = FlatStyle.Flat;
             Pencil_Btn.ForeColor = Color.Black;
-            Pencil_Btn.Location = new Point(60, 34);
+            Pencil_Btn.Location = new Point(61, 35);
             Pencil_Btn.Name = "Pencil_Btn";
             Pencil_Btn.RoundBottomLeft = true;
             Pencil_Btn.RoundBottomRight = true;
@@ -269,11 +229,12 @@ namespace Pint
             Eraser_Btn.BackgroundImage = Resources.eraser;
             Eraser_Btn.BackgroundImageLayout = ImageLayout.Zoom;
             Eraser_Btn.BorderRadius = 4;
+            Eraser_Btn.BorderWidth = 0F;
             Eraser_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Eraser_Btn.FlatAppearance.BorderSize = 0;
             Eraser_Btn.FlatStyle = FlatStyle.Flat;
             Eraser_Btn.ForeColor = Color.Black;
-            Eraser_Btn.Location = new Point(19, 34);
+            Eraser_Btn.Location = new Point(20, 35);
             Eraser_Btn.Name = "Eraser_Btn";
             Eraser_Btn.RoundBottomLeft = true;
             Eraser_Btn.RoundBottomRight = true;
@@ -289,7 +250,7 @@ namespace Pint
             label3.Anchor = AnchorStyles.None;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri", 12F);
-            label3.Location = new Point(39, 120);
+            label3.Location = new Point(40, 121);
             label3.Name = "label3";
             label3.Size = new Size(141, 28);
             label3.TabIndex = 31;
@@ -302,11 +263,12 @@ namespace Pint
             Hexagon_Btn.BackColor = Color.Transparent;
             Hexagon_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             Hexagon_Btn.BorderRadius = 4;
+            Hexagon_Btn.BorderWidth = 0F;
             Hexagon_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Hexagon_Btn.FlatAppearance.BorderSize = 0;
             Hexagon_Btn.FlatStyle = FlatStyle.Flat;
             Hexagon_Btn.ForeColor = Color.Black;
-            Hexagon_Btn.Location = new Point(175, 70);
+            Hexagon_Btn.Location = new Point(172, 72);
             Hexagon_Btn.Name = "Hexagon_Btn";
             Hexagon_Btn.RoundBottomLeft = true;
             Hexagon_Btn.RoundBottomRight = true;
@@ -324,11 +286,12 @@ namespace Pint
             Rhombus_Btn.BackColor = Color.Transparent;
             Rhombus_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             Rhombus_Btn.BorderRadius = 4;
+            Rhombus_Btn.BorderWidth = 0F;
             Rhombus_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Rhombus_Btn.FlatAppearance.BorderSize = 0;
             Rhombus_Btn.FlatStyle = FlatStyle.Flat;
             Rhombus_Btn.ForeColor = Color.Black;
-            Rhombus_Btn.Location = new Point(134, 70);
+            Rhombus_Btn.Location = new Point(131, 72);
             Rhombus_Btn.Name = "Rhombus_Btn";
             Rhombus_Btn.RoundBottomLeft = true;
             Rhombus_Btn.RoundBottomRight = true;
@@ -346,11 +309,12 @@ namespace Pint
             StarEight_Btn.BackColor = Color.Transparent;
             StarEight_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             StarEight_Btn.BorderRadius = 4;
+            StarEight_Btn.BorderWidth = 0F;
             StarEight_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             StarEight_Btn.FlatAppearance.BorderSize = 0;
             StarEight_Btn.FlatStyle = FlatStyle.Flat;
             StarEight_Btn.ForeColor = Color.Black;
-            StarEight_Btn.Location = new Point(93, 70);
+            StarEight_Btn.Location = new Point(90, 72);
             StarEight_Btn.Name = "StarEight_Btn";
             StarEight_Btn.RoundBottomLeft = true;
             StarEight_Btn.RoundBottomRight = true;
@@ -368,11 +332,12 @@ namespace Pint
             StarSix_Btn.BackColor = Color.Transparent;
             StarSix_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             StarSix_Btn.BorderRadius = 4;
+            StarSix_Btn.BorderWidth = 0F;
             StarSix_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             StarSix_Btn.FlatAppearance.BorderSize = 0;
             StarSix_Btn.FlatStyle = FlatStyle.Flat;
             StarSix_Btn.ForeColor = Color.Black;
-            StarSix_Btn.Location = new Point(52, 70);
+            StarSix_Btn.Location = new Point(49, 72);
             StarSix_Btn.Name = "StarSix_Btn";
             StarSix_Btn.RoundBottomLeft = true;
             StarSix_Btn.RoundBottomRight = true;
@@ -390,11 +355,12 @@ namespace Pint
             StarFive_Btn.BackColor = Color.Transparent;
             StarFive_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             StarFive_Btn.BorderRadius = 4;
+            StarFive_Btn.BorderWidth = 0F;
             StarFive_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             StarFive_Btn.FlatAppearance.BorderSize = 0;
             StarFive_Btn.FlatStyle = FlatStyle.Flat;
             StarFive_Btn.ForeColor = Color.Black;
-            StarFive_Btn.Location = new Point(11, 70);
+            StarFive_Btn.Location = new Point(8, 72);
             StarFive_Btn.Name = "StarFive_Btn";
             StarFive_Btn.RoundBottomLeft = true;
             StarFive_Btn.RoundBottomRight = true;
@@ -412,11 +378,12 @@ namespace Pint
             RegularTriangle_Btn.BackColor = Color.Transparent;
             RegularTriangle_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             RegularTriangle_Btn.BorderRadius = 4;
+            RegularTriangle_Btn.BorderWidth = 0F;
             RegularTriangle_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             RegularTriangle_Btn.FlatAppearance.BorderSize = 0;
             RegularTriangle_Btn.FlatStyle = FlatStyle.Flat;
             RegularTriangle_Btn.ForeColor = Color.Black;
-            RegularTriangle_Btn.Location = new Point(52, 35);
+            RegularTriangle_Btn.Location = new Point(49, 36);
             RegularTriangle_Btn.Name = "RegularTriangle_Btn";
             RegularTriangle_Btn.RoundBottomLeft = true;
             RegularTriangle_Btn.RoundBottomRight = true;
@@ -434,11 +401,12 @@ namespace Pint
             RightTriangle_Btn.BackColor = Color.Transparent;
             RightTriangle_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             RightTriangle_Btn.BorderRadius = 4;
+            RightTriangle_Btn.BorderWidth = 0F;
             RightTriangle_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             RightTriangle_Btn.FlatAppearance.BorderSize = 0;
             RightTriangle_Btn.FlatStyle = FlatStyle.Flat;
             RightTriangle_Btn.ForeColor = Color.Black;
-            RightTriangle_Btn.Location = new Point(134, 35);
+            RightTriangle_Btn.Location = new Point(131, 36);
             RightTriangle_Btn.Name = "RightTriangle_Btn";
             RightTriangle_Btn.RoundBottomLeft = true;
             RightTriangle_Btn.RoundBottomRight = true;
@@ -456,11 +424,12 @@ namespace Pint
             Line_Btn.BackColor = Color.Transparent;
             Line_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             Line_Btn.BorderRadius = 4;
+            Line_Btn.BorderWidth = 0F;
             Line_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Line_Btn.FlatAppearance.BorderSize = 0;
             Line_Btn.FlatStyle = FlatStyle.Flat;
             Line_Btn.ForeColor = Color.Black;
-            Line_Btn.Location = new Point(175, 34);
+            Line_Btn.Location = new Point(172, 35);
             Line_Btn.Name = "Line_Btn";
             Line_Btn.RoundBottomLeft = true;
             Line_Btn.RoundBottomRight = true;
@@ -478,11 +447,12 @@ namespace Pint
             Circle_Btn.BackColor = Color.Transparent;
             Circle_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             Circle_Btn.BorderRadius = 4;
+            Circle_Btn.BorderWidth = 0F;
             Circle_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Circle_Btn.FlatAppearance.BorderSize = 0;
             Circle_Btn.FlatStyle = FlatStyle.Flat;
             Circle_Btn.ForeColor = Color.Black;
-            Circle_Btn.Location = new Point(11, 34);
+            Circle_Btn.Location = new Point(8, 35);
             Circle_Btn.Name = "Circle_Btn";
             Circle_Btn.RoundBottomLeft = true;
             Circle_Btn.RoundBottomRight = true;
@@ -500,11 +470,12 @@ namespace Pint
             Rectangle_Btn.BackColor = Color.Transparent;
             Rectangle_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             Rectangle_Btn.BorderRadius = 4;
+            Rectangle_Btn.BorderWidth = 0F;
             Rectangle_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Rectangle_Btn.FlatAppearance.BorderSize = 0;
             Rectangle_Btn.FlatStyle = FlatStyle.Flat;
             Rectangle_Btn.ForeColor = Color.Black;
-            Rectangle_Btn.Location = new Point(93, 35);
+            Rectangle_Btn.Location = new Point(90, 36);
             Rectangle_Btn.Name = "Rectangle_Btn";
             Rectangle_Btn.RoundBottomLeft = true;
             Rectangle_Btn.RoundBottomRight = true;
@@ -521,7 +492,7 @@ namespace Pint
             label1.Anchor = AnchorStyles.None;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Calibri", 12F);
-            label1.Location = new Point(225, 122);
+            label1.Location = new Point(226, 123);
             label1.Name = "label1";
             label1.Size = new Size(128, 26);
             label1.TabIndex = 26;
@@ -532,8 +503,9 @@ namespace Pint
             // 
             panel2.Anchor = AnchorStyles.Left;
             panel2.BackColor = Color.Transparent;
-            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(rotatableLineControl3);
             panel2.Controls.Add(CurrentColor);
+            panel2.Controls.Add(rotatableLineControl1);
             panel2.Controls.Add(DeepPink_Btn);
             panel2.Controls.Add(Navy_Btn);
             panel2.Controls.Add(Sienna_Btn);
@@ -572,10 +544,20 @@ namespace Pint
             panel2.Controls.Add(Black_Btn);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(Cyan_Btn);
-            panel2.Location = new Point(0, 0);
+            panel2.Location = new Point(340, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(552, 150);
             panel2.TabIndex = 25;
+            // 
+            // rotatableLineControl3
+            // 
+            rotatableLineControl3.Color = Color.Black;
+            rotatableLineControl3.LineWidth = 2F;
+            rotatableLineControl3.Location = new Point(542, 0);
+            rotatableLineControl3.Name = "rotatableLineControl3";
+            rotatableLineControl3.RotationAngle = 0F;
+            rotatableLineControl3.Size = new Size(10, 150);
+            rotatableLineControl3.TabIndex = 64;
             // 
             // CurrentColor
             // 
@@ -587,6 +569,16 @@ namespace Pint
             CurrentColor.TabIndex = 69;
             CurrentColor.TabStop = false;
             // 
+            // rotatableLineControl1
+            // 
+            rotatableLineControl1.Color = Color.Black;
+            rotatableLineControl1.LineWidth = 2F;
+            rotatableLineControl1.Location = new Point(-2, 0);
+            rotatableLineControl1.Name = "rotatableLineControl1";
+            rotatableLineControl1.RotationAngle = 0F;
+            rotatableLineControl1.Size = new Size(10, 150);
+            rotatableLineControl1.TabIndex = 32;
+            // 
             // DeepPink_Btn
             // 
             DeepPink_Btn.Anchor = AnchorStyles.None;
@@ -594,7 +586,7 @@ namespace Pint
             DeepPink_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             DeepPink_Btn.FlatAppearance.BorderSize = 0;
             DeepPink_Btn.FlatStyle = FlatStyle.Popup;
-            DeepPink_Btn.Location = new Point(234, 88);
+            DeepPink_Btn.Location = new Point(235, 89);
             DeepPink_Btn.Name = "DeepPink_Btn";
             DeepPink_Btn.Size = new Size(26, 26);
             DeepPink_Btn.TabIndex = 68;
@@ -608,7 +600,7 @@ namespace Pint
             Navy_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Navy_Btn.FlatAppearance.BorderSize = 0;
             Navy_Btn.FlatStyle = FlatStyle.Popup;
-            Navy_Btn.Location = new Point(170, 88);
+            Navy_Btn.Location = new Point(171, 89);
             Navy_Btn.Name = "Navy_Btn";
             Navy_Btn.Size = new Size(26, 26);
             Navy_Btn.TabIndex = 67;
@@ -622,7 +614,7 @@ namespace Pint
             Sienna_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Sienna_Btn.FlatAppearance.BorderSize = 0;
             Sienna_Btn.FlatStyle = FlatStyle.Popup;
-            Sienna_Btn.Location = new Point(266, 88);
+            Sienna_Btn.Location = new Point(267, 89);
             Sienna_Btn.Name = "Sienna_Btn";
             Sienna_Btn.Size = new Size(26, 26);
             Sienna_Btn.TabIndex = 66;
@@ -636,7 +628,7 @@ namespace Pint
             Goldenrod_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Goldenrod_Btn.FlatAppearance.BorderSize = 0;
             Goldenrod_Btn.FlatStyle = FlatStyle.Popup;
-            Goldenrod_Btn.Location = new Point(77, 88);
+            Goldenrod_Btn.Location = new Point(78, 89);
             Goldenrod_Btn.Name = "Goldenrod_Btn";
             Goldenrod_Btn.Size = new Size(26, 26);
             Goldenrod_Btn.TabIndex = 65;
@@ -650,7 +642,7 @@ namespace Pint
             Crimson_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Crimson_Btn.FlatAppearance.BorderSize = 0;
             Crimson_Btn.FlatStyle = FlatStyle.Popup;
-            Crimson_Btn.Location = new Point(13, 88);
+            Crimson_Btn.Location = new Point(14, 89);
             Crimson_Btn.Name = "Crimson_Btn";
             Crimson_Btn.Size = new Size(26, 26);
             Crimson_Btn.TabIndex = 63;
@@ -664,7 +656,7 @@ namespace Pint
             DarkGreen_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             DarkGreen_Btn.FlatAppearance.BorderSize = 0;
             DarkGreen_Btn.FlatStyle = FlatStyle.Popup;
-            DarkGreen_Btn.Location = new Point(108, 88);
+            DarkGreen_Btn.Location = new Point(109, 89);
             DarkGreen_Btn.Name = "DarkGreen_Btn";
             DarkGreen_Btn.Size = new Size(26, 26);
             DarkGreen_Btn.TabIndex = 64;
@@ -678,7 +670,7 @@ namespace Pint
             Tomato_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Tomato_Btn.FlatAppearance.BorderSize = 0;
             Tomato_Btn.FlatStyle = FlatStyle.Popup;
-            Tomato_Btn.Location = new Point(77, 26);
+            Tomato_Btn.Location = new Point(78, 27);
             Tomato_Btn.Name = "Tomato_Btn";
             Tomato_Btn.Size = new Size(26, 26);
             Tomato_Btn.TabIndex = 61;
@@ -692,7 +684,7 @@ namespace Pint
             DarkOrange_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             DarkOrange_Btn.FlatAppearance.BorderSize = 0;
             DarkOrange_Btn.FlatStyle = FlatStyle.Popup;
-            DarkOrange_Btn.Location = new Point(77, 56);
+            DarkOrange_Btn.Location = new Point(78, 57);
             DarkOrange_Btn.Name = "DarkOrange_Btn";
             DarkOrange_Btn.Size = new Size(26, 26);
             DarkOrange_Btn.TabIndex = 62;
@@ -706,7 +698,7 @@ namespace Pint
             SteelBlue_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             SteelBlue_Btn.FlatAppearance.BorderSize = 0;
             SteelBlue_Btn.FlatStyle = FlatStyle.Popup;
-            SteelBlue_Btn.Location = new Point(138, 88);
+            SteelBlue_Btn.Location = new Point(139, 89);
             SteelBlue_Btn.Name = "SteelBlue_Btn";
             SteelBlue_Btn.Size = new Size(26, 26);
             SteelBlue_Btn.TabIndex = 60;
@@ -720,7 +712,7 @@ namespace Pint
             LightGray_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             LightGray_Btn.FlatAppearance.BorderSize = 0;
             LightGray_Btn.FlatStyle = FlatStyle.Popup;
-            LightGray_Btn.Location = new Point(45, 26);
+            LightGray_Btn.Location = new Point(46, 27);
             LightGray_Btn.Name = "LightGray_Btn";
             LightGray_Btn.Size = new Size(26, 26);
             LightGray_Btn.TabIndex = 59;
@@ -734,7 +726,7 @@ namespace Pint
             Purple_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Purple_Btn.FlatAppearance.BorderSize = 0;
             Purple_Btn.FlatStyle = FlatStyle.Popup;
-            Purple_Btn.Location = new Point(202, 88);
+            Purple_Btn.Location = new Point(203, 89);
             Purple_Btn.Name = "Purple_Btn";
             Purple_Btn.Size = new Size(26, 26);
             Purple_Btn.TabIndex = 58;
@@ -748,7 +740,7 @@ namespace Pint
             Blue_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Blue_Btn.FlatAppearance.BorderSize = 0;
             Blue_Btn.FlatStyle = FlatStyle.Popup;
-            Blue_Btn.Location = new Point(202, 56);
+            Blue_Btn.Location = new Point(203, 57);
             Blue_Btn.Name = "Blue_Btn";
             Blue_Btn.Size = new Size(26, 26);
             Blue_Btn.TabIndex = 57;
@@ -762,7 +754,7 @@ namespace Pint
             CurrentColorHTML.BorderStyle = BorderStyle.FixedSingle;
             CurrentColorHTML.Font = new Font("Calibri", 12F);
             CurrentColorHTML.ForeColor = Color.Black;
-            CurrentColorHTML.Location = new Point(416, 5);
+            CurrentColorHTML.Location = new Point(417, 6);
             CurrentColorHTML.Name = "CurrentColorHTML";
             CurrentColorHTML.Size = new Size(115, 27);
             CurrentColorHTML.TabIndex = 50;
@@ -776,7 +768,7 @@ namespace Pint
             HotPink_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             HotPink_Btn.FlatAppearance.BorderSize = 0;
             HotPink_Btn.FlatStyle = FlatStyle.Popup;
-            HotPink_Btn.Location = new Point(266, 56);
+            HotPink_Btn.Location = new Point(267, 57);
             HotPink_Btn.Name = "HotPink_Btn";
             HotPink_Btn.Size = new Size(26, 26);
             HotPink_Btn.TabIndex = 15;
@@ -788,7 +780,7 @@ namespace Pint
             ColorSlider_R.Anchor = AnchorStyles.None;
             ColorSlider_R.AutoSize = false;
             ColorSlider_R.BackColor = Color.WhiteSmoke;
-            ColorSlider_R.Location = new Point(343, 40);
+            ColorSlider_R.Location = new Point(344, 41);
             ColorSlider_R.Maximum = 255;
             ColorSlider_R.Name = "ColorSlider_R";
             ColorSlider_R.Size = new Size(145, 27);
@@ -803,7 +795,7 @@ namespace Pint
             Orange_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Orange_Btn.FlatAppearance.BorderSize = 0;
             Orange_Btn.FlatStyle = FlatStyle.Popup;
-            Orange_Btn.Location = new Point(108, 26);
+            Orange_Btn.Location = new Point(109, 27);
             Orange_Btn.Name = "Orange_Btn";
             Orange_Btn.Size = new Size(26, 26);
             Orange_Btn.TabIndex = 14;
@@ -817,7 +809,7 @@ namespace Pint
             CurrentColor_B.BorderStyle = BorderStyle.FixedSingle;
             CurrentColor_B.Font = new Font("Calibri", 12F);
             CurrentColor_B.ForeColor = Color.Black;
-            CurrentColor_B.Location = new Point(494, 98);
+            CurrentColor_B.Location = new Point(495, 99);
             CurrentColor_B.Name = "CurrentColor_B";
             CurrentColor_B.Size = new Size(37, 27);
             CurrentColor_B.TabIndex = 56;
@@ -831,7 +823,7 @@ namespace Pint
             BlueViolet_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             BlueViolet_Btn.FlatAppearance.BorderSize = 0;
             BlueViolet_Btn.FlatStyle = FlatStyle.Popup;
-            BlueViolet_Btn.Location = new Point(234, 56);
+            BlueViolet_Btn.Location = new Point(235, 57);
             BlueViolet_Btn.Name = "BlueViolet_Btn";
             BlueViolet_Btn.Size = new Size(26, 26);
             BlueViolet_Btn.TabIndex = 11;
@@ -843,7 +835,7 @@ namespace Pint
             ColorSlider_G.Anchor = AnchorStyles.None;
             ColorSlider_G.AutoSize = false;
             ColorSlider_G.BackColor = Color.WhiteSmoke;
-            ColorSlider_G.Location = new Point(343, 71);
+            ColorSlider_G.Location = new Point(344, 72);
             ColorSlider_G.Maximum = 255;
             ColorSlider_G.Name = "ColorSlider_G";
             ColorSlider_G.Size = new Size(145, 27);
@@ -858,7 +850,7 @@ namespace Pint
             LimeGreen_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             LimeGreen_Btn.FlatAppearance.BorderSize = 0;
             LimeGreen_Btn.FlatStyle = FlatStyle.Popup;
-            LimeGreen_Btn.Location = new Point(138, 56);
+            LimeGreen_Btn.Location = new Point(139, 57);
             LimeGreen_Btn.Name = "LimeGreen_Btn";
             LimeGreen_Btn.Size = new Size(26, 26);
             LimeGreen_Btn.TabIndex = 13;
@@ -872,7 +864,7 @@ namespace Pint
             CurrentColor_G.BorderStyle = BorderStyle.FixedSingle;
             CurrentColor_G.Font = new Font("Calibri", 12F);
             CurrentColor_G.ForeColor = Color.Black;
-            CurrentColor_G.Location = new Point(494, 67);
+            CurrentColor_G.Location = new Point(495, 68);
             CurrentColor_G.Name = "CurrentColor_G";
             CurrentColor_G.Size = new Size(37, 27);
             CurrentColor_G.TabIndex = 55;
@@ -886,7 +878,7 @@ namespace Pint
             DeepSkyBlue_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             DeepSkyBlue_Btn.FlatAppearance.BorderSize = 0;
             DeepSkyBlue_Btn.FlatStyle = FlatStyle.Popup;
-            DeepSkyBlue_Btn.Location = new Point(170, 56);
+            DeepSkyBlue_Btn.Location = new Point(171, 57);
             DeepSkyBlue_Btn.Name = "DeepSkyBlue_Btn";
             DeepSkyBlue_Btn.Size = new Size(26, 26);
             DeepSkyBlue_Btn.TabIndex = 9;
@@ -898,7 +890,7 @@ namespace Pint
             ColorSlider_B.Anchor = AnchorStyles.None;
             ColorSlider_B.AutoSize = false;
             ColorSlider_B.BackColor = Color.WhiteSmoke;
-            ColorSlider_B.Location = new Point(343, 102);
+            ColorSlider_B.Location = new Point(344, 103);
             ColorSlider_B.Maximum = 255;
             ColorSlider_B.Name = "ColorSlider_B";
             ColorSlider_B.Size = new Size(145, 27);
@@ -913,7 +905,7 @@ namespace Pint
             Fuchsia_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Fuchsia_Btn.FlatAppearance.BorderSize = 0;
             Fuchsia_Btn.FlatStyle = FlatStyle.Popup;
-            Fuchsia_Btn.Location = new Point(266, 26);
+            Fuchsia_Btn.Location = new Point(267, 27);
             Fuchsia_Btn.Name = "Fuchsia_Btn";
             Fuchsia_Btn.Size = new Size(26, 26);
             Fuchsia_Btn.TabIndex = 7;
@@ -927,7 +919,7 @@ namespace Pint
             CurrentColor_R.BorderStyle = BorderStyle.FixedSingle;
             CurrentColor_R.Font = new Font("Calibri", 12F);
             CurrentColor_R.ForeColor = Color.Black;
-            CurrentColor_R.Location = new Point(494, 36);
+            CurrentColor_R.Location = new Point(495, 37);
             CurrentColor_R.Name = "CurrentColor_R";
             CurrentColor_R.Size = new Size(37, 27);
             CurrentColor_R.TabIndex = 54;
@@ -941,7 +933,7 @@ namespace Pint
             RoyalBlue_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             RoyalBlue_Btn.FlatAppearance.BorderSize = 0;
             RoyalBlue_Btn.FlatStyle = FlatStyle.Popup;
-            RoyalBlue_Btn.Location = new Point(234, 26);
+            RoyalBlue_Btn.Location = new Point(235, 27);
             RoyalBlue_Btn.Name = "RoyalBlue_Btn";
             RoyalBlue_Btn.Size = new Size(26, 26);
             RoyalBlue_Btn.TabIndex = 6;
@@ -951,11 +943,12 @@ namespace Pint
             // label6
             // 
             label6.Anchor = AnchorStyles.None;
+            label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Calibri", 12F);
-            label6.Location = new Point(323, 35);
+            label6.Location = new Point(324, 41);
             label6.Name = "label6";
-            label6.Size = new Size(21, 28);
+            label6.Size = new Size(18, 19);
             label6.TabIndex = 51;
             label6.Text = "R";
             label6.TextAlign = ContentAlignment.MiddleCenter;
@@ -967,7 +960,7 @@ namespace Pint
             Gray_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Gray_Btn.FlatAppearance.BorderSize = 0;
             Gray_Btn.FlatStyle = FlatStyle.Popup;
-            Gray_Btn.Location = new Point(13, 56);
+            Gray_Btn.Location = new Point(14, 57);
             Gray_Btn.Name = "Gray_Btn";
             Gray_Btn.Size = new Size(26, 26);
             Gray_Btn.TabIndex = 10;
@@ -977,11 +970,12 @@ namespace Pint
             // label8
             // 
             label8.Anchor = AnchorStyles.None;
+            label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Calibri", 12F);
-            label8.Location = new Point(323, 98);
+            label8.Location = new Point(324, 104);
             label8.Name = "label8";
-            label8.Size = new Size(21, 27);
+            label8.Size = new Size(18, 19);
             label8.TabIndex = 53;
             label8.Text = "B";
             label8.TextAlign = ContentAlignment.MiddleCenter;
@@ -993,7 +987,7 @@ namespace Pint
             Gold_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Gold_Btn.FlatAppearance.BorderSize = 0;
             Gold_Btn.FlatStyle = FlatStyle.Popup;
-            Gold_Btn.Location = new Point(108, 56);
+            Gold_Btn.Location = new Point(109, 57);
             Gold_Btn.Name = "Gold_Btn";
             Gold_Btn.Size = new Size(26, 26);
             Gold_Btn.TabIndex = 8;
@@ -1003,11 +997,12 @@ namespace Pint
             // label7
             // 
             label7.Anchor = AnchorStyles.None;
+            label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Calibri", 12F);
-            label7.Location = new Point(323, 67);
+            label7.Location = new Point(324, 73);
             label7.Name = "label7";
-            label7.Size = new Size(21, 27);
+            label7.Size = new Size(19, 19);
             label7.TabIndex = 52;
             label7.Text = "G";
             label7.TextAlign = ContentAlignment.MiddleCenter;
@@ -1019,7 +1014,7 @@ namespace Pint
             LawnGreen_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             LawnGreen_Btn.FlatAppearance.BorderSize = 0;
             LawnGreen_Btn.FlatStyle = FlatStyle.Popup;
-            LawnGreen_Btn.Location = new Point(170, 26);
+            LawnGreen_Btn.Location = new Point(171, 27);
             LawnGreen_Btn.Name = "LawnGreen_Btn";
             LawnGreen_Btn.Size = new Size(26, 26);
             LawnGreen_Btn.TabIndex = 4;
@@ -1033,7 +1028,7 @@ namespace Pint
             Chocolate_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Chocolate_Btn.FlatAppearance.BorderSize = 0;
             Chocolate_Btn.FlatStyle = FlatStyle.Popup;
-            Chocolate_Btn.Location = new Point(45, 88);
+            Chocolate_Btn.Location = new Point(46, 89);
             Chocolate_Btn.Name = "Chocolate_Btn";
             Chocolate_Btn.Size = new Size(26, 26);
             Chocolate_Btn.TabIndex = 2;
@@ -1047,7 +1042,7 @@ namespace Pint
             Red_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Red_Btn.FlatAppearance.BorderSize = 0;
             Red_Btn.FlatStyle = FlatStyle.Popup;
-            Red_Btn.Location = new Point(45, 56);
+            Red_Btn.Location = new Point(46, 57);
             Red_Btn.Name = "Red_Btn";
             Red_Btn.Size = new Size(26, 26);
             Red_Btn.TabIndex = 1;
@@ -1061,7 +1056,7 @@ namespace Pint
             Yellow_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Yellow_Btn.FlatAppearance.BorderSize = 0;
             Yellow_Btn.FlatStyle = FlatStyle.Popup;
-            Yellow_Btn.Location = new Point(138, 26);
+            Yellow_Btn.Location = new Point(139, 27);
             Yellow_Btn.Name = "Yellow_Btn";
             Yellow_Btn.Size = new Size(26, 26);
             Yellow_Btn.TabIndex = 3;
@@ -1075,7 +1070,7 @@ namespace Pint
             Black_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Black_Btn.FlatAppearance.BorderSize = 0;
             Black_Btn.FlatStyle = FlatStyle.Popup;
-            Black_Btn.Location = new Point(13, 26);
+            Black_Btn.Location = new Point(14, 27);
             Black_Btn.Name = "Black_Btn";
             Black_Btn.Size = new Size(26, 26);
             Black_Btn.TabIndex = 0;
@@ -1089,7 +1084,7 @@ namespace Pint
             Cyan_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Cyan_Btn.FlatAppearance.BorderSize = 0;
             Cyan_Btn.FlatStyle = FlatStyle.Popup;
-            Cyan_Btn.Location = new Point(202, 26);
+            Cyan_Btn.Location = new Point(203, 27);
             Cyan_Btn.Name = "Cyan_Btn";
             Cyan_Btn.Size = new Size(26, 26);
             Cyan_Btn.TabIndex = 5;
@@ -1099,135 +1094,156 @@ namespace Pint
             // panel1
             // 
             panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(panel3);
             panel1.Controls.Add(Settings_Btn);
-            panel1.Controls.Add(splitContainer1);
             panel1.Controls.Add(panel6);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Top;
-            panel1.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-            panel1.ForeColor = Color.Black;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1634, 150);
             panel1.TabIndex = 42;
             // 
+            // panel3
+            // 
+            panel3.Anchor = AnchorStyles.Left;
+            panel3.BackColor = Color.Transparent;
+            panel3.Controls.Add(ExportImageButton);
+            panel3.Controls.Add(NewImageButton);
+            panel3.Controls.Add(label2);
+            panel3.Controls.Add(ClearImageButton);
+            panel3.Controls.Add(ImportImageButton);
+            panel3.Location = new Point(898, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(380, 150);
+            panel3.TabIndex = 66;
+            // 
+            // ExportImageButton
+            // 
+            ExportImageButton.BackColor = Color.White;
+            ExportImageButton.BorderRadius = 16;
+            ExportImageButton.BorderWidth = 0F;
+            ExportImageButton.FlatAppearance.BorderSize = 0;
+            ExportImageButton.FlatStyle = FlatStyle.Flat;
+            ExportImageButton.Font = new Font("Calibri", 12F);
+            ExportImageButton.ForeColor = Color.Black;
+            ExportImageButton.Location = new Point(195, 74);
+            ExportImageButton.Name = "ExportImageButton";
+            ExportImageButton.RoundBottomLeft = true;
+            ExportImageButton.RoundBottomRight = true;
+            ExportImageButton.RoundTopLeft = true;
+            ExportImageButton.RoundTopRight = true;
+            ExportImageButton.Size = new Size(181, 33);
+            ExportImageButton.TabIndex = 62;
+            ExportImageButton.Text = "Экспорт изображения";
+            ExportImageButton.UseVisualStyleBackColor = false;
+            ExportImageButton.Click += ExportImageButton_Click;
+            // 
+            // NewImageButton
+            // 
+            NewImageButton.BackColor = Color.White;
+            NewImageButton.BorderRadius = 16;
+            NewImageButton.BorderWidth = 0F;
+            NewImageButton.FlatAppearance.BorderSize = 0;
+            NewImageButton.FlatStyle = FlatStyle.Flat;
+            NewImageButton.Font = new Font("Calibri", 12F);
+            NewImageButton.ForeColor = Color.Black;
+            NewImageButton.Location = new Point(5, 34);
+            NewImageButton.Name = "NewImageButton";
+            NewImageButton.RoundBottomLeft = true;
+            NewImageButton.RoundBottomRight = true;
+            NewImageButton.RoundTopLeft = true;
+            NewImageButton.RoundTopRight = true;
+            NewImageButton.Size = new Size(181, 33);
+            NewImageButton.TabIndex = 59;
+            NewImageButton.Text = "Новое изображение";
+            NewImageButton.UseVisualStyleBackColor = false;
+            NewImageButton.Click += NewImageButton_Click;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.None;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Calibri", 12F);
+            label2.Location = new Point(122, 123);
+            label2.Name = "label2";
+            label2.Size = new Size(125, 26);
+            label2.TabIndex = 63;
+            label2.Text = "Изображение";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // ClearImageButton
+            // 
+            ClearImageButton.BackColor = Color.White;
+            ClearImageButton.BorderRadius = 16;
+            ClearImageButton.BorderWidth = 0F;
+            ClearImageButton.FlatAppearance.BorderSize = 0;
+            ClearImageButton.FlatStyle = FlatStyle.Flat;
+            ClearImageButton.Font = new Font("Calibri", 12F);
+            ClearImageButton.ForeColor = Color.Black;
+            ClearImageButton.Location = new Point(5, 74);
+            ClearImageButton.Name = "ClearImageButton";
+            ClearImageButton.RoundBottomLeft = true;
+            ClearImageButton.RoundBottomRight = true;
+            ClearImageButton.RoundTopLeft = true;
+            ClearImageButton.RoundTopRight = true;
+            ClearImageButton.Size = new Size(181, 33);
+            ClearImageButton.TabIndex = 60;
+            ClearImageButton.Text = "Очистить изображение";
+            ClearImageButton.UseVisualStyleBackColor = false;
+            ClearImageButton.Click += ClearImageButton_Click;
+            // 
+            // ImportImageButton
+            // 
+            ImportImageButton.BackColor = Color.White;
+            ImportImageButton.BorderRadius = 16;
+            ImportImageButton.BorderWidth = 0F;
+            ImportImageButton.FlatAppearance.BorderSize = 0;
+            ImportImageButton.FlatStyle = FlatStyle.Flat;
+            ImportImageButton.Font = new Font("Calibri", 12F);
+            ImportImageButton.ForeColor = Color.Black;
+            ImportImageButton.Location = new Point(195, 34);
+            ImportImageButton.Name = "ImportImageButton";
+            ImportImageButton.RoundBottomLeft = true;
+            ImportImageButton.RoundBottomRight = true;
+            ImportImageButton.RoundTopLeft = true;
+            ImportImageButton.RoundTopRight = true;
+            ImportImageButton.Size = new Size(181, 33);
+            ImportImageButton.TabIndex = 61;
+            ImportImageButton.Text = "Импорт изображения";
+            ImportImageButton.UseVisualStyleBackColor = false;
+            ImportImageButton.Click += ImportImageButton_Click;
+            // 
             // Settings_Btn
             // 
-            Settings_Btn.Anchor = AnchorStyles.None;
+            Settings_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             Settings_Btn.BackColor = Color.Transparent;
             Settings_Btn.BackgroundImage = Resources.settings;
             Settings_Btn.BackgroundImageLayout = ImageLayout.Zoom;
             Settings_Btn.BorderRadius = 4;
+            Settings_Btn.BorderWidth = 0F;
             Settings_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Settings_Btn.FlatAppearance.BorderSize = 0;
             Settings_Btn.FlatStyle = FlatStyle.Flat;
             Settings_Btn.ForeColor = Color.Black;
-            Settings_Btn.Location = new Point(1596, 3);
+            Settings_Btn.Location = new Point(1587, 12);
             Settings_Btn.Name = "Settings_Btn";
             Settings_Btn.RoundBottomLeft = true;
             Settings_Btn.RoundBottomRight = true;
             Settings_Btn.RoundTopLeft = true;
             Settings_Btn.RoundTopRight = true;
             Settings_Btn.Size = new Size(35, 35);
-            Settings_Btn.TabIndex = 61;
+            Settings_Btn.TabIndex = 65;
             Settings_Btn.UseVisualStyleBackColor = false;
-            Settings_Btn.Click += Settings_Btn_Click;
-            // 
-            // splitContainer1
-            // 
-            splitContainer1.Location = new Point(886, 0);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(splitContainer2);
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.Controls.Add(splitContainer3);
-            splitContainer1.Size = new Size(300, 150);
-            splitContainer1.SplitterDistance = 72;
-            splitContainer1.SplitterWidth = 1;
-            splitContainer1.TabIndex = 60;
-            // 
-            // splitContainer2
-            // 
-            splitContainer2.BorderStyle = BorderStyle.FixedSingle;
-            splitContainer2.Dock = DockStyle.Fill;
-            splitContainer2.Location = new Point(0, 0);
-            splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            splitContainer2.Panel1.Controls.Add(SelectFile_Btn);
-            // 
-            // splitContainer2.Panel2
-            // 
-            splitContainer2.Panel2.Controls.Add(NewImage_Btn);
-            splitContainer2.Size = new Size(300, 72);
-            splitContainer2.SplitterDistance = 145;
-            splitContainer2.SplitterWidth = 1;
-            splitContainer2.TabIndex = 0;
-            // 
-            // SelectFile_Btn
-            // 
-            SelectFile_Btn.BackColor = Color.Transparent;
-            SelectFile_Btn.Dock = DockStyle.Fill;
-            SelectFile_Btn.FlatAppearance.BorderColor = Color.Black;
-            SelectFile_Btn.FlatAppearance.BorderSize = 0;
-            SelectFile_Btn.FlatStyle = FlatStyle.Flat;
-            SelectFile_Btn.Font = new Font("Calibri", 12F);
-            SelectFile_Btn.Location = new Point(0, 0);
-            SelectFile_Btn.Name = "SelectFile_Btn";
-            SelectFile_Btn.Size = new Size(143, 70);
-            SelectFile_Btn.TabIndex = 42;
-            SelectFile_Btn.Text = "Выбрать изображение";
-            SelectFile_Btn.UseVisualStyleBackColor = false;
-            SelectFile_Btn.Click += SelectFile_Btn_Click;
-            // 
-            // NewImage_Btn
-            // 
-            NewImage_Btn.BackColor = Color.Transparent;
-            NewImage_Btn.Dock = DockStyle.Fill;
-            NewImage_Btn.FlatAppearance.BorderSize = 0;
-            NewImage_Btn.FlatStyle = FlatStyle.Flat;
-            NewImage_Btn.Font = new Font("Calibri", 12F);
-            NewImage_Btn.Location = new Point(0, 0);
-            NewImage_Btn.Name = "NewImage_Btn";
-            NewImage_Btn.Size = new Size(152, 70);
-            NewImage_Btn.TabIndex = 57;
-            NewImage_Btn.Text = "Новое изображение";
-            NewImage_Btn.UseVisualStyleBackColor = false;
-            NewImage_Btn.Click += NewImage_Btn_Click;
-            // 
-            // splitContainer3
-            // 
-            splitContainer3.BorderStyle = BorderStyle.FixedSingle;
-            splitContainer3.Dock = DockStyle.Fill;
-            splitContainer3.Location = new Point(0, 0);
-            splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            splitContainer3.Panel1.Controls.Add(SaveFile_Btn);
-            // 
-            // splitContainer3.Panel2
-            // 
-            splitContainer3.Panel2.Controls.Add(ClearBoard_Btn);
-            splitContainer3.Size = new Size(300, 77);
-            splitContainer3.SplitterDistance = 145;
-            splitContainer3.SplitterWidth = 1;
-            splitContainer3.TabIndex = 0;
+            Settings_Btn.Click += SettingsButton_Click;
             // 
             // panel6
             // 
             panel6.Anchor = AnchorStyles.Left;
             panel6.BackColor = Color.Transparent;
-            panel6.BorderStyle = BorderStyle.FixedSingle;
+            panel6.Controls.Add(rotatableLineControl2);
             panel6.Controls.Add(Hexagon_Btn);
-            panel6.Controls.Add(label2);
             panel6.Controls.Add(Rhombus_Btn);
             panel6.Controls.Add(label3);
             panel6.Controls.Add(StarEight_Btn);
@@ -1238,22 +1254,20 @@ namespace Pint
             panel6.Controls.Add(Circle_Btn);
             panel6.Controls.Add(RegularTriangle_Btn);
             panel6.Controls.Add(Line_Btn);
-            panel6.Location = new Point(549, 0);
+            panel6.Location = new Point(3, 0);
             panel6.Name = "panel6";
             panel6.Size = new Size(223, 150);
             panel6.TabIndex = 58;
             // 
-            // label2
+            // rotatableLineControl2
             // 
-            label2.Anchor = AnchorStyles.None;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Calibri", 12F);
-            label2.Location = new Point(39, 178);
-            label2.Name = "label2";
-            label2.Size = new Size(128, 26);
-            label2.TabIndex = 26;
-            label2.Text = "Палитра";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
+            rotatableLineControl2.Color = Color.Black;
+            rotatableLineControl2.LineWidth = 2F;
+            rotatableLineControl2.Location = new Point(213, 0);
+            rotatableLineControl2.Name = "rotatableLineControl2";
+            rotatableLineControl2.RotationAngle = 0F;
+            rotatableLineControl2.Size = new Size(10, 150);
+            rotatableLineControl2.TabIndex = 33;
             // 
             // DrawingTimer
             // 
@@ -1275,15 +1289,6 @@ namespace Pint
             CoordinatesLabel.Text = "0, 0пкс";
             CoordinatesLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // scrollablePictureBox
-            // 
-            scrollablePictureBox.Anchor = AnchorStyles.None;
-            scrollablePictureBox.Location = new Point(70, 190);
-            scrollablePictureBox.Name = "scrollablePictureBox";
-            scrollablePictureBox.Size = new Size(1500, 680);
-            scrollablePictureBox.TabIndex = 47;
-            scrollablePictureBox.Visible = false;
-            // 
             // SizeLabel
             // 
             SizeLabel.BackColor = Color.Transparent;
@@ -1303,7 +1308,7 @@ namespace Pint
             roundPanel1.Controls.Add(Scribble);
             roundPanel1.Controls.Add(PenTrackBar);
             roundPanel1.ForeColor = Color.Black;
-            roundPanel1.Location = new Point(10, 299);
+            roundPanel1.Location = new Point(10, 290);
             roundPanel1.Name = "roundPanel1";
             roundPanel1.RoundBottomLeft = true;
             roundPanel1.RoundBottomRight = true;
@@ -1350,6 +1355,7 @@ namespace Pint
             // 
             // roundPanel2
             // 
+            roundPanel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             roundPanel2.BackColor = Color.WhiteSmoke;
             roundPanel2.BorderRadius = 12;
             roundPanel2.Controls.Add(SizeLabel);
@@ -1364,22 +1370,29 @@ namespace Pint
             roundPanel2.Size = new Size(302, 30);
             roundPanel2.TabIndex = 51;
             // 
+            // MainImage
+            // 
+            MainImage.Location = new Point(664, 441);
+            MainImage.Name = "MainImage";
+            MainImage.Size = new Size(441, 289);
+            MainImage.TabIndex = 52;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(205, 205, 205);
             ClientSize = new Size(1634, 909);
+            Controls.Add(MainImage);
             Controls.Add(roundPanel2);
             Controls.Add(roundPanel1);
             Controls.Add(panel1);
-            Controls.Add(scrollablePictureBox);
             Icon = Resources.Icon;
             KeyPreview = true;
             MinimumSize = new Size(1400, 900);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Pint v4.2.0";
+            Text = "Pint v4.3.0";
             KeyDown += MainForm_KeyDown;
             Resize += MainForm_Resize;
             panel4.ResumeLayout(false);
@@ -1390,18 +1403,7 @@ namespace Pint
             ((System.ComponentModel.ISupportInitialize)ColorSlider_G).EndInit();
             ((System.ComponentModel.ISupportInitialize)ColorSlider_B).EndInit();
             panel1.ResumeLayout(false);
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
-            splitContainer2.Panel1.ResumeLayout(false);
-            splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
-            splitContainer2.ResumeLayout(false);
-            splitContainer3.Panel1.ResumeLayout(false);
-            splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
-            splitContainer3.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             panel6.ResumeLayout(false);
             roundPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Scribble).EndInit();
@@ -1411,8 +1413,6 @@ namespace Pint
         }
 
         #endregion
-        private Button ClearBoard_Btn;
-        private Button SaveFile_Btn;
         private Panel panel4;
         private Label label4;
         private Label label3;
@@ -1430,7 +1430,6 @@ namespace Pint
         private Button Red_Btn;
         private Button Black_Btn;
         private Panel panel1;
-        private Button SelectFile_Btn;
         private System.Windows.Forms.Timer DrawingTimer;
         private SaveFileDialog saveFileDialog1;
         private OpenFileDialog openFileDialog1;
@@ -1450,13 +1449,11 @@ namespace Pint
         private Button HotPink_Btn;
         private Button LimeGreen_Btn;
         private Button Orange_Btn;
-        private Button NewImage_Btn;
         private Label CoordinatesLabel;
         private PictureBox Scribble;
         private Panel panel5;
         private Label PenWidthLabel;
         private Panel panel6;
-        private Label label2;
         private Button Blue_Btn;
         private Button LightGray_Btn;
         private Button Purple_Btn;
@@ -1469,10 +1466,6 @@ namespace Pint
         private Button Tomato_Btn;
         private Button DarkOrange_Btn;
         private Button SteelBlue_Btn;
-        private SplitContainer splitContainer1;
-        private SplitContainer splitContainer2;
-        private SplitContainer splitContainer3;
-        private ScrollablePictureBox scrollablePictureBox;
         private Label SizeLabel;
         private RoundPanel roundPanel1;
         private Label label5;
@@ -1493,6 +1486,16 @@ namespace Pint
         private RoundButton StarSix_Btn;
         private RoundButton Rhombus_Btn;
         private RoundButton Hexagon_Btn;
+        private LineControl rotatableLineControl1;
+        private LineControl rotatableLineControl2;
+        private LineControl rotatableLineControl3;
+        private RoundButton ExportImageButton;
+        private RoundButton ImportImageButton;
+        private RoundButton ClearImageButton;
+        private RoundButton NewImageButton;
+        private Label label2;
+        private ScrollablePictureBox MainImage;
         private RoundButton Settings_Btn;
+        private Panel panel3;
     }
 }

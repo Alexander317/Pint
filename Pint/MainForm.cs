@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using Pint.Core.Misc;
 using Pint.Properties;
-using Pint.Core.Figures;
+using Pint.AdditionalToolbox;
 
 namespace Pint
 {
@@ -28,20 +28,19 @@ namespace Pint
             InitializeComponent();
             InitializeButtons();
 
+            MainImage.GetPictureBox().MouseDown += MainImage_MouseDown;
+            MainImage.GetPictureBox().MouseMove += MainImage_MouseMove;
+            MainImage.GetPictureBox().MouseUp += MainImage_MouseUp;
+            MainImage.GetPictureBox().MouseClick += MainImage_MouseClick;
+
             SetButtonTags();
             paintCore.MainToolDefiner = MainEnum.Pensils;
             paintCore.CurrentPensil = new Pencil();
 
-            scrollablePictureBox.GetPictureBox().MouseDown += MainImage_MouseDown;
-            scrollablePictureBox.GetPictureBox().MouseMove += MainImage_MouseMove;
-            scrollablePictureBox.GetPictureBox().MouseUp += MainImage_MouseUp;
-            scrollablePictureBox.GetPictureBox().MouseClick += MainImage_Click;
-
             UpdateCurrentColors(pen.Color);
             ButtonHandler.Select(Pencil_Btn);
             SetUITheme();
-            DrawOnButtons();
-            PenTrackBar_Scroll(new object(), new EventArgs());
+            PenTrackBar_Scroll(new object(), EventArgs.Empty);
             PenHandler.MakePenRound(pen);
         }
 
@@ -66,7 +65,7 @@ namespace Pint
             {
                 paintCore.ArrayPoint.SetPoint(paintCore.LastPos);
                 paintCore.Filter(MainBitmap, pen);
-                scrollablePictureBox.SetImage(MainBitmap);
+                MainImage.SetImage(MainBitmap);
             }
         }
         private void MainImage_MouseUp(object sender, MouseEventArgs e)
@@ -75,10 +74,10 @@ namespace Pint
             mouseDown = false;
             CopyBitmap?.Dispose();
             paintCore.Filter(MainBitmap, pen);
-            scrollablePictureBox.SetImage(MainBitmap);
+            MainImage.SetImage(MainBitmap);
             paintCore.ArrayPoint.ResetAll();
         }
-        private void MainImage_Click(object sender, EventArgs e)
+        private void MainImage_MouseClick(object sender, EventArgs e)
         {
             if (paintCore.MainToolDefiner is MainEnum.Misc)
             {
@@ -90,7 +89,7 @@ namespace Pint
                 else
                 {
                     paintCore.Filter(MainBitmap, pen);
-                    scrollablePictureBox.SetImage(MainBitmap);
+                    MainImage.SetImage(MainBitmap);
                 }
             }
         }
@@ -98,9 +97,13 @@ namespace Pint
         {
             CopyBitmap = new(MainBitmap);
             paintCore.DrawOnCopiedBitmap(CopyBitmap, pen);
-            scrollablePictureBox.SetImage(CopyBitmap);
+            MainImage.SetImage(CopyBitmap);
             GC.Collect();
         }
+
+        #endregion
+
+        #region Other Handlers
 
         private void MainSelect(object sender, EventArgs e)
         {
@@ -125,24 +128,20 @@ namespace Pint
             ButtonHandler.Select((Button)sender);
         }
 
-        #endregion
-
-        #region Other Handlers
-
-        private void ClearBoard_Btn_Click(object sender, EventArgs e)
+        private void ClearImageButton_Click(object sender, EventArgs e)
         {
             if (MainBitmap == null)
                 return;
 
-            int w = MainBitmap.Width;
-            int h = MainBitmap.Height;
+            int BackupWidth = MainBitmap.Width;
+            int BackupHeight = MainBitmap.Height;
 
             MainBitmap?.Dispose();
-            MainBitmap = paintCore.CreateBitmapBySize(new Size(w, h));
-            scrollablePictureBox.SetImage(MainBitmap);
+            MainBitmap = paintCore.CreateBitmap(new Size(BackupWidth, BackupHeight));
+            MainImage.SetImage(MainBitmap);
         }
 
-        private void SaveFile_Btn_Click(object sender, EventArgs e)
+        private void ExportImageButton_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|PNG Image|*.png";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -173,11 +172,11 @@ namespace Pint
                 }
                 else */
                 if (e.KeyCode == Keys.S)
-                    SaveFile_Btn_Click(sender, new EventArgs());
+                    ExportImageButton_Click(sender, new EventArgs());
                 else if (e.KeyCode == Keys.C)
-                    ClearBoard_Btn_Click(sender, new EventArgs());
+                    ClearImageButton_Click(sender, new EventArgs());
                 else if (e.KeyCode == Keys.O)
-                    SelectFile_Btn_Click(sender, new EventArgs());
+                    ImportImageButton_Click(sender, new EventArgs());
             }
         }
 
@@ -187,14 +186,14 @@ namespace Pint
             PenWidthLabel.Text = pen.Width.ToString();
         }
 
-        private void Settings_Btn_Click(object sender, EventArgs e)
+        private void SettingsButton_Click(object sender, EventArgs e)
         {
             SettingsScreen settingsScreen = new SettingsScreen();
             settingsScreen.ThemeChanged += SetUITheme;
             settingsScreen.Show();
         }
 
-        private void NewImage_Btn_Click(object sender, EventArgs e)
+        private void NewImageButton_Click(object sender, EventArgs e)
         {
             SizeChooseDialog sizeChooseDialog = new();
 
@@ -202,14 +201,14 @@ namespace Pint
             {
                 //if MainBm != null then dispose it
                 MainBitmap?.Dispose();
-                MainBitmap = paintCore.CreateBitmapBySize(size);
+                MainBitmap = paintCore.CreateBitmap(size);
                 ProcessPictureBox(size);
             };
 
             sizeChooseDialog.ShowDialog();
         }
 
-        private void SelectFile_Btn_Click(object sender, EventArgs e)
+        private void ImportImageButton_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Image Files(*.bmp;*.jpg;*.png)|*.bmp;*.jpg;*.png";
             openFileDialog1.FileName = "";
@@ -223,11 +222,9 @@ namespace Pint
         }
         private void ProcessPictureBox(Size size)
         {
-            CalculatePictureBoxSize();
-
-            scrollablePictureBox.SetImage(MainBitmap);
-            scrollablePictureBox.SetImageSize(size);
-            scrollablePictureBox.Visible = true;
+            MainImage.SetImage(MainBitmap);
+            MainImageCalculations();
+            MainImage.Visible = true;
 
             SizeLabel.Text = $"{size.Width}x{size.Height}";
         }
@@ -235,17 +232,24 @@ namespace Pint
         private void MainForm_Resize(object sender, EventArgs e)
         {
             if (MainBitmap != null)
-                CalculatePictureBoxSize();
+                MainImageCalculations();
         }
 
-        private void CalculatePictureBoxSize()
+        private void MainImageCalculations()
         {
-            scrollablePictureBox.Size = new Size(
-                Math.Min(MainBitmap.Width, Width - 140),
-                Math.Min(MainBitmap.Height, Height - 190) - 80
-            );
-            CoordinatesLabel.Text = $"{Width}, {Height}";
-            scrollablePictureBox.Location = new Point(70, 190);
+            var ImageWidth = MainImage.GetImage().Width;
+            var ImageHeight = MainImage.GetImage().Height;
+
+            var availableWidth = Width - 160;
+            var availableHeight = Height - 270;
+
+            //Location
+            MainImage.Location = new Point(ImageWidth > availableWidth ? 72 : (Width / 2) - (ImageWidth / 2),
+                                           ImageHeight > availableHeight ? 190 : (Height / 2) - (ImageHeight / 2) + 65);
+
+            //Control Size
+            MainImage.Size = new Size(ImageWidth > availableWidth ? availableWidth : ImageWidth,
+                                      ImageHeight > availableHeight ? availableHeight : ImageHeight);
         }
 
         #endregion
@@ -349,29 +353,30 @@ namespace Pint
         }
         public void InitializeButtons()
         {
-            ButtonHandler.Allbuttons.Add(Circle_Btn);
-            ButtonHandler.Allbuttons.Add(Rectangle_Btn);
-            ButtonHandler.Allbuttons.Add(RegularTriangle_Btn);
-            ButtonHandler.Allbuttons.Add(RightTriangle_Btn);
-            ButtonHandler.Allbuttons.Add(Line_Btn);
-            ButtonHandler.Allbuttons.Add(StarFive_Btn);
-            ButtonHandler.Allbuttons.Add(StarSix_Btn);
-            ButtonHandler.Allbuttons.Add(StarEight_Btn);
-            ButtonHandler.Allbuttons.Add(Rhombus_Btn);
-            ButtonHandler.Allbuttons.Add(Hexagon_Btn);
-            ButtonHandler.Allbuttons.Add(Pencil_Btn);
-            ButtonHandler.Allbuttons.Add(Eraser_Btn);
-            ButtonHandler.Allbuttons.Add(Filler_Btn);
-            ButtonHandler.Allbuttons.Add(ColorPicker_Btn);
+            ButtonHandler.Buttons.Add(Circle_Btn);
+            ButtonHandler.Buttons.Add(Rectangle_Btn);
+            ButtonHandler.Buttons.Add(RegularTriangle_Btn);
+            ButtonHandler.Buttons.Add(RightTriangle_Btn);
+            ButtonHandler.Buttons.Add(Line_Btn);
+            ButtonHandler.Buttons.Add(StarFive_Btn);
+            ButtonHandler.Buttons.Add(StarSix_Btn);
+            ButtonHandler.Buttons.Add(StarEight_Btn);
+            ButtonHandler.Buttons.Add(Rhombus_Btn);
+            ButtonHandler.Buttons.Add(Hexagon_Btn);
+            ButtonHandler.Buttons.Add(Pencil_Btn);
+            ButtonHandler.Buttons.Add(Eraser_Btn);
+            ButtonHandler.Buttons.Add(Filler_Btn);
+            ButtonHandler.Buttons.Add(Settings_Btn);
+            ButtonHandler.Buttons.Add(ColorPicker_Btn);
         }
 
-        public void DrawOnButtons()
+        public void DrawOnButtons(Color color)
         {
-            paintCore.SetArrayPoint();
-            foreach (var btn in ButtonHandler.Allbuttons)
+            ButtonHandler.SetArrayPoint();
+            foreach (var btn in ButtonHandler.Buttons)
             {
                 if (btn.Tag is FiguresEnum)
-                    paintCore.DrawOnButton(btn);
+                    ButtonHandler.DrawOnButton(btn, color);
             }
         }
 
@@ -389,11 +394,13 @@ namespace Pint
         Color panelsColor_Light = Color.FromArgb(245, 245, 245);
         Color formColor_Light = Color.FromArgb(205, 205, 205);
         Color mouseOverBackColor_Light = Color.FromArgb(230, 230, 230);
+        Color mouseDownBackColor_Light = Color.FromArgb(220, 220, 220);
         Color selectColor_Light = Color.FromArgb(205, 205, 205);
 
         Color panelsColor_Dark = Color.FromArgb(42, 42, 42);
         Color formColor_Dark = Color.FromArgb(24, 24, 24);
         Color mouseOverBackColor_Dark = Color.FromArgb(57, 57, 57);
+        Color mouseDownBackColor_Dark = Color.FromArgb(67, 67, 67);
         Color selectColor_Dark = Color.FromArgb(79, 79, 79);
 
         private void SetTheme(bool isLightTheme)
@@ -402,59 +409,86 @@ namespace Pint
             Color backColor = isLightTheme ? formColor_Light : formColor_Dark;
             Color panelBackColor = isLightTheme ? panelsColor_Light : panelsColor_Dark;
             Color mouseOverColor = isLightTheme ? mouseOverBackColor_Light : mouseOverBackColor_Dark;
+            Color mouseDownColor = isLightTheme ? mouseDownBackColor_Light : mouseDownBackColor_Dark;
             Color selectColor = isLightTheme ? selectColor_Light : selectColor_Dark;
-
+            Color linesColor = !isLightTheme ? selectColor_Light : selectColor_Dark;
 
             ForeColor = foreColor;
             BackColor = backColor;
             panel1.BackColor = panelBackColor;
             panel1.ForeColor = foreColor;
+            ButtonHandler.SelectColor = selectColor;
             Settings_Btn.FlatAppearance.BorderColor = panelBackColor;
 
-            SetColorDependencies(panelBackColor, foreColor);
+            SetLinesColor(linesColor);
+            SetControlImages(isLightTheme, foreColor);
+            SetControlColor(panelBackColor, foreColor);
+            SetBorderColor(Color.FromArgb(panelBackColor.R - 10, panelBackColor.G - 10, panelBackColor.B - 10));
+            SetMouseOverColor(mouseOverColor);
+            SetMouseDownColor(mouseDownColor);
 
-            ButtonHandler.SelectColor = selectColor;
+            SetWindowTheme(!isLightTheme);
 
-            var buttons = new Button[] { SelectFile_Btn, SaveFile_Btn, NewImage_Btn, ClearBoard_Btn, Settings_Btn };
-            foreach (var btn in buttons)
-            {
+            ButtonHandler.UpdateBtnColors();
+        }
+        private void SetMouseOverColor(Color mouseOverColor)
+        {
+            foreach (var btn in ButtonHandler.Buttons)
                 btn.FlatAppearance.MouseOverBackColor = mouseOverColor;
-            }
 
-            var buttonImages = new Dictionary<Button, Image>
+            var Buttons = new Button[] { NewImageButton, ClearImageButton, ImportImageButton, ExportImageButton };
+            foreach (var btn in Buttons)
+                btn.FlatAppearance.MouseOverBackColor = mouseOverColor;
+        }
+        private void SetMouseDownColor(Color mouseDownColor)
+        {
+            foreach (var btn in ButtonHandler.Buttons)
+                btn.FlatAppearance.MouseDownBackColor = mouseDownColor;
+
+            var Buttons = new Button[] { NewImageButton, ClearImageButton, ImportImageButton, ExportImageButton };
+            foreach (var btn in Buttons)
+                btn.FlatAppearance.MouseDownBackColor = mouseDownColor;
+        }
+        private void SetLinesColor(Color linesColor)
+        {
+            var lines = new LineControl[] { rotatableLineControl1, rotatableLineControl2, rotatableLineControl3 };
+            foreach (var line in lines)
+                line.Color = linesColor;
+        }
+        private void SetControlImages(bool isLightTheme, Color buttonImageColor)
+        {
+            DrawOnButtons(buttonImageColor);
+            var buttonImages = new Dictionary<Control, Image>
             {
                 { Filler_Btn, isLightTheme ? Resources.Filler : Resources.filler_inverted },
                 { Pencil_Btn, isLightTheme ? Resources.pencil : Resources.pencil_inverted },
                 { Eraser_Btn, isLightTheme ? Resources.eraser : Resources.eraser_inverted },
                 { ColorPicker_Btn, isLightTheme ? Resources.color_picker : Resources.color_picker_inverted },
+                { Scribble, isLightTheme ? Resources.scribble : Resources.scribble_inverted },
                 { Settings_Btn, isLightTheme ? Resources.settings : Resources.settings_inverted }
             };
-
             foreach (var kvp in buttonImages)
-            {
                 kvp.Key.BackgroundImage = kvp.Value;
-            }
-
-            DrawOnButtons();
-
-            foreach (var btn in ButtonHandler.Allbuttons)
-            {
-                btn.FlatAppearance.MouseOverBackColor = mouseOverColor;
-            }
-
-            Scribble.BackgroundImage = isLightTheme ? Resources.scribble : Resources.scribble_inverted;
-
-            SetWindowTheme(!isLightTheme);
-            ButtonHandler.UpdateBtnColors();
         }
-
-        private void SetColorDependencies(Color panelBackColor, Color panelForeColor)
+        private void SetBorderColor(Color borderColor)
+        {
+            var Buttons = new RoundButton[] { NewImageButton, ClearImageButton, ImportImageButton, ExportImageButton }; 
+            foreach (var btn in Buttons)
+                btn.FlatAppearance.BorderColor = borderColor;
+        }
+        private void SetControlColor(Color panelBackColor, Color foreColor)
         {
             var controls = new Control[] { CurrentColorHTML, CurrentColor_R, CurrentColor_G, CurrentColor_B, ColorSlider_R, ColorSlider_G, ColorSlider_B, roundPanel1, roundPanel2 };
+            var controls1 = new Control[] { NewImageButton, ClearImageButton, ImportImageButton, ExportImageButton };
             foreach (var control in controls)
             {
                 control.BackColor = panelBackColor;
-                control.ForeColor = panelForeColor;
+                control.ForeColor = foreColor;
+            }
+            foreach (var control in controls1)
+            {
+                control.BackColor = Color.FromArgb(panelBackColor.R - 10, panelBackColor.G - 10, panelBackColor.B - 10);
+                control.ForeColor = foreColor;
             }
         }
 
