@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using Pint.Core.Misc;
 using Pint.Properties;
 using Pint.AdditionalToolbox;
+using System.Drawing;
 
 namespace Pint
 {
@@ -52,6 +53,11 @@ namespace Pint
 
             paintCore.ArrayPoint.SetPoint(e.X, e.Y);
             mouseDown = true;
+
+            //Проверка: добавить битмап в предыдущие или нет
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                paintCore.AddToPreviousBitmaps(MainBitmap);
+
             if (paintCore.MainToolDefiner == MainEnum.Figures)
                 DrawingTimer.Enabled = true;
         }
@@ -103,6 +109,9 @@ namespace Pint
                 }
                 else
                 {
+                    //Проверка: добавить битмап в предыдущие или нет
+                    if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                        AddToPreviousBitmaps(bitmap);
                     paintCore.Filter(MainBitmap, pen);
                     MainImage.SetImage(MainBitmap);
                 }
@@ -143,6 +152,10 @@ namespace Pint
 
             int BackupWidth = MainBitmap.Width;
             int BackupHeight = MainBitmap.Height;
+
+            //Проверка: добавить битмап в предыдущие или нет
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                paintCore.AddToPreviousBitmaps(MainBitmap);
 
             MainBitmap?.Dispose();
             MainBitmap = paintCore.CreateBitmap(new Size(BackupWidth, BackupHeight));

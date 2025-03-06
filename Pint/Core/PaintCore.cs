@@ -45,8 +45,6 @@ namespace Pint.Core
 
         public void ClearBitmap(Bitmap bitmap)
         {
-            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
-                AddToPreviousBitmaps(bitmap);
             using Graphics g = Graphics.FromImage(bitmap);
             g.Clear(Color.White);
         }
@@ -75,10 +73,6 @@ namespace Pint.Core
                 }
                 futureBitmaps.Clear();
             }
-
-            //Проверка: добавить битмап в предыдущие или нет
-            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
-                AddToPreviousBitmaps(bitmap);
 
             //Рисуем, господа
             if (mainToolDefiner == MainEnum.Pensils)
