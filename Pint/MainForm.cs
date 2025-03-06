@@ -44,17 +44,26 @@ namespace Pint
             PenHandler.MakePenRound(pen);
         }
 
-        #region Main Image Handlers
-
+        #region Main Image Handlers 
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
+            if (MainBitmap == null)
+                return;
+
             paintCore.ArrayPoint.SetPoint(e.X, e.Y);
             mouseDown = true;
+            //
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                paintCore.AddToPreviousBitmaps(MainBitmap);
+            //
             if (paintCore.MainToolDefiner == MainEnum.Figures)
                 DrawingTimer.Enabled = true;
         }
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
+            if (MainBitmap == null)
+                return;
+
             CoordinatesLabel.Text = $"{e.X}, {e.Y}пкс";
             paintCore.LastPos = new Point(e.X, e.Y);
             if (!mouseDown)
@@ -68,8 +77,18 @@ namespace Pint
                 MainImage.SetImage(MainBitmap);
             }
         }
+        private void DrawingTimer_Tick(object sender, EventArgs e)
+        {
+            CopyBitmap = new(MainBitmap);
+            paintCore.DrawOnCopiedBitmap(CopyBitmap, pen);
+            MainImage.SetImage(CopyBitmap);
+            GC.Collect();
+        }
         private void MainImage_MouseUp(object sender, MouseEventArgs e)
         {
+            if (MainBitmap == null)
+                return;
+
             DrawingTimer.Enabled = false;
             mouseDown = false;
             CopyBitmap?.Dispose();
@@ -81,6 +100,10 @@ namespace Pint
         {
             if (paintCore.MainToolDefiner is MainEnum.Misc)
             {
+                //
+                if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                    paintCore.AddToPreviousBitmaps(MainBitmap);
+                //
                 if (paintCore.CurrentMisc is ColorPicker)
                 {
                     pen.Color = MainBitmap.GetPixel(paintCore.LastPos.X, paintCore.LastPos.Y);
@@ -92,13 +115,6 @@ namespace Pint
                     MainImage.SetImage(MainBitmap);
                 }
             }
-        }
-        private void DrawingTimer_Tick(object sender, EventArgs e)
-        {
-            CopyBitmap = new(MainBitmap);
-            paintCore.DrawOnCopiedBitmap(CopyBitmap, pen);
-            MainImage.SetImage(CopyBitmap);
-            GC.Collect();
         }
 
         #endregion
@@ -152,7 +168,6 @@ namespace Pint
         {
             "jpg" or "jpeg" => ImageFormat.Jpeg,
             "png" => ImageFormat.Png,
-            "gif" => ImageFormat.Gif,
             _ => ImageFormat.Bmp,
         };
 
@@ -160,17 +175,17 @@ namespace Pint
         {
             if (e.Control)
             {
-                /*if (e.KeyCode == Keys.Z)
+                if (e.KeyCode == Keys.Z && ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
                 {
                     MainBitmap = paintCore.ReturnToPreviousBitmap(MainBitmap);
-                    MainImage.Image = MainBitmap;
+                    MainImage.SetImage(MainBitmap);
                 }
-                else if (e.KeyCode == Keys.Y)
+                else if (e.KeyCode == Keys.Y && ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
                 {
                     MainBitmap = paintCore.ReturnToFutureBitmap(MainBitmap);
-                    MainImage.Image = MainBitmap;
+                    MainImage.SetImage(MainBitmap);
                 }
-                else */
+                else
                 if (e.KeyCode == Keys.S)
                     ExportImageButton_Click(sender, new EventArgs());
                 else if (e.KeyCode == Keys.C)
@@ -451,7 +466,7 @@ namespace Pint
         }
         private void SetLinesColor(Color linesColor)
         {
-            var lines = new LineControl[] { rotatableLineControl1, rotatableLineControl2, rotatableLineControl3 };
+            var lines = new LineControl[] { rotatableLineControl1, rotatableLineControl2, rotatableLineControl3, rotatableLineControl4 };
             foreach (var line in lines)
                 line.Color = linesColor;
         }

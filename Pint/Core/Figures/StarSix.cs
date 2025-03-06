@@ -6,34 +6,47 @@ namespace Pint.Core.Figures
     {
         public override void UseFigure(Bitmap bitmap, Pen pen, ArrayPoint arrayPoint, SmoothingMode smoothingMode)
         {
+            // Получаем две диагональные точки ограничивающего прямоугольника
             Point p1 = arrayPoint.Points[0];
             Point p2 = arrayPoint.Points[1];
 
-            int centerX = (p1.X + p2.X) / 2;
-            int centerY = (p1.Y + p2.Y) / 2;
+            // Вычисляем центр и полуширину/полувысоту прямоугольника
+            float centerX = (p1.X + p2.X) / 2f;
+            float centerY = (p1.Y + p2.Y) / 2f;
+            float halfWidth = Math.Abs(p2.X - p1.X) / 2f;
+            float halfHeight = Math.Abs(p2.Y - p1.Y) / 2f;
 
-            int radius = Math.Min(Math.Abs(p2.X - p1.X) / 2, Math.Abs(p2.Y - p1.Y) / 2);
-            double innerRadius = radius / 2.5;
+            // Внешние "радиусы" – это половина ширины и высоты.
+            // Для внутренних точек выбран коэффициент 0.5, позволяющий получить гармоничную форму.
+            float innerFactor = 0.5f;
+            float innerWidth = halfWidth * innerFactor;
+            float innerHeight = halfHeight * innerFactor;
 
-            double[] angles = new double[12];
-            for (int i = 0; i < 12; i++)
-            {
-                angles[i] = -Math.PI / 2 + i * Math.PI / 6;
-            }
-
+            // Всего вершин: 12 (6 внешних + 6 внутренних)
             PointF[] starPoints = new PointF[12];
+
+            // Шаг по углу равен 360/12 = 30° (π/6 радиан)
             for (int i = 0; i < 12; i++)
             {
-                double currentRadius = (i % 2 == 0) ? radius : innerRadius;
+                // Начинаем с -90° (чтобы верхняя точка была вверху)
+                double angle = -Math.PI / 2 + i * (Math.PI / 6);
+                bool isOuter = (i % 2 == 0); // внешние вершины для чётных индексов
+                float currentWidth = isOuter ? halfWidth : innerWidth;
+                float currentHeight = isOuter ? halfHeight : innerHeight;
+
+                // Вычисляем координаты каждой точки с учётом центра и выбранного "радиуса" по осям
                 starPoints[i] = new PointF(
-                    centerX + (float)(currentRadius * Math.Cos(angles[i])),
-                    centerY + (float)(currentRadius * Math.Sin(angles[i]))
+                    centerX + (float)(currentWidth * Math.Cos(angle)),
+                    centerY + (float)(currentHeight * Math.Sin(angle))
                 );
             }
 
-            using Graphics graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = smoothingMode;
-            graphics.DrawPolygon(pen, starPoints);
+            // Создаем Graphics для рисования и устанавливаем режим сглаживания
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.SmoothingMode = smoothingMode;
+                graphics.DrawPolygon(pen, starPoints);
+            }
         }
     }
 }

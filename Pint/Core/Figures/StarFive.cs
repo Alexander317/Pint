@@ -6,27 +6,45 @@ namespace Pint.Core.Figures
     {
         public override void UseFigure(Bitmap bitmap, Pen pen, ArrayPoint arrayPoint, SmoothingMode smoothingMode)
         {
+            // Получаем две диагональные точки ограничивающего прямоугольника
             Point p1 = arrayPoint.Points[0];
             Point p2 = arrayPoint.Points[1];
 
-            Point center = new Point((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
-            int radius = Math.Min(Math.Abs(p2.X - p1.X) / 2, Math.Abs(p2.Y - p1.Y) / 2);
+            // Вычисляем центр и полуширину/полувысоту (используем умножение на 0.5f вместо деления)
+            float centerX = (p1.X + p2.X) * 0.5f;
+            float centerY = (p1.Y + p2.Y) * 0.5f;
+            float halfWidth = Math.Abs(p2.X - p1.X) * 0.5f;
+            float halfHeight = Math.Abs(p2.Y - p1.Y) * 0.5f;
 
-            Point[] starPoints = new Point[10];
-            double angle = -Math.PI / 2;
+            // Определяем внутренние радиусы как долю от внешних (коэффициент ~0.382 для пятиконечной звезды)
+            float innerWidth = halfWidth * 0.382f;
+            float innerHeight = halfHeight * 0.382f;
+
+            // Всего вершин: 10 (чередуются внешние и внутренние)
+            PointF[] starPoints = new PointF[10];
+
+            // Предварительно вычисляем шаг по углу и стартовый угол (-90°)
+            float angleStep = MathF.PI / 5f;
+            float startAngle = -MathF.PI / 2f;
 
             for (int i = 0; i < 10; i++)
             {
-                double currentAngle = angle + i * Math.PI / 5;
-                double currentRadius = (i % 2 == 0 ? radius : radius / 2.5);
-
-                int x = center.X + (int)(currentRadius * Math.Cos(currentAngle));
-                int y = center.Y + (int)(currentRadius * Math.Sin(currentAngle));
-                starPoints[i] = new Point(x, y);
+                float angle = startAngle + i * angleStep;
+                // Четные индексы – внешние вершины, нечетные – внутренние
+                float currentWidth = (i % 2 == 0) ? halfWidth : innerWidth;
+                float currentHeight = (i % 2 == 0) ? halfHeight : innerHeight;
+                starPoints[i] = new PointF(
+                    centerX + currentWidth * MathF.Cos(angle),
+                    centerY + currentHeight * MathF.Sin(angle)
+                );
             }
-            using Graphics graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = smoothingMode;
-            graphics.DrawPolygon(pen, starPoints);
+
+            // Отрисовка звезды с заданным режимом сглаживания
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.SmoothingMode = smoothingMode;
+                graphics.DrawPolygon(pen, starPoints);
+            }
         }
     }
 }

@@ -42,22 +42,22 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Calibri", 12F);
-            label1.Location = new Point(11, 12);
+            label1.Font = new Font("Calibri", 13F);
+            label1.Location = new Point(35, 14);
             label1.Name = "label1";
-            label1.Size = new Size(164, 19);
+            label1.Size = new Size(74, 22);
             label1.TabIndex = 3;
-            label1.Text = "Ширина изображения";
+            label1.Text = "Ширина";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Calibri", 12F);
-            label2.Location = new Point(11, 45);
+            label2.Font = new Font("Calibri", 13F);
+            label2.Location = new Point(35, 49);
             label2.Name = "label2";
-            label2.Size = new Size(156, 19);
+            label2.Size = new Size(66, 22);
             label2.TabIndex = 4;
-            label2.Text = "Высота изображения";
+            label2.Text = "Высота";
             // 
             // panel1
             // 
@@ -69,14 +69,14 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(280, 78);
+            panel1.Size = new Size(244, 89);
             panel1.TabIndex = 7;
             // 
             // heightNumeric
             // 
             heightNumeric.Font = new Font("Calibri", 12F);
             heightNumeric.InterceptArrowKeys = false;
-            heightNumeric.Location = new Point(181, 44);
+            heightNumeric.Location = new Point(130, 47);
             heightNumeric.Maximum = new decimal(new int[] { 32768, 0, 0, 0 });
             heightNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             heightNumeric.Name = "heightNumeric";
@@ -89,7 +89,7 @@
             // 
             widthNumeric.Font = new Font("Calibri", 12F);
             widthNumeric.InterceptArrowKeys = false;
-            widthNumeric.Location = new Point(181, 10);
+            widthNumeric.Location = new Point(130, 12);
             widthNumeric.Maximum = new decimal(new int[] { 32768, 0, 0, 0 });
             widthNumeric.Name = "widthNumeric";
             widthNumeric.Size = new Size(84, 27);
@@ -105,17 +105,17 @@
             applyButton.FlatAppearance.BorderColor = Color.Black;
             applyButton.FlatAppearance.BorderSize = 0;
             applyButton.FlatStyle = FlatStyle.Flat;
-            applyButton.Font = new Font("Calibri", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            applyButton.Font = new Font("Calibri", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             applyButton.ForeColor = Color.Black;
-            applyButton.Location = new Point(44, 95);
+            applyButton.Location = new Point(30, 100);
             applyButton.Name = "applyButton";
             applyButton.RoundBottomLeft = true;
             applyButton.RoundBottomRight = true;
             applyButton.RoundTopLeft = true;
             applyButton.RoundTopRight = true;
-            applyButton.Size = new Size(192, 41);
+            applyButton.Size = new Size(190, 35);
             applyButton.TabIndex = 43;
-            applyButton.Text = "Создать";
+            applyButton.Text = "Создать изображение";
             applyButton.UseVisualStyleBackColor = false;
             applyButton.Click += ApplyButton_Click;
             // 
@@ -124,7 +124,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(205, 205, 205);
-            ClientSize = new Size(280, 148);
+            ClientSize = new Size(244, 151);
             Controls.Add(applyButton);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -132,7 +132,8 @@
             MinimizeBox = false;
             Name = "SizeChooseDialog";
             ShowInTaskbar = false;
-            Text = "Выберите размер изображения";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Размер нового изображения";
             TopMost = true;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

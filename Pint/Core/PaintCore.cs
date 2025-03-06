@@ -55,10 +55,30 @@ namespace Pint.Core
 
         public void Filter(Bitmap bitmap, Pen pen)
         {
-            futureBitmaps.Clear();
+            //Проверка чтобы не тратить кучу памяти
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "dontUse" && previousBitmaps.Count > 0)
+            {
+                foreach (Bitmap bmp in previousBitmaps)
+                {
+                    bmp.Dispose();
+                }
+                previousBitmaps.Clear();
+            }
+
+            if (futureBitmaps.Count > 0)
+            {
+                foreach (Bitmap bmp in futureBitmaps)
+                {
+                    bmp.Dispose();
+                }
+                futureBitmaps.Clear();
+            }
+
+
+
             if (mainToolDefiner == MainEnum.Pensils)
             {
-                currentPencil.UsePencil(bitmap, pen, arrayPoint, 
+                currentPencil.UsePencil(bitmap, pen, arrayPoint,
                     ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
             }
             else if (mainToolDefiner == MainEnum.Figures)
@@ -82,7 +102,6 @@ namespace Pint.Core
 
         #endregion
 
-        //RemakeMePlease
         #region Prev/Fut Bitmaps
 
         public Bitmap ReturnToPreviousBitmap(Bitmap bitmap)
@@ -108,7 +127,7 @@ namespace Pint.Core
 
         public void AddToPreviousBitmaps(Bitmap bitmap)
         {
-            previousBitmaps.Add(bitmap);
+            previousBitmaps.Add((Bitmap)bitmap.Clone());
         }
         #endregion
     }

@@ -54,9 +54,9 @@ namespace Pint
             rotatableLineControl3 = new LineControl();
             CurrentColor = new PictureBox();
             rotatableLineControl1 = new LineControl();
-            DeepPink_Btn = new Button();
+            MediumVioletRed_Btn = new Button();
             Navy_Btn = new Button();
-            Sienna_Btn = new Button();
+            DeepPink_Btn = new Button();
             Goldenrod_Btn = new Button();
             Crimson_Btn = new Button();
             DarkGreen_Btn = new Button();
@@ -77,7 +77,7 @@ namespace Pint
             CurrentColor_G = new TextBox();
             DeepSkyBlue_Btn = new Button();
             ColorSlider_B = new TrackBar();
-            Fuchsia_Btn = new Button();
+            Violet_Btn = new Button();
             CurrentColor_R = new TextBox();
             RoyalBlue_Btn = new Button();
             label6 = new Label();
@@ -111,6 +111,7 @@ namespace Pint
             Scribble = new PictureBox();
             PenTrackBar = new TrackBar();
             roundPanel2 = new RoundPanel();
+            rotatableLineControl4 = new LineControl();
             MainImage = new ScrollablePictureBox();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -191,7 +192,7 @@ namespace Pint
             // 
             label4.Anchor = AnchorStyles.None;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Calibri", 12F);
+            label4.Font = new Font("Calibri", 12F, FontStyle.Bold);
             label4.Location = new Point(-3, 121);
             label4.Name = "label4";
             label4.Size = new Size(123, 28);
@@ -249,7 +250,7 @@ namespace Pint
             // 
             label3.Anchor = AnchorStyles.None;
             label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Calibri", 12F);
+            label3.Font = new Font("Calibri", 12F, FontStyle.Bold);
             label3.Location = new Point(40, 121);
             label3.Name = "label3";
             label3.Size = new Size(141, 28);
@@ -491,7 +492,7 @@ namespace Pint
             // 
             label1.Anchor = AnchorStyles.None;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Calibri", 12F);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label1.Location = new Point(226, 123);
             label1.Name = "label1";
             label1.Size = new Size(128, 26);
@@ -506,9 +507,9 @@ namespace Pint
             panel2.Controls.Add(rotatableLineControl3);
             panel2.Controls.Add(CurrentColor);
             panel2.Controls.Add(rotatableLineControl1);
-            panel2.Controls.Add(DeepPink_Btn);
+            panel2.Controls.Add(MediumVioletRed_Btn);
             panel2.Controls.Add(Navy_Btn);
-            panel2.Controls.Add(Sienna_Btn);
+            panel2.Controls.Add(DeepPink_Btn);
             panel2.Controls.Add(Goldenrod_Btn);
             panel2.Controls.Add(Crimson_Btn);
             panel2.Controls.Add(DarkGreen_Btn);
@@ -529,7 +530,7 @@ namespace Pint
             panel2.Controls.Add(CurrentColor_G);
             panel2.Controls.Add(DeepSkyBlue_Btn);
             panel2.Controls.Add(ColorSlider_B);
-            panel2.Controls.Add(Fuchsia_Btn);
+            panel2.Controls.Add(Violet_Btn);
             panel2.Controls.Add(CurrentColor_R);
             panel2.Controls.Add(RoyalBlue_Btn);
             panel2.Controls.Add(label6);
@@ -553,10 +554,10 @@ namespace Pint
             // 
             rotatableLineControl3.Color = Color.Black;
             rotatableLineControl3.LineWidth = 2F;
-            rotatableLineControl3.Location = new Point(542, 0);
+            rotatableLineControl3.Location = new Point(543, 5);
             rotatableLineControl3.Name = "rotatableLineControl3";
             rotatableLineControl3.RotationAngle = 0F;
-            rotatableLineControl3.Size = new Size(10, 150);
+            rotatableLineControl3.Size = new Size(10, 140);
             rotatableLineControl3.TabIndex = 64;
             // 
             // CurrentColor
@@ -573,25 +574,25 @@ namespace Pint
             // 
             rotatableLineControl1.Color = Color.Black;
             rotatableLineControl1.LineWidth = 2F;
-            rotatableLineControl1.Location = new Point(-2, 0);
+            rotatableLineControl1.Location = new Point(-3, 5);
             rotatableLineControl1.Name = "rotatableLineControl1";
             rotatableLineControl1.RotationAngle = 0F;
-            rotatableLineControl1.Size = new Size(10, 150);
+            rotatableLineControl1.Size = new Size(10, 140);
             rotatableLineControl1.TabIndex = 32;
             // 
-            // DeepPink_Btn
+            // MediumVioletRed_Btn
             // 
-            DeepPink_Btn.Anchor = AnchorStyles.None;
-            DeepPink_Btn.BackColor = Color.DeepPink;
-            DeepPink_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
-            DeepPink_Btn.FlatAppearance.BorderSize = 0;
-            DeepPink_Btn.FlatStyle = FlatStyle.Popup;
-            DeepPink_Btn.Location = new Point(235, 89);
-            DeepPink_Btn.Name = "DeepPink_Btn";
-            DeepPink_Btn.Size = new Size(26, 26);
-            DeepPink_Btn.TabIndex = 68;
-            DeepPink_Btn.UseVisualStyleBackColor = false;
-            DeepPink_Btn.Click += SelectColor;
+            MediumVioletRed_Btn.Anchor = AnchorStyles.None;
+            MediumVioletRed_Btn.BackColor = Color.MediumVioletRed;
+            MediumVioletRed_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            MediumVioletRed_Btn.FlatAppearance.BorderSize = 0;
+            MediumVioletRed_Btn.FlatStyle = FlatStyle.Popup;
+            MediumVioletRed_Btn.Location = new Point(235, 89);
+            MediumVioletRed_Btn.Name = "MediumVioletRed_Btn";
+            MediumVioletRed_Btn.Size = new Size(26, 26);
+            MediumVioletRed_Btn.TabIndex = 68;
+            MediumVioletRed_Btn.UseVisualStyleBackColor = false;
+            MediumVioletRed_Btn.Click += SelectColor;
             // 
             // Navy_Btn
             // 
@@ -607,19 +608,19 @@ namespace Pint
             Navy_Btn.UseVisualStyleBackColor = false;
             Navy_Btn.Click += SelectColor;
             // 
-            // Sienna_Btn
+            // DeepPink_Btn
             // 
-            Sienna_Btn.Anchor = AnchorStyles.None;
-            Sienna_Btn.BackColor = Color.Sienna;
-            Sienna_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
-            Sienna_Btn.FlatAppearance.BorderSize = 0;
-            Sienna_Btn.FlatStyle = FlatStyle.Popup;
-            Sienna_Btn.Location = new Point(267, 89);
-            Sienna_Btn.Name = "Sienna_Btn";
-            Sienna_Btn.Size = new Size(26, 26);
-            Sienna_Btn.TabIndex = 66;
-            Sienna_Btn.UseVisualStyleBackColor = false;
-            Sienna_Btn.Click += SelectColor;
+            DeepPink_Btn.Anchor = AnchorStyles.None;
+            DeepPink_Btn.BackColor = Color.DeepPink;
+            DeepPink_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            DeepPink_Btn.FlatAppearance.BorderSize = 0;
+            DeepPink_Btn.FlatStyle = FlatStyle.Popup;
+            DeepPink_Btn.Location = new Point(267, 89);
+            DeepPink_Btn.Name = "DeepPink_Btn";
+            DeepPink_Btn.Size = new Size(26, 26);
+            DeepPink_Btn.TabIndex = 66;
+            DeepPink_Btn.UseVisualStyleBackColor = false;
+            DeepPink_Btn.Click += SelectColor;
             // 
             // Goldenrod_Btn
             // 
@@ -752,7 +753,7 @@ namespace Pint
             CurrentColorHTML.Anchor = AnchorStyles.None;
             CurrentColorHTML.BackColor = Color.WhiteSmoke;
             CurrentColorHTML.BorderStyle = BorderStyle.FixedSingle;
-            CurrentColorHTML.Font = new Font("Calibri", 12F);
+            CurrentColorHTML.Font = new Font("Calibri", 12F, FontStyle.Bold);
             CurrentColorHTML.ForeColor = Color.Black;
             CurrentColorHTML.Location = new Point(417, 6);
             CurrentColorHTML.Name = "CurrentColorHTML";
@@ -807,7 +808,7 @@ namespace Pint
             CurrentColor_B.Anchor = AnchorStyles.None;
             CurrentColor_B.BackColor = Color.WhiteSmoke;
             CurrentColor_B.BorderStyle = BorderStyle.FixedSingle;
-            CurrentColor_B.Font = new Font("Calibri", 12F);
+            CurrentColor_B.Font = new Font("Calibri", 12F, FontStyle.Bold);
             CurrentColor_B.ForeColor = Color.Black;
             CurrentColor_B.Location = new Point(495, 99);
             CurrentColor_B.Name = "CurrentColor_B";
@@ -862,7 +863,7 @@ namespace Pint
             CurrentColor_G.Anchor = AnchorStyles.None;
             CurrentColor_G.BackColor = Color.WhiteSmoke;
             CurrentColor_G.BorderStyle = BorderStyle.FixedSingle;
-            CurrentColor_G.Font = new Font("Calibri", 12F);
+            CurrentColor_G.Font = new Font("Calibri", 12F, FontStyle.Bold);
             CurrentColor_G.ForeColor = Color.Black;
             CurrentColor_G.Location = new Point(495, 68);
             CurrentColor_G.Name = "CurrentColor_G";
@@ -898,26 +899,26 @@ namespace Pint
             ColorSlider_B.TickStyle = TickStyle.None;
             ColorSlider_B.Scroll += ColorSliderChanged;
             // 
-            // Fuchsia_Btn
+            // Violet_Btn
             // 
-            Fuchsia_Btn.Anchor = AnchorStyles.None;
-            Fuchsia_Btn.BackColor = Color.Fuchsia;
-            Fuchsia_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
-            Fuchsia_Btn.FlatAppearance.BorderSize = 0;
-            Fuchsia_Btn.FlatStyle = FlatStyle.Popup;
-            Fuchsia_Btn.Location = new Point(267, 27);
-            Fuchsia_Btn.Name = "Fuchsia_Btn";
-            Fuchsia_Btn.Size = new Size(26, 26);
-            Fuchsia_Btn.TabIndex = 7;
-            Fuchsia_Btn.UseVisualStyleBackColor = false;
-            Fuchsia_Btn.Click += SelectColor;
+            Violet_Btn.Anchor = AnchorStyles.None;
+            Violet_Btn.BackColor = Color.Violet;
+            Violet_Btn.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            Violet_Btn.FlatAppearance.BorderSize = 0;
+            Violet_Btn.FlatStyle = FlatStyle.Popup;
+            Violet_Btn.Location = new Point(267, 27);
+            Violet_Btn.Name = "Violet_Btn";
+            Violet_Btn.Size = new Size(26, 26);
+            Violet_Btn.TabIndex = 7;
+            Violet_Btn.UseVisualStyleBackColor = false;
+            Violet_Btn.Click += SelectColor;
             // 
             // CurrentColor_R
             // 
             CurrentColor_R.Anchor = AnchorStyles.None;
             CurrentColor_R.BackColor = Color.WhiteSmoke;
             CurrentColor_R.BorderStyle = BorderStyle.FixedSingle;
-            CurrentColor_R.Font = new Font("Calibri", 12F);
+            CurrentColor_R.Font = new Font("Calibri", 12F, FontStyle.Bold);
             CurrentColor_R.ForeColor = Color.Black;
             CurrentColor_R.Location = new Point(495, 37);
             CurrentColor_R.Name = "CurrentColor_R";
@@ -945,7 +946,7 @@ namespace Pint
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Calibri", 12F);
+            label6.Font = new Font("Calibri", 12F, FontStyle.Bold);
             label6.Location = new Point(324, 41);
             label6.Name = "label6";
             label6.Size = new Size(18, 19);
@@ -972,7 +973,7 @@ namespace Pint
             label8.Anchor = AnchorStyles.None;
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Calibri", 12F);
+            label8.Font = new Font("Calibri", 12F, FontStyle.Bold);
             label8.Location = new Point(324, 104);
             label8.Name = "label8";
             label8.Size = new Size(18, 19);
@@ -999,7 +1000,7 @@ namespace Pint
             label7.Anchor = AnchorStyles.None;
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Calibri", 12F);
+            label7.Font = new Font("Calibri", 12F, FontStyle.Bold);
             label7.Location = new Point(324, 73);
             label7.Name = "label7";
             label7.Size = new Size(19, 19);
@@ -1114,9 +1115,9 @@ namespace Pint
             panel3.Controls.Add(label2);
             panel3.Controls.Add(ClearImageButton);
             panel3.Controls.Add(ImportImageButton);
-            panel3.Location = new Point(898, 0);
+            panel3.Location = new Point(896, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(380, 150);
+            panel3.Size = new Size(402, 150);
             panel3.TabIndex = 66;
             // 
             // ExportImageButton
@@ -1126,15 +1127,15 @@ namespace Pint
             ExportImageButton.BorderWidth = 0F;
             ExportImageButton.FlatAppearance.BorderSize = 0;
             ExportImageButton.FlatStyle = FlatStyle.Flat;
-            ExportImageButton.Font = new Font("Calibri", 12F);
+            ExportImageButton.Font = new Font("Calibri", 12F, FontStyle.Bold);
             ExportImageButton.ForeColor = Color.Black;
-            ExportImageButton.Location = new Point(195, 74);
+            ExportImageButton.Location = new Point(196, 73);
             ExportImageButton.Name = "ExportImageButton";
             ExportImageButton.RoundBottomLeft = true;
             ExportImageButton.RoundBottomRight = true;
             ExportImageButton.RoundTopLeft = true;
             ExportImageButton.RoundTopRight = true;
-            ExportImageButton.Size = new Size(181, 33);
+            ExportImageButton.Size = new Size(186, 40);
             ExportImageButton.TabIndex = 62;
             ExportImageButton.Text = "Экспорт изображения";
             ExportImageButton.UseVisualStyleBackColor = false;
@@ -1147,15 +1148,15 @@ namespace Pint
             NewImageButton.BorderWidth = 0F;
             NewImageButton.FlatAppearance.BorderSize = 0;
             NewImageButton.FlatStyle = FlatStyle.Flat;
-            NewImageButton.Font = new Font("Calibri", 12F);
+            NewImageButton.Font = new Font("Calibri", 12F, FontStyle.Bold);
             NewImageButton.ForeColor = Color.Black;
-            NewImageButton.Location = new Point(5, 34);
+            NewImageButton.Location = new Point(5, 26);
             NewImageButton.Name = "NewImageButton";
             NewImageButton.RoundBottomLeft = true;
             NewImageButton.RoundBottomRight = true;
             NewImageButton.RoundTopLeft = true;
             NewImageButton.RoundTopRight = true;
-            NewImageButton.Size = new Size(181, 33);
+            NewImageButton.Size = new Size(186, 40);
             NewImageButton.TabIndex = 59;
             NewImageButton.Text = "Новое изображение";
             NewImageButton.UseVisualStyleBackColor = false;
@@ -1165,10 +1166,10 @@ namespace Pint
             // 
             label2.Anchor = AnchorStyles.None;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Calibri", 12F);
-            label2.Location = new Point(122, 123);
+            label2.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            label2.Location = new Point(127, 123);
             label2.Name = "label2";
-            label2.Size = new Size(125, 26);
+            label2.Size = new Size(137, 26);
             label2.TabIndex = 63;
             label2.Text = "Изображение";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -1180,15 +1181,15 @@ namespace Pint
             ClearImageButton.BorderWidth = 0F;
             ClearImageButton.FlatAppearance.BorderSize = 0;
             ClearImageButton.FlatStyle = FlatStyle.Flat;
-            ClearImageButton.Font = new Font("Calibri", 12F);
+            ClearImageButton.Font = new Font("Calibri", 12F, FontStyle.Bold);
             ClearImageButton.ForeColor = Color.Black;
-            ClearImageButton.Location = new Point(5, 74);
+            ClearImageButton.Location = new Point(5, 73);
             ClearImageButton.Name = "ClearImageButton";
             ClearImageButton.RoundBottomLeft = true;
             ClearImageButton.RoundBottomRight = true;
             ClearImageButton.RoundTopLeft = true;
             ClearImageButton.RoundTopRight = true;
-            ClearImageButton.Size = new Size(181, 33);
+            ClearImageButton.Size = new Size(186, 40);
             ClearImageButton.TabIndex = 60;
             ClearImageButton.Text = "Очистить изображение";
             ClearImageButton.UseVisualStyleBackColor = false;
@@ -1201,15 +1202,15 @@ namespace Pint
             ImportImageButton.BorderWidth = 0F;
             ImportImageButton.FlatAppearance.BorderSize = 0;
             ImportImageButton.FlatStyle = FlatStyle.Flat;
-            ImportImageButton.Font = new Font("Calibri", 12F);
+            ImportImageButton.Font = new Font("Calibri", 12F, FontStyle.Bold);
             ImportImageButton.ForeColor = Color.Black;
-            ImportImageButton.Location = new Point(195, 34);
+            ImportImageButton.Location = new Point(196, 26);
             ImportImageButton.Name = "ImportImageButton";
             ImportImageButton.RoundBottomLeft = true;
             ImportImageButton.RoundBottomRight = true;
             ImportImageButton.RoundTopLeft = true;
             ImportImageButton.RoundTopRight = true;
-            ImportImageButton.Size = new Size(181, 33);
+            ImportImageButton.Size = new Size(186, 40);
             ImportImageButton.TabIndex = 61;
             ImportImageButton.Text = "Импорт изображения";
             ImportImageButton.UseVisualStyleBackColor = false;
@@ -1263,10 +1264,10 @@ namespace Pint
             // 
             rotatableLineControl2.Color = Color.Black;
             rotatableLineControl2.LineWidth = 2F;
-            rotatableLineControl2.Location = new Point(213, 0);
+            rotatableLineControl2.Location = new Point(213, 5);
             rotatableLineControl2.Name = "rotatableLineControl2";
             rotatableLineControl2.RotationAngle = 0F;
-            rotatableLineControl2.Size = new Size(10, 150);
+            rotatableLineControl2.Size = new Size(10, 140);
             rotatableLineControl2.TabIndex = 33;
             // 
             // DrawingTimer
@@ -1281,7 +1282,7 @@ namespace Pint
             // CoordinatesLabel
             // 
             CoordinatesLabel.BackColor = Color.Transparent;
-            CoordinatesLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            CoordinatesLabel.Font = new Font("Calibri", 12F, FontStyle.Bold);
             CoordinatesLabel.Location = new Point(3, 5);
             CoordinatesLabel.Name = "CoordinatesLabel";
             CoordinatesLabel.Size = new Size(135, 21);
@@ -1292,8 +1293,8 @@ namespace Pint
             // SizeLabel
             // 
             SizeLabel.BackColor = Color.Transparent;
-            SizeLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            SizeLabel.Location = new Point(144, 5);
+            SizeLabel.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            SizeLabel.Location = new Point(147, 5);
             SizeLabel.Name = "SizeLabel";
             SizeLabel.Size = new Size(152, 21);
             SizeLabel.TabIndex = 48;
@@ -1320,7 +1321,7 @@ namespace Pint
             // PenWidthLabel
             // 
             PenWidthLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            PenWidthLabel.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            PenWidthLabel.Font = new Font("Calibri", 12F, FontStyle.Bold);
             PenWidthLabel.Location = new Point(4, 15);
             PenWidthLabel.Name = "PenWidthLabel";
             PenWidthLabel.Size = new Size(43, 23);
@@ -1358,6 +1359,7 @@ namespace Pint
             roundPanel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             roundPanel2.BackColor = Color.WhiteSmoke;
             roundPanel2.BorderRadius = 12;
+            roundPanel2.Controls.Add(rotatableLineControl4);
             roundPanel2.Controls.Add(SizeLabel);
             roundPanel2.Controls.Add(CoordinatesLabel);
             roundPanel2.ForeColor = Color.Black;
@@ -1369,6 +1371,16 @@ namespace Pint
             roundPanel2.RoundTopRight = true;
             roundPanel2.Size = new Size(302, 30);
             roundPanel2.TabIndex = 51;
+            // 
+            // rotatableLineControl4
+            // 
+            rotatableLineControl4.Color = Color.Black;
+            rotatableLineControl4.LineWidth = 2F;
+            rotatableLineControl4.Location = new Point(140, 2);
+            rotatableLineControl4.Name = "rotatableLineControl4";
+            rotatableLineControl4.RotationAngle = 0F;
+            rotatableLineControl4.Size = new Size(10, 25);
+            rotatableLineControl4.TabIndex = 49;
             // 
             // MainImage
             // 
@@ -1421,7 +1433,7 @@ namespace Pint
         private Panel panel2;
         private Button DeepSkyBlue_Btn;
         private Button Gold_Btn;
-        private Button Fuchsia_Btn;
+        private Button Violet_Btn;
         private Button RoyalBlue_Btn;
         private Button Cyan_Btn;
         private Button LawnGreen_Btn;
@@ -1457,9 +1469,9 @@ namespace Pint
         private Button Blue_Btn;
         private Button LightGray_Btn;
         private Button Purple_Btn;
-        private Button DeepPink_Btn;
+        private Button MediumVioletRed_Btn;
         private Button Navy_Btn;
-        private Button Sienna_Btn;
+        private Button DeepPink_Btn;
         private Button Goldenrod_Btn;
         private Button Crimson_Btn;
         private Button DarkGreen_Btn;
@@ -1497,5 +1509,6 @@ namespace Pint
         private ScrollablePictureBox MainImage;
         private RoundButton Settings_Btn;
         private Panel panel3;
+        private LineControl rotatableLineControl4;
     }
 }

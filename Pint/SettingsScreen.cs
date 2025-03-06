@@ -27,6 +27,11 @@ namespace Pint
                 useAntiAliasing.Checked = true;
             else
                 dontUseAntiAliasing.Checked = true;
+
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                useExtendedCtrl.Checked = true;
+            else
+                dontUseExtendedCtrl.Checked = true;
         }
 
         #region Radiobuttons
@@ -51,6 +56,10 @@ namespace Pint
         private void useAntiAliasing_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["Anti-Aliasing"] = "use";
 
         private void dontUseAntiAliasing_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["Anti-Aliasing"] = "dontUse";
+
+        private void useExtendedCtrl_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["ExtendedCtrl"] = "use";
+
+        private void dontUseExtendedCtrl_CheckedChanged(object sender, EventArgs e) => ConfigurationManager.AppSettings["ExtendedCtrl"] = "dontUse";
 
         #endregion
 
@@ -78,7 +87,7 @@ namespace Pint
             ForeColor = foreColor;
             BackColor = backColor;
 
-            RoundGroupBox[] groupBoxes = { groupBox1, groupBox2, groupBox3 };
+            RoundGroupBox[] groupBoxes = { groupBox1, groupBox2, groupBox3, groupBox4 };
             foreach (var groupBox in groupBoxes)
             {
                 groupBox.BackColor = groupBoxBackColor;
@@ -104,6 +113,5 @@ namespace Pint
         }
 
         #endregion
-
     }
 }
