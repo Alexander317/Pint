@@ -1404,7 +1404,7 @@ namespace Pint
             MinimumSize = new Size(1400, 900);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Pint v4.3.0";
+            Text = "Pint v4.4.0";
             KeyDown += MainForm_KeyDown;
             Resize += MainForm_Resize;
             panel4.ResumeLayout(false);

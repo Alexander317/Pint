@@ -45,6 +45,8 @@ namespace Pint.Core
 
         public void ClearBitmap(Bitmap bitmap)
         {
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                AddToPreviousBitmaps(bitmap);
             using Graphics g = Graphics.FromImage(bitmap);
             g.Clear(Color.White);
         }
@@ -55,7 +57,7 @@ namespace Pint.Core
 
         public void Filter(Bitmap bitmap, Pen pen)
         {
-            //Проверка чтобы не тратить кучу памяти
+            //Проверка: очищаем список предыдущих битмапов если они не используются и сам список не пуст
             if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "dontUse" && previousBitmaps.Count > 0)
             {
                 foreach (Bitmap bmp in previousBitmaps)
@@ -64,7 +66,7 @@ namespace Pint.Core
                 }
                 previousBitmaps.Clear();
             }
-
+            //Проверка: очищаем список будущих битмапов если он не пуст, потому что программа сейчас будет рисовать
             if (futureBitmaps.Count > 0)
             {
                 foreach (Bitmap bmp in futureBitmaps)
@@ -74,8 +76,11 @@ namespace Pint.Core
                 futureBitmaps.Clear();
             }
 
+            //Проверка: добавить битмап в предыдущие или нет
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                AddToPreviousBitmaps(bitmap);
 
-
+            //Рисуем, господа
             if (mainToolDefiner == MainEnum.Pensils)
             {
                 currentPencil.UsePencil(bitmap, pen, arrayPoint,

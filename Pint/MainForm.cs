@@ -52,10 +52,6 @@ namespace Pint
 
             paintCore.ArrayPoint.SetPoint(e.X, e.Y);
             mouseDown = true;
-            //
-            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
-                paintCore.AddToPreviousBitmaps(MainBitmap);
-            //
             if (paintCore.MainToolDefiner == MainEnum.Figures)
                 DrawingTimer.Enabled = true;
         }
@@ -100,10 +96,6 @@ namespace Pint
         {
             if (paintCore.MainToolDefiner is MainEnum.Misc)
             {
-                //
-                if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
-                    paintCore.AddToPreviousBitmaps(MainBitmap);
-                //
                 if (paintCore.CurrentMisc is ColorPicker)
                 {
                     pen.Color = MainBitmap.GetPixel(paintCore.LastPos.X, paintCore.LastPos.Y);
