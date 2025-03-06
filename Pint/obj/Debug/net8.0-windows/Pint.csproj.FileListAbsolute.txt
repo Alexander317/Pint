@@ -36,5 +36,98 @@ C:\Users\User\source\repos\Pint\Pint\obj\Debug\net8.0-windows\refint\Pint.dll
 C:\Users\User\source\repos\Pint\Pint\obj\Debug\net8.0-windows\Pint.pdb
 C:\Users\User\source\repos\Pint\Pint\obj\Debug\net8.0-windows\Pint.genruntimeconfig.cache
 C:\Users\User\source\repos\Pint\Pint\obj\Debug\net8.0-windows\ref\Pint.dll
-C:\Users\User\source\repos\Pint\Pint\obj\Debug\net8.0-windows\CustomPaint.SizeChooseDialog.resources
 C:\Users\User\source\repos\Pint\Pint\obj\Debug\net8.0-windows\Pint.ScrollablePictureBox.resources
+C:\Users\User\source\repos\Pint\Pint\obj\Debug\net8.0-windows\Pint.AdditionalToolbox.LineControl.resources
+C:\Users\User\source\repos\Pint\Pint\obj\Debug\net8.0-windows\Pint.SizeChooseDialog.resources
+C:\Users\User\Desktop\Pint\Pint\bin\Debug\net8.0-windows\Pint.exe
+C:\Users\User\Desktop\Pint\Pint\bin\Debug\net8.0-windows\Pint.dll.config
+C:\Users\User\Desktop\Pint\Pint\bin\Debug\net8.0-windows\Pint.deps.json
+C:\Users\User\Desktop\Pint\Pint\bin\Debug\net8.0-windows\Pint.runtimeconfig.json
+C:\Users\User\Desktop\Pint\Pint\bin\Debug\net8.0-windows\Pint.dll
+C:\Users\User\Desktop\Pint\Pint\bin\Debug\net8.0-windows\Pint.pdb
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.AdditionalToolbox.LineControl.resources
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.ScrollablePictureBox.resources
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.MainForm.resources
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.Properties.Resources.resources
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.SettingsScreen.resources
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.SizeChooseDialog.resources
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.AssemblyInfo.cs
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.sourcelink.json
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.dll
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\refint\Pint.dll
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.pdb
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\Pint.genruntimeconfig.cache
+C:\Users\User\Desktop\Pint\Pint\obj\Debug\net8.0-windows\ref\Pint.dll
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.exe
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.dll.config
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.deps.json
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.runtimeconfig.json
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.dll
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.pdb
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.AdditionalToolbox.LineControl.resources
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.ScrollablePictureBox.resources
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.MainForm.resources
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.Properties.Resources.resources
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.SettingsScreen.resources
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.SizeChooseDialog.resources
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.AssemblyInfo.cs
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.sourcelink.json
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.dll
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\refint\Pint.dll
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.pdb
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.genruntimeconfig.cache
+C:\Users\User\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\ref\Pint.dll
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\bin\Debug\net8.0-windows\Pint.exe
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\bin\Debug\net8.0-windows\Pint.dll.config
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\bin\Debug\net8.0-windows\Pint.deps.json
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\bin\Debug\net8.0-windows\Pint.runtimeconfig.json
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\bin\Debug\net8.0-windows\Pint.dll
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\bin\Debug\net8.0-windows\Pint.pdb
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.AdditionalToolbox.LineControl.resources
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.ScrollablePictureBox.resources
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.MainForm.resources
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.Properties.Resources.resources
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.SettingsScreen.resources
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.SizeChooseDialog.resources
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.csproj.GenerateResource.cache
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.AssemblyInfoInputs.cache
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.AssemblyInfo.cs
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.csproj.CoreCompileInputs.cache
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.sourcelink.json
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.dll
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\refint\Pint.dll
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.pdb
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\Pint.genruntimeconfig.cache
+C:\Users\AlexSanech\source\repos\Pint_Main\Pint\obj\Debug\net8.0-windows\ref\Pint.dll
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.exe
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.dll.config
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.deps.json
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.runtimeconfig.json
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.dll
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\bin\Debug\net8.0-windows\Pint.pdb
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.AdditionalToolbox.LineControl.resources
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.ScrollablePictureBox.resources
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.MainForm.resources
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.Properties.Resources.resources
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.SettingsScreen.resources
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.SizeChooseDialog.resources
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.csproj.GenerateResource.cache
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.AssemblyInfoInputs.cache
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.AssemblyInfo.cs
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.csproj.CoreCompileInputs.cache
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.sourcelink.json
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.dll
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\refint\Pint.dll
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.pdb
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\Pint.genruntimeconfig.cache
+C:\Users\AlexSanech\Desktop\Индивидуальный проект\Старые версии пэйнта\Pint_v4\Pint\obj\Debug\net8.0-windows\ref\Pint.dll
