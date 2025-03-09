@@ -68,9 +68,9 @@ namespace Pint
 
             CoordinatesLabel.Text = $"{e.X}, {e.Y}пкс";
             paintCore.LastPos = new Point(e.X, e.Y);
+
             if (!mouseDown)
                 return;
-
 
             if (paintCore.MainToolDefiner == MainEnum.Pensils)
             {
@@ -81,9 +81,9 @@ namespace Pint
         }
         private void DrawingTimer_Tick(object sender, EventArgs e)
         {
-            CopyBitmap = new(MainBitmap);
+            CopyBitmap = (Bitmap)MainBitmap.Clone();
             paintCore.DrawOnCopiedBitmap(CopyBitmap, pen);
-            MainImage.SetImage(CopyBitmap);
+            MainImage.SetImage((Bitmap)CopyBitmap.Clone());
             GC.Collect();
         }
         private void MainImage_MouseUp(object sender, MouseEventArgs e)
@@ -111,7 +111,7 @@ namespace Pint
                 {
                     //Проверка: добавить битмап в предыдущие или нет
                     if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
-                        AddToPreviousBitmaps(bitmap);
+                        paintCore.AddToPreviousBitmaps(MainBitmap);
                     paintCore.Filter(MainBitmap, pen);
                     MainImage.SetImage(MainBitmap);
                 }
