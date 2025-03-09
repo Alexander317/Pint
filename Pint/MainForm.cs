@@ -19,7 +19,6 @@ namespace Pint
         private PaintCore paintCore = new();
         private Pen pen = new(Color.Black, 1);
         private Bitmap MainBitmap;
-        private Bitmap CopyBitmap;
         private bool mouseDown = false;
 
         #endregion
@@ -81,9 +80,7 @@ namespace Pint
         }
         private void DrawingTimer_Tick(object sender, EventArgs e)
         {
-            CopyBitmap = (Bitmap)MainBitmap.Clone();
-            paintCore.DrawOnCopiedBitmap(CopyBitmap, pen);
-            MainImage.SetImage((Bitmap)CopyBitmap.Clone());
+            MainImage.SetImage(paintCore.DrawOnCopiedBitmap((Bitmap)MainBitmap.Clone(), pen));
             GC.Collect();
         }
         private void MainImage_MouseUp(object sender, MouseEventArgs e)
@@ -93,7 +90,6 @@ namespace Pint
 
             DrawingTimer.Enabled = false;
             mouseDown = false;
-            CopyBitmap?.Dispose();
             paintCore.Filter(MainBitmap, pen);
             MainImage.SetImage(MainBitmap);
             paintCore.ArrayPoint.ResetAll();
