@@ -1,13 +1,13 @@
+using Pint.Core.Enums;
+using Pint.Core;
+using Pint.Core.Pencils;
 using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
+using Pint.Core.Misc;
 using Pint.Properties;
 using Pint.AdditionalToolbox;
-using Pint.Core;
-using Pint.Core.Tools;
-using Pint.Core.Tools.Figures;
-using Pint.Core.Tools.Misc;
-using Pint.Core.Tools.Pencils;
+using System.Drawing;
 
 namespace Pint
 {
@@ -16,30 +16,32 @@ namespace Pint
     {
         #region Fields
 
-        private ArrayPoint arrayPoint = new(2);
         private PaintCore paintCore = new();
+        private Pen pen = new(Color.Black, 1);
         private Bitmap MainBitmap;
-        private Bitmap CopyBitmap;
         private bool mouseDown = false;
-        private Dictionary<Button, Func<ITool>> buttonFactories;
 
         #endregion
 
         public MainForm()
         {
             InitializeComponent();
-            InitButtons();
+            InitializeButtons();
 
             MainImage.GetPictureBox().MouseDown += MainImage_MouseDown;
             MainImage.GetPictureBox().MouseMove += MainImage_MouseMove;
             MainImage.GetPictureBox().MouseUp += MainImage_MouseUp;
+            MainImage.GetPictureBox().MouseClick += MainImage_MouseClick;
 
-            paintCore.Settings.ColorChanged += UpdateCurrentColors;
-            UpdateCurrentColors(paintCore.Settings.CurrentColor);
+            SetButtonTags();
+            paintCore.MainToolDefiner = MainEnum.Pensils;
+            paintCore.CurrentPensil = new Pencil();
 
-            SelectTool(Pencil_Btn, null);
-            PenTrackBar_Scroll(new object(), EventArgs.Empty);
+            UpdateCurrentColors(pen.Color);
+            ButtonHandler.Select(Pencil_Btn);
             SetUITheme();
+            PenTrackBar_Scroll(new object(), EventArgs.Empty);
+            PenHandler.MakePenRound(pen);
         }
 
         #region Main Image Handlers 
@@ -48,46 +50,95 @@ namespace Pint
             if (MainBitmap == null)
                 return;
 
+            paintCore.ArrayPoint.SetPoint(e.X, e.Y);
             mouseDown = true;
-            paintCore.CurrentTool.OnMouseDown(e, MainBitmap, paintCore.Settings, arrayPoint);
+
+            //Проверка: добавить битмап в предыдущие или нет
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                paintCore.AddToPreviousBitmaps(MainBitmap);
+
+            if (paintCore.MainToolDefiner == MainEnum.Figures)
+                DrawingTimer.Enabled = true;
         }
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (MainBitmap == null) return;
+            if (MainBitmap == null)
+                return;
+
             CoordinatesLabel.Text = $"{e.X}, {e.Y}пкс";
+            paintCore.LastPos = new Point(e.X, e.Y);
 
-            if (!mouseDown) return;
+            if (!mouseDown)
+                return;
 
-            if (paintCore.CurrentTool.RequiresPreview)
+            if (paintCore.MainToolDefiner == MainEnum.Pensils)
             {
-                CopyBitmap?.Dispose();
-                CopyBitmap = new Bitmap(MainBitmap);
-                paintCore.CurrentTool.OnMouseMove(e, CopyBitmap, paintCore.Settings, arrayPoint);
-                MainImage.SetImage(CopyBitmap);
-            } else
-            {
-                paintCore.CurrentTool.OnMouseMove(e, MainBitmap, paintCore.Settings, arrayPoint);
+                paintCore.ArrayPoint.SetPoint(paintCore.LastPos);
+                paintCore.Filter(MainBitmap, pen);
                 MainImage.SetImage(MainBitmap);
             }
+        }
+        private void DrawingTimer_Tick(object sender, EventArgs e)
+        {
+            MainImage.SetImage(paintCore.DrawOnCopiedBitmap((Bitmap)MainBitmap.Clone(), pen));
+            GC.Collect();
         }
         private void MainImage_MouseUp(object sender, MouseEventArgs e)
         {
             if (MainBitmap == null)
                 return;
 
+            DrawingTimer.Enabled = false;
             mouseDown = false;
-            paintCore.CurrentTool.OnMouseUp(e, MainBitmap, paintCore.Settings, arrayPoint);
+            paintCore.Filter(MainBitmap, pen);
             MainImage.SetImage(MainBitmap);
+            paintCore.ArrayPoint.ResetAll();
+        }
+        private void MainImage_MouseClick(object sender, EventArgs e)
+        {
+            if (paintCore.MainToolDefiner is MainEnum.Misc)
+            {
+                if (paintCore.CurrentMisc is ColorPicker)
+                {
+                    pen.Color = MainBitmap.GetPixel(paintCore.LastPos.X, paintCore.LastPos.Y);
+                    UpdateCurrentColors(pen.Color);
+                }
+                else
+                {
+                    //Проверка: добавить битмап в предыдущие или нет
+                    if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                        paintCore.AddToPreviousBitmaps(MainBitmap);
+                    paintCore.Filter(MainBitmap, pen);
+                    MainImage.SetImage(MainBitmap);
+                }
+            }
         }
 
         #endregion
 
         #region Other Handlers
 
-        private void SelectTool(object sender, EventArgs e)
+        private void MainSelect(object sender, EventArgs e)
         {
+            object? tag = ((Button)sender).Tag;
+
+            if (tag is FiguresEnum)
+            {
+                paintCore.MainToolDefiner = MainEnum.Figures;
+                paintCore.CurrentFigure = EnumsHandler.getFigure((FiguresEnum)tag);
+            }
+            else if (tag is PensilsEnum)
+            {
+                paintCore.MainToolDefiner = MainEnum.Pensils;
+                paintCore.CurrentPensil = EnumsHandler.getPensil((PensilsEnum)tag);
+            }
+            else if (tag is MiscEnum)
+            {
+                paintCore.MainToolDefiner = MainEnum.Misc;
+                paintCore.CurrentMisc = EnumsHandler.getMisc((MiscEnum)tag);
+            }
+            ButtonHandler.UnselectAll();
             ButtonHandler.Select((Button)sender);
-            paintCore.CurrentTool = buttonFactories[(Button)sender]();
         }
 
         private void ClearImageButton_Click(object sender, EventArgs e)
@@ -97,6 +148,10 @@ namespace Pint
 
             int BackupWidth = MainBitmap.Width;
             int BackupHeight = MainBitmap.Height;
+
+            //Проверка: добавить битмап в предыдущие или нет
+            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                paintCore.AddToPreviousBitmaps(MainBitmap);
 
             MainBitmap?.Dispose();
             MainBitmap = paintCore.CreateBitmap(new Size(BackupWidth, BackupHeight));
@@ -121,7 +176,7 @@ namespace Pint
         {
             if (e.Control)
             {
-                /*if (e.KeyCode == Keys.Z && ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
+                if (e.KeyCode == Keys.Z && ConfigurationManager.AppSettings["ExtendedCtrl"] == "use")
                 {
                     MainBitmap = paintCore.ReturnToPreviousBitmap(MainBitmap);
                     MainImage.SetImage(MainBitmap);
@@ -131,7 +186,7 @@ namespace Pint
                     MainBitmap = paintCore.ReturnToFutureBitmap(MainBitmap);
                     MainImage.SetImage(MainBitmap);
                 }
-                else*/
+                else
                 if (e.KeyCode == Keys.S)
                     ExportImageButton_Click(sender, new EventArgs());
                 else if (e.KeyCode == Keys.C)
@@ -143,8 +198,8 @@ namespace Pint
 
         private void PenTrackBar_Scroll(object sender, EventArgs e)
         {
-            paintCore.Settings.PenWidth = PenTrackBar.Value + 1;
-            PenWidthLabel.Text = paintCore.Settings.PenWidth.ToString();
+            PenHandler.SetPenParameters(pen, PenTrackBar.Value + 1, pen.Color);
+            PenWidthLabel.Text = pen.Width.ToString();
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)
@@ -160,6 +215,7 @@ namespace Pint
 
             sizeChooseDialog.SizeChanged += (_, size) =>
             {
+                //if MainBm != null then dispose it
                 MainBitmap?.Dispose();
                 MainBitmap = paintCore.CreateBitmap(size);
                 ProcessPictureBox(size);
@@ -174,6 +230,7 @@ namespace Pint
             openFileDialog1.FileName = "";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                //if MainBm != null then dispose it
                 MainBitmap?.Dispose();
                 MainBitmap = new Bitmap(openFileDialog1.FileName);
                 ProcessPictureBox(new Size(MainBitmap.Width, MainBitmap.Height));
@@ -223,10 +280,17 @@ namespace Pint
                 try
                 {
                     Color color = ColorTranslator.FromHtml(CurrentColorHTML.Text);
-                    paintCore.Settings.CurrentColor = color;
+                    UpdateCurrentColors(color);
+                    pen.Color = color;
                 }
-                catch (ArgumentException) { }
-                catch (FormatException) { }
+                catch (ArgumentException)
+                {
+                    UpdateCurrentColors(pen.Color);
+                }
+                catch (FormatException)
+                {
+                    UpdateCurrentColors(pen.Color);
+                }
             }
         }
 
@@ -240,10 +304,17 @@ namespace Pint
                         Convert.ToInt32(CurrentColor_R.Text),
                         Convert.ToInt32(CurrentColor_G.Text),
                         Convert.ToInt32(CurrentColor_B.Text));
-                    paintCore.Settings.CurrentColor = color;
+                    UpdateCurrentColors(color);
+                    pen.Color = color;
                 }
-                catch (ArgumentException) { }
-                catch (FormatException) { }
+                catch (ArgumentException)
+                {
+                    UpdateCurrentColors(pen.Color);
+                }
+                catch (FormatException)
+                {
+                    UpdateCurrentColors(pen.Color);
+                }
             }
         }
 
@@ -253,7 +324,8 @@ namespace Pint
                 ColorSlider_R.Value,
                 ColorSlider_G.Value,
                 ColorSlider_B.Value);
-            paintCore.Settings.CurrentColor = color;
+            UpdateCurrentColors(color);
+            pen.Color = color;
         }
 
         private void UpdateCurrentColors(Color color)
@@ -271,48 +343,31 @@ namespace Pint
         private void SelectColor(object sender, EventArgs e)
         {
             Color color = ((Button)sender).BackColor;
-            paintCore.Settings.CurrentColor = color;
+            UpdateCurrentColors(color);
+            pen.Color = color;
         }
         #endregion
 
         #region Button Handlers
 
-        public void InitButtons()
+        private void SetButtonTags()
         {
-            InitButtonFactories();
-            InitButtonSelector();
+            Circle_Btn.Tag = FiguresEnum.Circle;
+            Line_Btn.Tag = FiguresEnum.Line;
+            Rectangle_Btn.Tag = FiguresEnum.Square;
+            RightTriangle_Btn.Tag = FiguresEnum.RightTriangle;
+            RegularTriangle_Btn.Tag = FiguresEnum.RegularTriangle;
+            StarFive_Btn.Tag = FiguresEnum.StarFive;
+            StarSix_Btn.Tag = FiguresEnum.StarSix;
+            StarEight_Btn.Tag = FiguresEnum.StarEight;
+            Rhombus_Btn.Tag = FiguresEnum.Rhombus;
+            Hexagon_Btn.Tag = FiguresEnum.Hexagon;
+            Pencil_Btn.Tag = PensilsEnum.Pencil;
+            Eraser_Btn.Tag = PensilsEnum.Eraser;
+            Filler_Btn.Tag = MiscEnum.Filler;
+            ColorPicker_Btn.Tag = MiscEnum.ColorPicker;
         }
-        public void InitButtonFactories()
-        {
-            buttonFactories = new Dictionary<Button, Func<ITool>>
-            {
-                // Pencils
-                { Pencil_Btn, () => new PencilTool() },
-                { Eraser_Btn, () => new EraserTool()  },
-                /*{ Eraser_Btn, () => new Eraser() },*/
-
-                // Figures
-                { Circle_Btn, () => new CircleTool() },
-                { Rectangle_Btn, () => new RectangleTool() },
-                { Hexagon_Btn, () => new HexagonTool()  },
-                { Line_Btn, () => new LineTool()  },
-                { RegularTriangle_Btn, () => new RegularTriangleTool()  },
-                { Rhombus_Btn, () => new RhombusTool()  },
-                { RightTriangle_Btn, () => new RightTriangleTool()  },
-                { StarEight_Btn, () => new StarEightTool()  },
-                { StarFive_Btn, () => new StarFiveTool()  },
-                { StarSix_Btn, () => new StarSixTool()  },
-
-                // Miscs
-                { ColorPicker_Btn, () => new ColorPickerTool()  },
-                { Filler_Btn, () => new FillerTool()  },
-            };
-            foreach (var button in buttonFactories.Keys)
-            {
-                button.Click += SelectTool;
-            }
-        }
-        public void InitButtonSelector()
+        public void InitializeButtons()
         {
             ButtonHandler.Buttons.Add(Circle_Btn);
             ButtonHandler.Buttons.Add(Rectangle_Btn);
@@ -329,6 +384,16 @@ namespace Pint
             ButtonHandler.Buttons.Add(Filler_Btn);
             ButtonHandler.Buttons.Add(Settings_Btn);
             ButtonHandler.Buttons.Add(ColorPicker_Btn);
+        }
+
+        public void DrawOnButtons(Color color)
+        {
+            ButtonHandler.SetArrayPoint();
+            foreach (var btn in ButtonHandler.Buttons)
+            {
+                if (btn.Tag is FiguresEnum)
+                    ButtonHandler.DrawOnButton(btn, color);
+            }
         }
 
         #endregion
@@ -402,42 +467,24 @@ namespace Pint
         }
         private void SetLinesColor(Color linesColor)
         {
-            var lines = new LineControl[] { rotatableLineControl1, rotatableLineControl2, rotatableLineControl3 };
+            var lines = new LineControl[] { rotatableLineControl1, rotatableLineControl2, rotatableLineControl3, rotatableLineControl4 };
             foreach (var line in lines)
                 line.Color = linesColor;
         }
         private void SetControlImages(bool isLightTheme, Color buttonImageColor)
         {
+            DrawOnButtons(buttonImageColor);
             var buttonImages = new Dictionary<Control, Image>
             {
-                // Основные инструменты
-                { Filler_Btn, isLightTheme ? Resources.filler : Resources.filler_inverted },
+                { Filler_Btn, isLightTheme ? Resources.Filler : Resources.filler_inverted },
                 { Pencil_Btn, isLightTheme ? Resources.pencil : Resources.pencil_inverted },
                 { Eraser_Btn, isLightTheme ? Resources.eraser : Resources.eraser_inverted },
                 { ColorPicker_Btn, isLightTheme ? Resources.color_picker : Resources.color_picker_inverted },
                 { Scribble, isLightTheme ? Resources.scribble : Resources.scribble_inverted },
-                { Settings_Btn, isLightTheme ? Resources.settings : Resources.settings_inverted },
-
-                // Фигуры
-                { Rectangle_Btn, isLightTheme ? Resources.rectangle : Resources.rectangle_inverted },
-                { Circle_Btn, isLightTheme ? Resources.circle : Resources.circle_inverted },
-                { Line_Btn, isLightTheme ? Resources.line : Resources.line_inverted },
-                { Rhombus_Btn, isLightTheme ? Resources.rhombus : Resources.rhombus_inverted },
-                { Hexagon_Btn, isLightTheme ? Resources.hexagon : Resources.hexagon_inverted },
-    
-                // Треугольники (в ресурсах дефис станет подчеркиванием)
-                { RegularTriangle_Btn, isLightTheme ? Resources.regular_triangle : Resources.regular_triangle_inverted },
-                { RightTriangle_Btn, isLightTheme ? Resources.right_triangle : Resources.right_triangle_inverted },
-
-                // Звезды
-                { StarFive_Btn, isLightTheme ? Resources.star_five : Resources.star_five_inverted },
-                { StarSix_Btn, isLightTheme ? Resources.star_six : Resources.star_six_inverted },
-                { StarEight_Btn, isLightTheme ? Resources.star_eight : Resources.star_eight_inverted }
+                { Settings_Btn, isLightTheme ? Resources.settings : Resources.settings_inverted }
             };
             foreach (var kvp in buttonImages)
-            {
                 kvp.Key.BackgroundImage = kvp.Value;
-            }
         }
         private void SetBorderColor(Color borderColor)
         {
