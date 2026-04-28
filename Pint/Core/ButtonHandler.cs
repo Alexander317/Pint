@@ -1,8 +1,4 @@
-﻿using Pint.Core.Enums;
-using Pint.Core.Figures;
-using System.Drawing.Drawing2D;
-
-namespace Pint.Core
+﻿namespace Pint.Core
 {
     public class ButtonHandler
     {
@@ -11,8 +7,6 @@ namespace Pint.Core
         private static List<Button> buttons = new();
         private static Color selectColor { get; set; }
         private static Button lastSelectedBtn;
-        private static ArrayPoint buttonAP = new(2);
-        private static Bitmap buttonBitmap;
 
         #endregion
 
@@ -32,33 +26,13 @@ namespace Pint.Core
         }
         public static void Select(Button btn)
         {
-            btn.BackColor = selectColor;
+            if (lastSelectedBtn != null) lastSelectedBtn.BackColor = Color.Transparent;
             lastSelectedBtn = btn;
+            lastSelectedBtn.BackColor = selectColor;
         }
         public static void UpdateBtnColors() {
             UnselectAll();
-            lastSelectedBtn.BackColor = selectColor;
-        }
-
-        #endregion
-
-        #region Button Drawing
-
-        public static void SetArrayPoint()
-        {
-            buttonAP.SetPoint(18, 18);
-            buttonAP.SetPoint(44, 44);
-        }
-
-        public static void DrawOnButton(Button button, Color color)
-        {
-            buttonBitmap = new Bitmap(64, 64);
-            using (Graphics g = Graphics.FromImage(buttonBitmap))
-            {
-                MainFigure currentFigure = EnumsHandler.getFigure((FiguresEnum)button.Tag);
-                currentFigure.UseFigure(buttonBitmap, new Pen(color, 2), buttonAP, SmoothingMode.AntiAlias);
-                button.Image = buttonBitmap;
-            }
+            if (lastSelectedBtn != null) lastSelectedBtn.BackColor = selectColor;
         }
 
         #endregion

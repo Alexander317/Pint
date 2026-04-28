@@ -1,36 +1,23 @@
-﻿using Pint.Core.Enums;
-using Pint.Core.Figures;
-using Pint.Core.Misc;
-using Pint.Core.Pencils;
-using System.Configuration;
-using System.Drawing.Drawing2D;
-
+﻿using Pint.Core.Tools;
 
 namespace Pint.Core
 {
     public class PaintCore
     {
         #region Fields
-
-        private MainEnum mainToolDefiner;
-        private Point lastPos;
-        private MainFigure currentFigure;
-        private MainPencil currentPencil;
-        private MainMisc currentMisc;
+        private ITool currentTool;
+        private DrawingSettinngs settings = new();
         private List<Bitmap> previousBitmaps = new();
         private List<Bitmap> futureBitmaps = new();
-        private ArrayPoint arrayPoint = new(2);
+
+        private List<Drawing> drawings = new();
 
         #endregion
 
         #region Properties
 
-        public MainEnum MainToolDefiner {  get => mainToolDefiner; set => mainToolDefiner = value;  }
-        public Point LastPos { get => lastPos; set => lastPos = value; }
-        public MainFigure CurrentFigure { get => currentFigure; set => currentFigure = value; }
-        public MainPencil CurrentPensil { get => currentPencil; set => currentPencil = value; }
-        public MainMisc CurrentMisc { get => currentMisc; set => currentMisc = value; }
-        public ArrayPoint ArrayPoint { get => arrayPoint; }
+        public ITool CurrentTool { get => currentTool; set => currentTool = value;  }
+        public DrawingSettinngs Settings { get => settings; set => settings = value; }
 
         #endregion
 
@@ -51,53 +38,9 @@ namespace Pint.Core
 
         #endregion
 
-        #region Main Drawing
+        #region Undo/Redo
+        
 
-        public void Filter(Bitmap bitmap, Pen pen)
-        {
-            //Проверка: очищаем список предыдущих битмапов если они не используются и сам список не пуст
-            if (ConfigurationManager.AppSettings["ExtendedCtrl"] == "dontUse" && previousBitmaps.Count > 0)
-            {
-                foreach (Bitmap bmp in previousBitmaps)
-                {
-                    bmp.Dispose();
-                }
-                previousBitmaps.Clear();
-            }
-            //Проверка: очищаем список будущих битмапов если он не пуст, потому что программа сейчас будет рисовать
-            if (futureBitmaps.Count > 0)
-            {
-                foreach (Bitmap bmp in futureBitmaps)
-                {
-                    bmp.Dispose();
-                }
-                futureBitmaps.Clear();
-            }
-
-            //Рисуем, господа
-            if (mainToolDefiner == MainEnum.Pensils)
-            {
-                currentPencil.UsePencil(bitmap, pen, arrayPoint,
-                    ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
-            }
-            else if (mainToolDefiner == MainEnum.Figures)
-            {
-                currentFigure.UseFigure(bitmap, pen, arrayPoint,
-                    ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
-            }
-            else if (mainToolDefiner == MainEnum.Misc)
-            {
-                currentMisc.UseMisc(bitmap, pen, lastPos);
-            }
-        }
-        public Bitmap DrawOnCopiedBitmap(Bitmap bitmap, Pen pen)
-        {
-            arrayPoint.ResetOnlyLast();
-            arrayPoint.SetPoint(lastPos);
-            currentFigure.UseFigure(bitmap, pen, arrayPoint,
-                ConfigurationManager.AppSettings["Anti-Aliasing"] == "use" ? SmoothingMode.AntiAlias : SmoothingMode.HighSpeed);
-            return bitmap;
-        }
 
         #endregion
 
