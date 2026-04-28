@@ -60,7 +60,7 @@ namespace Pint
             groupBox1.Controls.Add(darkTheme);
             groupBox1.Controls.Add(lightTheme);
             groupBox1.FlatStyle = FlatStyle.Flat;
-            groupBox1.Font = new Font("Calibri", 15F, FontStyle.Bold);
+            groupBox1.Font = new Font("Calibri", 16F);
             groupBox1.ForeColor = Color.Black;
             groupBox1.Location = new Point(17, 31);
             groupBox1.Name = "groupBox1";
@@ -68,17 +68,18 @@ namespace Pint
             groupBox1.RoundBottomRight = true;
             groupBox1.RoundTopLeft = true;
             groupBox1.RoundTopRight = true;
-            groupBox1.Size = new Size(330, 161);
+            groupBox1.Size = new Size(400, 134);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Тема приложения";
             // 
             // label1
             // 
-            label1.Font = new Font("Calibri", 12F);
+            label1.AutoSize = true;
+            label1.Font = new Font("Calibri", 11F);
             label1.Location = new Point(10, 37);
             label1.Name = "label1";
-            label1.Size = new Size(320, 40);
+            label1.Size = new Size(320, 18);
             label1.TabIndex = 3;
             label1.Text = "Определяет тему приложения для отображения";
             // 
@@ -86,7 +87,7 @@ namespace Pint
             // 
             darkTheme.AutoSize = true;
             darkTheme.Font = new Font("Calibri", 13F);
-            darkTheme.Location = new Point(25, 123);
+            darkTheme.Location = new Point(31, 104);
             darkTheme.Name = "darkTheme";
             darkTheme.Size = new Size(84, 26);
             darkTheme.TabIndex = 2;
@@ -99,7 +100,7 @@ namespace Pint
             // 
             lightTheme.AutoSize = true;
             lightTheme.Font = new Font("Calibri", 13F);
-            lightTheme.Location = new Point(25, 91);
+            lightTheme.Location = new Point(31, 72);
             lightTheme.Name = "lightTheme";
             lightTheme.Size = new Size(89, 26);
             lightTheme.TabIndex = 1;
@@ -116,33 +117,33 @@ namespace Pint
             groupBox2.Controls.Add(useAgressiveFilling);
             groupBox2.Controls.Add(dontUseAgressiveFilling);
             groupBox2.FlatStyle = FlatStyle.Flat;
-            groupBox2.Font = new Font("Calibri", 15F, FontStyle.Bold);
+            groupBox2.Font = new Font("Calibri", 16F);
             groupBox2.ForeColor = Color.Black;
-            groupBox2.Location = new Point(17, 207);
+            groupBox2.Location = new Point(17, 195);
             groupBox2.Name = "groupBox2";
             groupBox2.RoundBottomLeft = true;
             groupBox2.RoundBottomRight = true;
             groupBox2.RoundTopLeft = true;
             groupBox2.RoundTopRight = true;
-            groupBox2.Size = new Size(330, 200);
+            groupBox2.Size = new Size(400, 200);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Более агрессивная заливка";
             // 
             // label2
             // 
-            label2.Font = new Font("Calibri", 12F);
+            label2.Font = new Font("Calibri", 11F);
             label2.Location = new Point(10, 35);
             label2.Name = "label2";
-            label2.Size = new Size(309, 91);
+            label2.Size = new Size(384, 91);
             label2.TabIndex = 3;
-            label2.Text = "Определяет, будет ли использоваться более агрессивный метод заливки фигуры (Может привести к графическим ошибкам)";
+            label2.Text = "Определяет, будет ли использоваться более агрессивный метод заливки фигуры (Лучше всего использовать когда цвета заливки и контура фигуры совпадают. Может привести к графическим ошибкам)";
             // 
             // useAgressiveFilling
             // 
             useAgressiveFilling.AutoSize = true;
             useAgressiveFilling.Font = new Font("Calibri", 13F);
-            useAgressiveFilling.Location = new Point(25, 129);
+            useAgressiveFilling.Location = new Point(31, 129);
             useAgressiveFilling.Name = "useAgressiveFilling";
             useAgressiveFilling.Size = new Size(135, 26);
             useAgressiveFilling.TabIndex = 2;
@@ -155,7 +156,7 @@ namespace Pint
             // 
             dontUseAgressiveFilling.AutoSize = true;
             dontUseAgressiveFilling.Font = new Font("Calibri", 13F);
-            dontUseAgressiveFilling.Location = new Point(25, 161);
+            dontUseAgressiveFilling.Location = new Point(31, 161);
             dontUseAgressiveFilling.Name = "dontUseAgressiveFilling";
             dontUseAgressiveFilling.Size = new Size(157, 26);
             dontUseAgressiveFilling.TabIndex = 1;
@@ -172,33 +173,33 @@ namespace Pint
             groupBox3.Controls.Add(useAntiAliasing);
             groupBox3.Controls.Add(dontUseAntiAliasing);
             groupBox3.FlatStyle = FlatStyle.Flat;
-            groupBox3.Font = new Font("Calibri", 15F, FontStyle.Bold);
+            groupBox3.Font = new Font("Calibri", 16F);
             groupBox3.ForeColor = Color.Black;
-            groupBox3.Location = new Point(374, 31);
+            groupBox3.Location = new Point(444, 31);
             groupBox3.Name = "groupBox3";
             groupBox3.RoundBottomLeft = true;
             groupBox3.RoundBottomRight = true;
             groupBox3.RoundTopLeft = true;
             groupBox3.RoundTopRight = true;
-            groupBox3.Size = new Size(330, 200);
+            groupBox3.Size = new Size(400, 207);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Технология Anti-Aliasing";
             // 
             // label3
             // 
-            label3.Font = new Font("Calibri", 12F);
+            label3.Font = new Font("Calibri", 11F);
             label3.Location = new Point(10, 37);
             label3.Name = "label3";
-            label3.Size = new Size(295, 93);
+            label3.Size = new Size(384, 82);
             label3.TabIndex = 3;
-            label3.Text = "Определяет, будет ли использоваться технология сглаживания Anti-Aliasing. Значительно улучшает качество картинки";
+            label3.Text = "Определяет, будет ли использоваться технология сглаживания Anti-Aliasing. Значительно улучшает качество картинки, но может привести к графическим ошибкам при использовании вместе с заливкой";
             // 
             // useAntiAliasing
             // 
             useAntiAliasing.AutoSize = true;
             useAntiAliasing.Font = new Font("Calibri", 13F);
-            useAntiAliasing.Location = new Point(25, 130);
+            useAntiAliasing.Location = new Point(31, 135);
             useAntiAliasing.Name = "useAntiAliasing";
             useAntiAliasing.Size = new Size(135, 26);
             useAntiAliasing.TabIndex = 2;
@@ -211,7 +212,7 @@ namespace Pint
             // 
             dontUseAntiAliasing.AutoSize = true;
             dontUseAntiAliasing.Font = new Font("Calibri", 13F);
-            dontUseAntiAliasing.Location = new Point(25, 162);
+            dontUseAntiAliasing.Location = new Point(31, 167);
             dontUseAntiAliasing.Name = "dontUseAntiAliasing";
             dontUseAntiAliasing.Size = new Size(157, 26);
             dontUseAntiAliasing.TabIndex = 1;
@@ -228,33 +229,33 @@ namespace Pint
             groupBox4.Controls.Add(useExtendedCtrl);
             groupBox4.Controls.Add(dontUseExtendedCtrl);
             groupBox4.FlatStyle = FlatStyle.Flat;
-            groupBox4.Font = new Font("Calibri", 15F, FontStyle.Bold);
+            groupBox4.Font = new Font("Calibri", 16F);
             groupBox4.ForeColor = Color.Black;
-            groupBox4.Location = new Point(374, 250);
+            groupBox4.Location = new Point(444, 258);
             groupBox4.Name = "groupBox4";
             groupBox4.RoundBottomLeft = true;
             groupBox4.RoundBottomRight = true;
             groupBox4.RoundTopLeft = true;
             groupBox4.RoundTopRight = true;
-            groupBox4.Size = new Size(330, 157);
+            groupBox4.Size = new Size(400, 137);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
-            groupBox4.Text = "Ctrl+Z и Ctrl+Y";
+            groupBox4.Text = "Откатить предудыщее действие";
             // 
             // label4
             // 
-            label4.Font = new Font("Calibri", 12F);
+            label4.Font = new Font("Calibri", 11F);
             label4.Location = new Point(10, 37);
             label4.Name = "label4";
-            label4.Size = new Size(314, 38);
+            label4.Size = new Size(335, 26);
             label4.TabIndex = 3;
-            label4.Text = "Определяет, могут ли использоваться сочетания клавиш Ctrl+Z и Ctrl+Y";
+            label4.Text = "Разрешает использование Ctrl+Z и Ctrl+Y";
             // 
             // useExtendedCtrl
             // 
             useExtendedCtrl.AutoSize = true;
             useExtendedCtrl.Font = new Font("Calibri", 13F);
-            useExtendedCtrl.Location = new Point(25, 85);
+            useExtendedCtrl.Location = new Point(31, 66);
             useExtendedCtrl.Name = "useExtendedCtrl";
             useExtendedCtrl.Size = new Size(135, 26);
             useExtendedCtrl.TabIndex = 2;
@@ -267,7 +268,7 @@ namespace Pint
             // 
             dontUseExtendedCtrl.AutoSize = true;
             dontUseExtendedCtrl.Font = new Font("Calibri", 13F);
-            dontUseExtendedCtrl.Location = new Point(25, 117);
+            dontUseExtendedCtrl.Location = new Point(31, 98);
             dontUseExtendedCtrl.Name = "dontUseExtendedCtrl";
             dontUseExtendedCtrl.Size = new Size(157, 26);
             dontUseExtendedCtrl.TabIndex = 1;
@@ -281,7 +282,7 @@ namespace Pint
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(195, 195, 195);
-            ClientSize = new Size(727, 427);
+            ClientSize = new Size(865, 413);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
@@ -290,7 +291,6 @@ namespace Pint
             MaximizeBox = false;
             Name = "SettingsScreen";
             ShowIcon = false;
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Настройки";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

@@ -58,8 +58,8 @@ namespace Pint.AdditionalToolbox
             Graphics g = e.Graphics;
 
             // Определяем начальную и конечную точки линии
-            Point startPoint = new Point(5, 5);
-            Point endPoint = new Point(Width - 5, Height - 5);
+            Point startPoint = new Point(5, 10);
+            Point endPoint = new Point(Width - 5, Height - 10);
 
             // Поворачиваем координаты точек на заданный угол
             Matrix rotationMatrix = new Matrix();

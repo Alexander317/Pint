@@ -5,10 +5,6 @@
         public ScrollablePictureBox()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-              ControlStyles.AllPaintingInWmPaint |
-              ControlStyles.UserPaint, true);
-            this.UpdateStyles();
         }
 
         #region Functional
